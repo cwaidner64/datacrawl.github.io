@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Heebo:wght@100..900&display=swap');
+@import "tailwindcss";
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="radio"] {
+    accent-color: #2C2C2C;
+}
+
+input[type="checkbox"] {
+    accent-color: #2C2C2C;
+    border: none;
+    outline: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(40%) sepia(10%) saturate(0%) hue-rotate(180deg);
+    cursor: pointer;
+}
+
+input[type="checkbox"]:focus {
+    outline: none;
+}
+
+select {
+    border: none;
+}
+
+select option {
+    background-color: #2C2C2C;
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+
+option:focus {
+    background-color: #2A2A2A;
+}
+
+@media (min-width: 1350px) {
+    #spider-graphic {
+        right: 2%;
+        color: #575757;
+    }
+}
+
+#bg-gradient {
+    /* background: radial-gradient(at 75% 60%, #1f1f1f, #111111); */
+}
+
+#landing * {
+    box-sizing: border-box;
+}
+
+/* @media (min-width: 1400px) {
+    #spider-graphic {
+        right: 4%;
+    }
+} */
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
