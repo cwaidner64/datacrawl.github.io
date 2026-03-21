@@ -76,7 +76,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <AppContent handleData={handleData} data={data} />
       </Router>
     </AuthProvider>

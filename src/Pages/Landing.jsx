@@ -26,6 +26,45 @@ export default function Landing() {
     const userId = localStorage.getItem('DCuserId');
 
     const [menuOpen, setMenuOpen] = useState(false);
+    const [showForm, setShowForm] = useState(false);
+    const [formData, setFormData] = useState({ name: '', email: '', role: '', intent: '' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitError('');
+        setSubmitSuccess(false);
+
+        try {
+            const subject = encodeURIComponent(`Early Access Request - ${formData.name}`);
+            const body = encodeURIComponent(
+                `Name: ${formData.name}\n` +
+                `Email: ${formData.email}\n` +
+                `Role: ${formData.role}\n` +
+                `Intent: ${formData.intent}\n\n` +
+                `Message:\nEarly access request from ${formData.name} (${formData.email}).`
+            );
+
+            window.location.href = `mailto:contact@datacrawl.org?subject=${subject}&body=${body}`;
+
+            setSubmitSuccess(true);
+            setShowForm(false);
+            setFormData({ name: '', email: '', role: '', intent: '' });
+        } catch (error) {
+            console.error('Error preparing email:', error);
+            setSubmitError('Unable to open your email client. Please email contact@datacrawl.org manually.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     const headers = [
         {
@@ -166,10 +205,13 @@ export default function Landing() {
                         >
                             <button
                                 className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
-                                onClick={() => navigate('/contact')}
+                                onClick={() => setShowForm(true)}
                             >
                                 Get Started
                             </button>
+                            <p className="text-sm text-[#888] mt-3">
+                            Used by robotics teams, AI startups, and data engineers
+                            </p>
                         </motion.div>
 
                     </div>
@@ -199,7 +241,7 @@ export default function Landing() {
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
                         name="Secure Data Training"
-                        description="Train AI models on sensitive robotics and fleet data without the data ever leaving the owner's infrastructure."
+                        description="Stream, structure, and use distributed datasets from robots, fleets, and sensors directly in your ML pipelines"
                     />
 
                     <FeatureCard
@@ -237,17 +279,17 @@ export default function Landing() {
 
                 <div className="flex flex-col md:flex-row gap-16 mt-20">
 
-                    <Need img={"/landing/usage/development.svg"} text="Robotics AI Training" />
-                    <Need img={"/landing/usage/data-science.svg"} text="Autonomous Vehicle Data" />
-                    <Need img={"/landing/usage/marketing.svg"} text="Fleet Analytics" />
+                    <Need img={`${import.meta.env.BASE_URL}landing/usage/development.svg`} text="Robotics AI Training" />
+                    <Need img={`${import.meta.env.BASE_URL}landing/usage/data-science.svg`} text="Autonomous Vehicle Data" />
+                    <Need img={`${import.meta.env.BASE_URL}landing/usage/marketing.svg`} text="Fleet Analytics" />
 
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-16">
 
-                    <Need img={"/landing/usage/e-commerce.svg"} text="Sensor Dataset Discovery" />
-                    <Need img={"/landing/usage/content.svg"} text="Mobility Platforms" />
-                    <Need img={"/landing/usage/seo.svg"} text="Industrial Robotics" />
+                    <Need img={`${import.meta.env.BASE_URL}landing/usage/e-commerce.svg`} text="Sensor Dataset Discovery" />
+                    <Need img={`${import.meta.env.BASE_URL}landing/usage/content.svg`} text="Mobility Platforms" />
+                    <Need img={`${import.meta.env.BASE_URL}landing/usage/seo.svg`} text="Industrial Robotics" />
 
                 </div>
 
@@ -270,7 +312,7 @@ export default function Landing() {
 
                     <button
                         className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
-                        onClick={() => navigate('/signup')}
+                        onClick={() => setShowForm(true)}
                     >
                         Get Started
                     </button>
@@ -278,6 +320,108 @@ export default function Landing() {
                 </div>
 
             </section>
+
+            {showForm && (
+                <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+
+                    <div className="bg-[#1a1a1a] p-8 rounded-xl w-[90%] max-w-md">
+
+                        <h2 className="text-white text-xl font-bold mb-6">
+                            Request Early Access
+                        </h2>
+
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+
+                            {submitError && (
+                                <div className="bg-red-600/20 border border-red-600 text-red-400 p-3 rounded text-sm">
+                                    {submitError}
+                                </div>
+                            )}
+
+                            {submitSuccess && (
+                                <div className="bg-green-600/20 border border-green-600 text-green-400 p-3 rounded text-sm">
+                                    Thank you! Your request has been sent to contact@datacrawl.org
+                                </div>
+                            )}
+
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Preferred name"
+                                value={formData.name}
+                                required
+                                onChange={handleChange}
+                                disabled={isSubmitting}
+                                className="p-3 rounded bg-[#111] text-white disabled:opacity-50"
+                            />
+
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                value={formData.email}
+                                required
+                                onChange={handleChange}
+                                disabled={isSubmitting}
+                                className="p-3 rounded bg-[#111] text-white disabled:opacity-50"
+                            />
+
+                            <select
+                                name="role"
+                                value={formData.role}
+                                required
+                                onChange={handleChange}
+                                disabled={isSubmitting}
+                                className="p-3 rounded bg-[#111] text-white disabled:opacity-50"
+                            >
+                                <option value="">Select role</option>
+                                <option>Robotics Engineer</option>
+                                <option>ML Engineer</option>
+                                <option>Founder</option>
+                                <option>Other</option>
+                            </select>
+
+                            <select
+                                name="intent"
+                                value={formData.intent}
+                                required
+                                onChange={handleChange}
+                                disabled={isSubmitting}
+                                className="p-3 rounded bg-[#111] text-white disabled:opacity-50"
+                            >
+                                <option value="">What are you trying to do?</option>
+                                <option>Train models</option>
+                                <option>Access datasets</option>
+                                <option>Build pipelines</option>
+                                <option>Explore</option>
+                            </select>
+
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed p-3 rounded text-white font-bold"
+                            >
+                                {isSubmitting ? 'Sending...' : 'Submit'}
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setShowForm(false);
+                                    setSubmitError('');
+                                    setSubmitSuccess(false);
+                                }}
+                                disabled={isSubmitting}
+                                className="text-gray-400 mt-2 disabled:opacity-50"
+                            >
+                                Cancel
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+            )}
 
         </div>
     );
