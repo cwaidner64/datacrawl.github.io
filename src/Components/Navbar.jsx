@@ -127,13 +127,7 @@ function Navbar() {
               </div>
             ) : (
               <div className="flex flex-col gap-3">
-                <Link
-                  to="/login"
-                  className="px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-[500] transition-all duration-200 text-center"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Login / Register
-                </Link>
+               
               </div>
             )}
           </div>
