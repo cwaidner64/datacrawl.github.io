@@ -76,7 +76,7 @@ export default function Landing() {
 
                     {/* Graphic */}
                     <div className="transform absolute right-[-30%] sm:right-[-20%] md:-right-[10%] top-18 md:top-3 scale-[0.42] sm:scale-[0.55] md:scale-75 lg:scale-90 flex justify-center items-center pointer-events-none opacity-70 md:opacity-100">
-                        <img src="/landing/Spider.svg" className="absolute mr-5 mt-5 w-64 sm:w-80 md:w-auto" />
+                        <img src={`${import.meta.env.BASE_URL}landing/Spider.svg`} className="absolute mr-5 mt-5 w-64 sm:w-80 md:w-auto" />
                         <SparkOverlay />
                     </div>
 
@@ -85,7 +85,7 @@ export default function Landing() {
                     <nav className="flex justify-between py-6 md:py-10 *:text-[#E3E3E3] text-md absolute w-full left-0 box-border px-4 sm:px-6 md:px-10 xl:px-35 top-0 z-20">
 
                         <span className="flex items-center gap-4">
-                            <img src="/landing/Logo.svg" className="w-8" />
+                            <img src={`${import.meta.env.BASE_URL}landing/Logo.svg`} className="w-8" />
                             <p className="font-[500]">DataCrawl</p>
                         </span>
 
@@ -189,7 +189,7 @@ export default function Landing() {
 
 
                     <FeatureCard
-                        icon={<img src="/landing/Expand.svg" className="w-10" />}
+                        icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" />}
                         name="Dataset Discovery"
                         description="Search robotics, vehicle telemetry, and sensor datasets from a growing network of data providers."
                         glow={true}
@@ -197,19 +197,19 @@ export default function Landing() {
                     />
 
                     <FeatureCard
-                        icon={<img src="/landing/Security Shield.svg" className="w-12" />}
+                        icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
                         name="Secure Data Training"
                         description="Train AI models on sensitive robotics and fleet data without the data ever leaving the owner's infrastructure."
                     />
 
                     <FeatureCard
-                        icon={<img src="/landing/Settings.svg" className="w-12" />}
+                        icon={<img src={`${import.meta.env.BASE_URL}landing/Settings.svg`} className="w-12" />}
                         name="AI Model Training"
                         description="Build perception, navigation, and predictive models using robotics datasets and real-world vehicle data."
                     />
 
                     <FeatureCard
-                        icon={<img src="/landing/API.svg" className="w-12" />}
+                        icon={<img src={`${import.meta.env.BASE_URL}landing/API.svg`} className="w-12" />}
                         name="Developer APIs"
                         description="Integrate robotics platforms, sensor systems, and fleet software using powerful APIs."
                         glow={true}

@@ -8,7 +8,7 @@ function Footer() {
     <footer >
            <div className="relative py-10 text-[#E3E3E3] bg-[#111111] w-full overflow-clip px-4 sm:px-6 md:px-10 xl:px-35 flex flex-col box-border">
 
-                <img src="/landing/bg3.svg" className="absolute left-0 bottom-0 pointer-events-none z-100 h-full w-full object-cover " />
+                <img src={`${import.meta.env.BASE_URL}landing/bg3.svg`} className="absolute left-0 bottom-0 pointer-events-none z-100 h-full w-full object-cover " />
 
                 <div className="flex flex-col w-full h-full">
 
@@ -16,15 +16,15 @@ function Footer() {
 
                         <div className="flex flex-col gap-2 mb-4 md:mb-[100px]">
                             <span className="flex items-center gap-4 xl:px-2">
-                                <img src="/landing/Logo.svg" className="w-12" />
+                                <img src={`${import.meta.env.BASE_URL}landing/Logo.svg`} className="w-12" />
                                 <p className="text-[20px] ">DataCrawl</p>
                             </span>
                             <p className="text-[#928F8F] mt-8 text-s xl:px-2">Data has never been easier</p>
                             <div className="flex flex-row h-[30px] mt-6 sm:mt-10 justify-start gap-2">
-                                <img src="/landing/Instagram.svg" className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
-                                <img src="/landing/GitHub.svg" className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
-                                <img src="/landing/Facebook.svg" className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
-                                <img src="/landing/X.svg" className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
+                                <img src={`${import.meta.env.BASE_URL}landing/Instagram.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
+                                <img src={`${import.meta.env.BASE_URL}landing/GitHub.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
+                                <img src={`${import.meta.env.BASE_URL}landing/Facebook.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
+                                <img src={`${import.meta.env.BASE_URL}landing/X.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
                             </div>
                         </div>
 

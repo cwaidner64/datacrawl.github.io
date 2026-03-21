@@ -2,7 +2,7 @@ function Pill({ show = false }) {
   if (show) {
     return (
       <div className="flex items-center bg-blue-600/20 border border-blue-600 py-1 px-4 rounded-full mb-2">
-        <img src="/landing/Sparkles.svg" className="mr-2 h-5" />
+        <img src={`${import.meta.env.BASE_URL}landing/Sparkles.svg`} className="mr-2 h-5" />
         <p className="text-blue-400 text-xs font-bold">Popular</p>
       </div>
     );
@@ -13,7 +13,7 @@ function FeatureItem({ feature }) {
   if (feature != undefined) {
     return (
       <li className="flex items-center text-gray-300">
-        <img src="/landing/Done.svg" className="h-5 mr-3" />
+        <img src={`${import.meta.env.BASE_URL}landing/Done.svg`} className="h-5 mr-3" />
         {feature}
       </li>
     );

@@ -204,7 +204,7 @@ export default function Login({ setNewUser }) {
               onClick={handleGoogleSignIn}
             >
               <span className="flex justify-center items-center">
-                <img src="/google.svg" className="w-7 mr-2" alt="Google logo" /> {/* Added alt text for accessibility */}
+                <img src={`${import.meta.env.BASE_URL}google.svg`} className="w-7 mr-2" alt="Google logo" /> {/* Added alt text for accessibility */}
                 <p>{isLoading ? "Connecting..." : "Log in with Google"}</p>
               </span>
             </button>
