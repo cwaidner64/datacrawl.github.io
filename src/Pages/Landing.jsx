@@ -66,7 +66,7 @@ export default function Landing() {
         }
     };
 
-    const headers = [
+ const headers = [
         {
             label: "Features",
             title: "Infrastructure for Robotics & Automotive Data",
@@ -90,6 +90,11 @@ export default function Landing() {
             title: "Start Building with DataCrawl",
             subtext: "Secure access to robotics and automotive datasets"
         },
+        {
+            label: "Enterprise",
+            title: "Source Large-Scale Data",
+            subtext: "Built for teams with high-volume data procurement needs"
+        },
     ]
 
     const navLinks = [
@@ -98,7 +103,12 @@ export default function Landing() {
         { to: '/investors', label: 'Investors' },
     ];
 
-    return (
+    const handleMobileNavigate = (to) => {
+        navigate(to);
+        setMenuOpen(false);
+    };
+
+     return (
 
         <div className="bg-[#111111] min-h-screen w-full overflow-x-hidden" id="landing">
 
@@ -165,11 +175,62 @@ export default function Landing() {
                         <button
                             className="md:hidden text-white p-2 rounded-lg border border-[#2b2b2b] bg-[#151515]/70"
                             onClick={() => setMenuOpen(!menuOpen)}
+                            aria-label="Toggle navigation menu"
+                            aria-expanded={menuOpen}
                         >
                             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                         </button>
 
                     </nav>
+
+                    {menuOpen && (
+                        <div className="md:hidden absolute top-[82px] left-4 right-4 z-30 rounded-xl border border-[#2b2b2b] bg-[#171717]/95 backdrop-blur-sm p-4 shadow-2xl">
+                            <div className="flex flex-col gap-2">
+                                {navLinks.map((link) => (
+                                    <button
+                                        key={link.to}
+                                        onClick={() => handleMobileNavigate(link.to)}
+                                        className="w-full text-left px-3 py-3 rounded-lg text-[#E3E3E3] font-[500] hover:bg-[#232323] transition-colors"
+                                    >
+                                        {link.label}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <div className="mt-4 pt-4 border-t border-[#2b2b2b] flex flex-col gap-2">
+                                {isLoggedIn ? (
+                                    <>
+                                        <span className="px-3 text-sm text-[#bdbdbd] truncate">{loggedInEmail}</span>
+                                        <button
+                                            className="w-full px-3 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
+                                            onClick={() => handleMobileNavigate(`/profile/${userId}`)}
+                                        >
+                                            Profile
+                                        </button>
+                                        <button
+                                            className="w-full px-3 py-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold transition-colors"
+                                            onClick={() => {
+                                                handleLogout();
+                                                setMenuOpen(false);
+                                            }}
+                                        >
+                                            Logout
+                                        </button>
+                                    </>
+                                ) : (
+                                    <button
+                                        className="w-full px-3 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
+                                        onClick={() => {
+                                            setShowForm(true);
+                                            setMenuOpen(false);
+                                        }}
+                                    >
+                                        Get Started
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    )}
 
 
                     {/* HERO TEXT */}
@@ -181,7 +242,7 @@ export default function Landing() {
                             transition={{ duration: 0.8 }}
                         >
                             <p className="font-['Roboto'] font-bold text-4xl md:text-5xl text-[#E3E3E3] mb-5 leading-tight">
-                                AI Infrastructure for Robotics & Automotive Data
+                                AI and Large Data Infrastructure for Robotics, Automotive, and Autonomous Systems
                             </p>
                         </motion.div>
 
@@ -240,7 +301,7 @@ export default function Landing() {
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
-                        name="Secure Data Training"
+                        name="Secure Training"
                         description="Stream, structure, and use distributed datasets from robots, fleets, and sensors directly in your ML pipelines"
                     />
 
@@ -293,7 +354,67 @@ export default function Landing() {
 
                 </div>
 
+                <div className="flex flex-col md:flex-row gap-16">
+
+                    <Need img={`${import.meta.env.BASE_URL}landing/Earth Globe.svg`} text="Geospatial Drone Data" />
+                    <Need img={`${import.meta.env.BASE_URL}landing/Sparkles.svg`} text="Remote Sensing" />
+                    <Need img={`${import.meta.env.BASE_URL}landing/Audio Wave.svg`} text="Spatial Analytics" />
+
+                </div>
+
             </div>
+
+
+
+            {/* ENTERPRISE DATA BUYERS */}
+
+            <section className="flex flex-col bg-[#0d0d0d] items-center justify-center px-6 md:px-10 xl:px-35 py-40 border-t border-[#1e1e1e]">
+
+                <Header {...headers[5]} />
+
+                <p className="text-[#969696] mt-6 text-center max-w-2xl text-base font-[Heebo]">
+                    Connect directly with verified large-scale data suppliers. Source custom datasets,
+                    negotiate volume contracts, and integrate data pipelines at enterprise scale.
+                </p>
+
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 w-full justify-items-center">
+
+                    <FeatureCard
+                        icon={<img src={`${import.meta.env.BASE_URL}landing/Done.svg`} className="w-10" />}
+                        name="Supplier Directory"
+                        description="Browse a curated network of pre-vetted data suppliers with proven track records across robotics, geospatial, and automotive domains."
+                    />
+
+                    <FeatureCard
+                        icon={<img src={`${import.meta.env.BASE_URL}landing/User.svg`} className="w-10" />}
+                        name="Supplier Matching"
+                        description="Describe your data requirements and get matched with suppliers who specialize in your domain — from aerial drone surveys to autonomous driving logs."
+                    />
+
+                    <FeatureCard
+                        icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" />}
+                        name="Volume"
+                        description="License petabyte-scale datasets with flexible volume pricing, SLA guarantees, and dedicated support for enterprise procurement workflows."
+                        glow={true}
+                        glowClass="left-[43px] top-[37px]"
+                    />
+
+                    <FeatureCard
+                        icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
+                        name="Compliance"
+                        description="Full data lineage, privacy compliance, and licensing clarity on every dataset. Meet GDPR, CCPA, and sector-specific regulatory requirements."
+                    />
+
+                </div>
+
+                <button
+                    className="mt-16 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
+                    onClick={() => setShowForm(true)}
+                >
+                    Connect with Suppliers
+                </button>
+
+            </section>
 
 
 
