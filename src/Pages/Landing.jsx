@@ -340,25 +340,25 @@ export default function Landing() {
 
                 <div className="flex flex-col md:flex-row gap-16 mt-20">
 
-                    <Need img={`${import.meta.env.BASE_URL}landing/usage/development.svg`} text="Robotics AI Training" />
-                    <Need img={`${import.meta.env.BASE_URL}landing/usage/data-science.svg`} text="Autonomous Vehicle Data" />
-                    <Need img={`${import.meta.env.BASE_URL}landing/usage/marketing.svg`} text="Fleet Analytics" />
+                    <Need img="landing/usage/development.svg" text="Robotics AI Training" />
+                    <Need img="landing/usage/data-science.svg" text="Autonomous Vehicle Data" />
+                    <Need img="landing/usage/marketing.svg" text="Fleet Analytics" />
 
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-16">
 
-                    <Need img={`${import.meta.env.BASE_URL}landing/usage/e-commerce.svg`} text="Sensor Dataset Discovery" />
-                    <Need img={`${import.meta.env.BASE_URL}landing/usage/content.svg`} text="Mobility Platforms" />
-                    <Need img={`${import.meta.env.BASE_URL}landing/usage/seo.svg`} text="Industrial Robotics" />
+                    <Need img="landing/usage/e-commerce.svg" text="Sensor Dataset Discovery" />
+                    <Need img="landing/usage/content.svg" text="Mobility Platforms" />
+                    <Need img="landing/usage/seo.svg" text="Industrial Robotics" />
 
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-16">
 
-                    <Need img={`${import.meta.env.BASE_URL}landing/Earth Globe.svg`} text="Geospatial Drone Data" />
-                    <Need img={`${import.meta.env.BASE_URL}landing/Sparkles.svg`} text="Remote Sensing" />
-                    <Need img={`${import.meta.env.BASE_URL}landing/Audio Wave.svg`} text="Spatial Analytics" />
+                    <Need img="landing/Earth Globe.svg" text="Geospatial Drone Data" />
+                    <Need img="landing/Sparkles.svg" text="Remote Sensing" />
+                    <Need img="landing/Audio Wave.svg" text="Spatial Analytics" />
 
                 </div>
 
