@@ -12,7 +12,8 @@ import Contact from "./Pages/Contact";
 import Investors from "./Pages/Investors";
 import About from "./Pages/About";
 import MarketplaceTool from "./Pages/MarketplaceTool";
-import AINodeTrainingInfo from "./Pages/AINodeTrainingInfo";
+import Services from "./Pages/Services";
+
 
 
 
@@ -48,16 +49,13 @@ function AppContent({ handleData, data }) {
         <Routes>
 
           <Route path="/vendor/information" exact element={<VendorInfo />} />
-          <Route path="/pricing" exact element={<Pricing />} />
           <Route path="/contact" exact element={<Contact />} />
           <Route path="/investors" exact element={<Investors />} />
           <Route path="/about" exact element={<About />} />
           <Route path="/market" exact element={<MarketplaceTool />} />
-          <Route path="/ai-node-training" exact element={<AINodeTrainingInfo />} />
-          
-
-
-          
+          <Route path="/services" exact element={<Services />} />
+ 
+  
         </Routes>
       
       </div>

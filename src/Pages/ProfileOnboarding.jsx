@@ -188,76 +188,76 @@ const ProfileOnboarding = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#111111] text-white flex items-center justify-center p-4 font-[Heebo]">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-2xl bg-gray-800 rounded-lg shadow-lg p-8"
+        className="w-full max-w-2xl bg-[#1f1f1f] border border-[#333] rounded-2xl shadow-lg p-5 sm:p-8"
       >
         <h1 className="text-2xl font-bold mb-6">Complete your profile</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <label className="text-sm text-gray-200">
+          <label className="text-sm text-[#d1d5db]">
             First name
             <input
               type="text"
               value={formValues.first_name}
               onChange={(event) => handleChange('first_name', event.target.value)}
-              className="mt-1 w-full rounded border border-gray-600 bg-gray-700 p-2 text-white"
+              className="mt-1 w-full rounded border border-[#444] bg-[#222] p-2 text-white"
             />
             {fieldErrors.first_name && <div className="mt-1 text-xs text-red-400">{fieldErrors.first_name}</div>}
           </label>
 
-          <label className="text-sm text-gray-200">
+          <label className="text-sm text-[#d1d5db]">
             Last name
             <input
               type="text"
               value={formValues.last_name}
               onChange={(event) => handleChange('last_name', event.target.value)}
-              className="mt-1 w-full rounded border border-gray-600 bg-gray-700 p-2 text-white"
+              className="mt-1 w-full rounded border border-[#444] bg-[#222] p-2 text-white"
             />
             {fieldErrors.last_name && <div className="mt-1 text-xs text-red-400">{fieldErrors.last_name}</div>}
           </label>
 
-          <label className="text-sm text-gray-200 md:col-span-2">
+          <label className="text-sm text-[#d1d5db] md:col-span-2">
             Profile photo URL (optional)
             <input
               type="url"
               value={formValues.avatar_url}
               onChange={(event) => handleChange('avatar_url', event.target.value)}
               placeholder="https://..."
-              className="mt-1 w-full rounded border border-gray-600 bg-gray-700 p-2 text-white"
+              className="mt-1 w-full rounded border border-[#444] bg-[#222] p-2 text-white"
             />
             {fieldErrors.avatar_url && <div className="mt-1 text-xs text-red-400">{fieldErrors.avatar_url}</div>}
           </label>
 
-          <label className="text-sm text-gray-200">
+          <label className="text-sm text-[#d1d5db]">
             Company name
             <input
               type="text"
               value={formValues.company_name}
               onChange={(event) => handleChange('company_name', event.target.value)}
-              className="mt-1 w-full rounded border border-gray-600 bg-gray-700 p-2 text-white"
+              className="mt-1 w-full rounded border border-[#444] bg-[#222] p-2 text-white"
             />
             {fieldErrors.company_name && <div className="mt-1 text-xs text-red-400">{fieldErrors.company_name}</div>}
           </label>
 
-          <label className="text-sm text-gray-200">
+          <label className="text-sm text-[#d1d5db]">
             Role
             <input
               type="text"
               value={formValues.role}
               onChange={(event) => handleChange('role', event.target.value)}
-              className="mt-1 w-full rounded border border-gray-600 bg-gray-700 p-2 text-white"
+              className="mt-1 w-full rounded border border-[#444] bg-[#222] p-2 text-white"
             />
             {fieldErrors.role && <div className="mt-1 text-xs text-red-400">{fieldErrors.role}</div>}
           </label>
 
-          <label className="text-sm text-gray-200 md:col-span-2">
+          <label className="text-sm text-[#d1d5db] md:col-span-2">
             Industry specialty
             <select
               value={formValues.industry_specialty}
               onChange={(event) => handleChange('industry_specialty', event.target.value)}
-              className="mt-1 w-full rounded border border-gray-600 bg-gray-700 p-2 text-white"
+              className="mt-1 w-full rounded border border-[#444] bg-[#222] p-2 text-white"
             >
               <option value="">Select an industry specialty</option>
               {INDUSTRY_SPECIALTY_OPTIONS.map((specialty) => (

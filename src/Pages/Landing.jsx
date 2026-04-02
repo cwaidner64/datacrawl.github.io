@@ -69,7 +69,7 @@ export default function Landing() {
  const headers = [
         {
             label: "Features",
-            title: "Infrastructure for Robotics & Automotive Data",
+            title: "Data Monetization Infrastructure",
         },
         {
             label: "Usage",
@@ -101,6 +101,9 @@ export default function Landing() {
         { to: '/about', label: 'About' },
         { to: '/vendor/information', label: 'Vendors' },
         { to: '/investors', label: 'Investors' },
+        { to: '/contact', label: 'Contact' },
+        { to: '/market', label: 'Marketplace' },
+            { to: '/services', label: 'Services' },
     ];
 
     const handleMobileNavigate = (to) => {
@@ -124,7 +127,7 @@ export default function Landing() {
 
 
                     {/* Graphic */}
-                    <div className="transform absolute right-[-30%] sm:right-[-20%] md:-right-[10%] top-18 md:top-3 scale-[0.42] sm:scale-[0.55] md:scale-75 lg:scale-90 flex justify-center items-center pointer-events-none opacity-70 md:opacity-100">
+                    <div className="transform absolute right-[-20%] sm:right-[-15%] md:-right-[10%] top-18 md:top-3 scale-[0.75] sm:scale-[0.72] md:scale-75 lg:scale-90 flex justify-center items-center pointer-events-none opacity-80 md:opacity-100">
                         <img src={`${import.meta.env.BASE_URL}landing/Spider.svg`} className="absolute mr-5 mt-5 w-64 sm:w-80 md:w-auto" />
                         <SparkOverlay />
                     </div>
@@ -134,7 +137,7 @@ export default function Landing() {
                     <nav className="flex justify-between py-6 md:py-10 *:text-[#E3E3E3] text-md absolute w-full left-0 box-border px-4 sm:px-6 md:px-10 xl:px-35 top-0 z-20">
 
                         <span className="flex items-center gap-4">
-                            <img src={`${import.meta.env.BASE_URL}landing/Logo.svg`} className="w-8" />
+                            <img src={`${import.meta.env.BASE_URL}landing/Logo.svg`} className="w-8 h-8" />
                             <p className="font-[500]">DataCrawl</p>
                         </span>
 
@@ -234,48 +237,53 @@ export default function Landing() {
 
 
                     {/* HERO TEXT */}
-                    <div className="flex flex-col items-start w-full sm:w-[85%] md:w-[60%] lg:w-[45%] xl:w-[35%] relative top-18 sm:top-16 md:top-5 xl:top-1 z-10">
+<div className="flex flex-col items-start w-full sm:w-[85%] md:w-[60%] lg:w-[45%] xl:w-[35%] 
+               relative top-20 sm:top-16 md:top-8 lg:top-4 z-10">
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <p className="font-['Roboto'] font-bold text-4xl md:text-5xl text-[#E3E3E3] mb-5 leading-tight">
-                                AI and Large Data Infrastructure for Robotics, Automotive, and Autonomous Systems
-                            </p>
-                        </motion.div>
+    {/* Main Title */}
+    <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+    >
+        <h1 className="font-bold text-7xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 
+                       leading-none tracking-tighter text-[#E3E3E3] mb-4">
+            DataCrawl
+        </h1>
+    </motion.div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.5 }}
-                        >
-                            <p className="text-[#BFBFBF] text-base mb-8 font-[Heebo] max-w-[34rem]">
-                                DataCrawl enables robotics companies, autonomous vehicle developers, and AI teams
-                                to train models on distributed datasets while keeping sensitive sensor and fleet
-                                data secure. Connect APIs, discover datasets, and build intelligent systems without
-                                moving the underlying data.
-                            </p>
-                        </motion.div>
+    {/* Tagline */}
+    <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+    >
+        <p className="text-[#BFBFBF] text-xl md:text-2xl font-light tracking-wide mb-10">
+            Data Monetization Infrastructure
+        </p>
+    </motion.div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 1 }}
-                        >
-                            <button
-                                className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
-                                onClick={() => setShowForm(true)}
-                            >
-                                Get Started
-                            </button>
-                            <p className="text-sm text-[#888] mt-3">
-                            Used by robotics teams, AI startups, and data engineers
-                            </p>
-                        </motion.div>
+    {/* CTA Section */}
+    <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
+        className="flex flex-col items-start"
+    >
+        <button
+            onClick={() => setShowForm(true)}
+            className="px-10 py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 
+                       text-white font-semibold text-lg rounded-xl transition-all 
+                       duration-200 hover:scale-105 shadow-lg shadow-blue-900/30"
+        >
+            Get Started
+        </button>
 
-                    </div>
+        <p className="text-sm text-[#888] mt-4 tracking-wide">
+            Trusted by robotics teams, AI startups, and data engineers
+        </p>
+    </motion.div>
+</div>
 
                 </main>
 
@@ -294,7 +302,7 @@ export default function Landing() {
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" />}
                         name="Dataset Discovery"
-                        description="Search robotics, vehicle telemetry, and sensor datasets from a growing network of data providers."
+                        description="Search a growing network of data providers and open source data."
                         glow={true}
                         glowClass="left-[43px] top-[37px]"
                     />
@@ -302,13 +310,13 @@ export default function Landing() {
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
                         name="Secure Training"
-                        description="Stream, structure, and use distributed datasets from robots, fleets, and sensors directly in your ML pipelines"
+                        description="Secure authenication and billing infrastructure"
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Settings.svg`} className="w-12" />}
-                        name="AI Model Training"
-                        description="Build perception, navigation, and predictive models using robotics datasets and real-world vehicle data."
+                        name="Data Pipelines"
+                        description="Link to our easy to use monetization infrastructure for data repos"
                     />
 
                     <FeatureCard
@@ -382,19 +390,19 @@ export default function Landing() {
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Done.svg`} className="w-10" />}
                         name="Supplier Directory"
-                        description="Browse a curated network of pre-vetted data suppliers with proven track records across robotics, geospatial, and automotive domains."
+                        description="Connect with large-scale data suppliers across industries and domains. "
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/User.svg`} className="w-10" />}
                         name="Supplier Matching"
-                        description="Describe your data requirements and get matched with suppliers who specialize in your domain — from aerial drone surveys to autonomous driving logs."
+                        description="We find and connect you to supplier matching your requirements."
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" />}
                         name="Volume"
-                        description="License petabyte-scale datasets with flexible volume pricing, SLA guarantees, and dedicated support for enterprise procurement workflows."
+                        description="Scale your workflows/applications seamlessly with easy to use SDKs."
                         glow={true}
                         glowClass="left-[43px] top-[37px]"
                     />
@@ -402,7 +410,7 @@ export default function Landing() {
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
                         name="Compliance"
-                        description="Full data lineage, privacy compliance, and licensing clarity on every dataset. Meet GDPR, CCPA, and sector-specific regulatory requirements."
+                        description="Complete data provenance and lineage for secure and compliant data sourcing and usage."
                     />
 
                 </div>
@@ -425,8 +433,7 @@ export default function Landing() {
                 <Header {...headers[4]} />
 
                 <p className="text-[#969696] mt-4 text-center max-w-xl">
-                    Access robotics and automotive datasets, integrate APIs,
-                    and begin training AI models on distributed data sources in minutes.
+                    Access robotics, automotive, and geospatial datasets, or integrate your own APIs.
                 </p>
 
                 <div className="py-16">

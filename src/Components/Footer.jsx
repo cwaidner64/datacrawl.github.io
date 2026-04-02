@@ -21,10 +21,21 @@ function Footer() {
                             </span>
                             <p className="text-[#928F8F] mt-8 text-s xl:px-2">Data has never been easier</p>
                             <div className="flex flex-row h-[30px] mt-6 sm:mt-10 justify-start gap-2">
-                                <img src={`${import.meta.env.BASE_URL}landing/Instagram.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
-                                <img src={`${import.meta.env.BASE_URL}landing/GitHub.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
-                                <img src={`${import.meta.env.BASE_URL}landing/Facebook.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
-                                <img src={`${import.meta.env.BASE_URL}landing/X.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
+                                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                                    <img src={`${import.meta.env.BASE_URL}landing/Instagram.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
+                                </a>
+                                <a href="https://www.github.com/datacrawl" target="_blank" rel="noopener noreferrer">
+                                    <img src={`${import.meta.env.BASE_URL}landing/GitHub.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
+                                </a>
+                                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                                    <img src={`${import.meta.env.BASE_URL}landing/Facebook.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
+                                </a>
+                                <a href="https://www.x.com" target="_blank" rel="noopener noreferrer">
+                                    <img src={`${import.meta.env.BASE_URL}landing/X.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
+                                </a>
+                                <a href="https://www.linkedin.com/company/datacrawl-org" target="_blank" rel="noopener noreferrer">
+                                    <img src={`${import.meta.env.BASE_URL}landing/LinkedIn.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
+                                </a>
                             </div>
                         </div>
 
@@ -32,7 +43,9 @@ function Footer() {
                             <div className="flex flex-col font-[Heebo]">
                                 <p className="font-bold text-s mb-[35px]">Products</p>
                                 <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/market')}>DataMarket</p>
-                                <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/ai-node-training')}>AI Node Training</p>
+                                <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/services')}>Services</p>
+
+                   
                             </div>
 
                             <div className="flex flex-col font-[Heebo]">
@@ -40,6 +53,7 @@ function Footer() {
                                 <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/about')}>About</p>
                                 <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/investors')}>Investors</p>
                                 <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/contact')}>Contact</p>
+                                <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/vendor/information')}>Vendors</p>
                             </div>
 
                 

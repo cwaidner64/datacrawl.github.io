@@ -18,10 +18,9 @@ function Navbar() {
     { to: '/about', label: 'About' },
     { to: '/vendor/information', label: 'Vendors' },
     { to: '/investors', label: 'Investors' },
-    { to: '/pricing', label: 'Pricing' },
     { to: '/contact', label: 'Contact' },
     { to: '/market', label: 'Marketplace' },
-    { to: '/ai-node-training', label: 'AI Node Training' }
+    { to: '/services', label: 'Services' },
   ];
 
   const handleLogoutClick = () => {

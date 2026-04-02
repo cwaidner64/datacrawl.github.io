@@ -1,104 +1,91 @@
 import React from "react";
 import Header from "../Components/Landing/Header";
 
-const sectionStyle = {
-  background: "#1f1f1f",
-  border: "1px solid #333",
-  borderRadius: "10px",
-  padding: "1.25rem",
-  marginBottom: "1.25rem",
-};
-
 export default function About() {
   return (
-    <div className="min-h-screen bg-[#111111] flex flex-col items-center justify-center font-[Heebo] px-4 py-16">
-      {/* About: Header Section */}
-      <section className="flex flex-col items-center bg-[#111111] mt-20 mb-40">
-        <Header
-          label={"About Us"}
-          title={"Meet DataCrawl"}
-          subtext={
-            "Building the infrastructure that powers secure AI training, data discovery, and intelligent systems."
-          }
-        />
+    <div className="min-h-screen bg-[#111111] text-white py-12 sm:py-20 px-4 font-[Heebo]">
+      <div className="max-w-5xl mx-auto">
 
-        <div className="flex flex-wrap justify-center gap-8 items-start h-full md:h-100 mx-12 mt-30">
-          {/* Mission */}
-          <div className="bg-[#222] rounded-xl shadow-lg p-8 w-80 flex flex-col items-center">
-            <h2 className="text-xl font-bold text-white mb-4">Our Mission</h2>
-            <p className="text-white mb-4 text-center">
-              To build the infrastructure that allows organizations to unlock
-              the value of their data—securely, privately, and intelligently.
-              DataCrawl enables AI systems to learn from data without exposing
-              the underlying information.
+        {/* Header */}
+        <section className="flex flex-col items-center text-center mb-10 sm:mb-20">
+          <Header
+            label="About Us"
+            title="Meet DataCrawl"
+            subtext="Building secure data pipelines that connect data owners with the AI and robotics teams who need it."
+          />
+        </section>
+
+        {/* Mission & Values */}
+        <section className="grid md:grid-cols-2 gap-6 mb-8 sm:mb-16">
+          
+          {/* Our Mission */}
+          <div className="bg-[#1f1f1f] border border-blue-500/30 rounded-2xl p-5 sm:p-10 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 rounded-l-2xl" />
+            <span className="text-blue-400 text-xs font-semibold tracking-widest uppercase mb-4 block pl-4 sm:pl-6">Our Mission</span>
+            <p className="text-white text-xl sm:text-2xl font-medium leading-relaxed pl-4 sm:pl-6">
+              Connecting data owners with AI and robotics teams through secure, plug-and-play pipelines.
             </p>
           </div>
 
-          {/* Team */}
-          <div className="bg-[#222] rounded-xl shadow-lg p-8 w-80 flex flex-col items-center">
-            <h2 className="text-xl font-bold text-white mb-4">Our Team</h2>
-            <p className="text-white mb-4 text-center">
-              Our team combines experience in software engineering, AI
-              development, distributed systems, and data infrastructure. We are
-              passionate about building technology that empowers researchers,
-              developers, and organizations to innovate faster.
-            </p>
-          </div>
-
-          {/* Values */}
-          <div className="bg-[#222] rounded-xl shadow-lg p-8 w-80 flex flex-col items-center">
-            <h2 className="text-xl font-bold text-white mb-4">Our Values</h2>
-            <ul className="text-white text-left list-disc pl-5">
-              <li>Accessibility — making data tools available to everyone</li>
-              <li>Transparency — clear systems and open collaboration</li>
-              <li>Innovation — building the next generation of AI infrastructure</li>
-              <li>Security — protecting sensitive data by design</li>
+          {/* Our Values */}
+          <div className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-10">
+            <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Our Values</h2>
+            <ul className="space-y-4 text-[#d1d5db]">
+              <li className="flex items-start gap-3">
+                <span className="text-blue-400 mt-1 text-xl">•</span>
+                <span>Security and privacy by design</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-blue-400 mt-1 text-xl">•</span>
+                <span>Seamless matchmaking between data and demand</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-blue-400 mt-1 text-xl">•</span>
+                <span>Simplicity and reliability in complex data flows</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-blue-400 mt-1 text-xl">•</span>
+                <span>Building infrastructure that accelerates innovation</span>
+              </li>
             </ul>
           </div>
-        </div>
-      </section>
 
-      {/* Why DataCrawl */}
-      <section style={sectionStyle}>
-        <h1 className="text-2xl font-bold text-white mb-6">Why DataCrawl?</h1>
+        </section>
 
-        <p className="text-white mb-8 text-center max-w-2xl">
-          DataCrawl is building a new layer of infrastructure for the data
-          economy. Today, organizations sit on massive amounts of valuable data
-          but often cannot share or utilize it due to privacy, security, or
-          regulatory constraints. DataCrawl solves this by enabling AI models to
-          train directly on private datasets without the data ever leaving its
-          source.
-        </p>
+        {/* Why DataCrawl */}
+        <section className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-10 mb-8 sm:mb-16">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-center">Why DataCrawl</h2>
+          <div className="max-w-3xl mx-auto text-[#d1d5db] space-y-6 text-center">
+            <p>
+              Organizations hold valuable real-world data but struggle to share or monetize it safely. 
+              AI teams and robotics companies need high-quality datasets but face fragmented sources and integration challenges.
+            </p>
+            <p>
+              DataCrawl solves both sides of the problem. We build secure, end-to-end data pipelines 
+              that connect data owners with the right buyers — enabling seamless discovery, access, 
+              and monetization while keeping data under full control.
+            </p>
+          </div>
+        </section>
 
-        <p className="text-white mb-8 text-center max-w-2xl">
-          Through built-in APIs, dataset discovery tools, and distributed
-          training nodes, DataCrawl connects data providers with developers,
-          researchers, and companies that need insights—while preserving full
-          control and ownership of the underlying data.
-        </p>
+        {/* CTA */}
+        <section className="flex flex-col items-center text-center">
+          <h2 className="text-2xl font-semibold mb-4">Let's Build Together</h2>
+          <p className="text-[#d1d5db] max-w-md mb-6">
+            Whether you're a data owner or an AI/robotics team, we're here to help you move faster.
+          </p>
+          <p className="text-[#aaa]">
+            Get in touch at{" "}
+            <a 
+              href="mailto:contact@datacrawl.org" 
+              className="text-blue-400 font-semibold hover:underline"
+            >
+              contact@datacrawl.org
+            </a>
+          </p>
+        </section>
 
-        <p className="text-white mb-8 text-center max-w-2xl">
-          Whether you're building robotics systems, developing AI models,
-          conducting research, or exploring new data-driven opportunities,
-          DataCrawl provides the tools to securely access and utilize the
-          world's growing ecosystem of data.
-        </p>
-
-        <h2 className="text-xl font-bold text-white mb-4">Get Involved</h2>
-
-        <h2 className="text-lg text-white mb-2">Contact Us</h2>
-        <p className="text-white mb-4">
-          Have questions, feedback, or partnership ideas? We'd love to hear from
-          you. Reach out at{" "}
-          <a
-            href="mailto:contact@datacrawl.org"
-            className="text-blue-400 hover:underline"
-          >
-            contact@datacrawl.org
-          </a>.
-        </p>
-      </section>
+      </div>
     </div>
   );
 }
