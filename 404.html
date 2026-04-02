@@ -6,9 +6,11 @@
     <title>Redirecting...</title>
     <script>
       (function () {
-        var repoBase = "/";
+        var repoBase = "/datacrawl.github.io/";
         var pathname = window.location.pathname;
-        var route = pathname.replace(/^\/+/, "");
+        var route = pathname.indexOf(repoBase) === 0
+          ? pathname.slice(repoBase.length)
+          : pathname.replace(/^\/+/, "");
         var normalizedRoute = route.replace(/^\/+/, "");
         var redirectUrl = repoBase + "?p=" + encodeURIComponent(normalizedRoute) + window.location.hash;
 
