@@ -1,0 +1,18 @@
+export const INDUSTRY_SPECIALTY_OPTIONS = [
+  "synthetic",
+  "real_observational",
+  "first_second_party",
+  "public",
+  "anonymized",
+  "aggregated",
+  "raw",
+  "structured",
+  "unstructured",
+  "model_generated_non_synthetic",
+  "transactional",
+  "behavioral",
+  "geospatial",
+  "derived",
+  "licensed_contractual",
+  "regulated",
+];

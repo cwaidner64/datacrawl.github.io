@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <script>
+      (function () {
+        var repoBase = "/datacrawl.github.io/";
+        var pathname = window.location.pathname;
+        var route = pathname.indexOf(repoBase) === 0
+          ? pathname.slice(repoBase.length)
+          : pathname.replace(/^\/+/, "");
+        var normalizedRoute = route.replace(/^\/+/, "");
+        var redirectUrl = repoBase + "?p=" + encodeURIComponent(normalizedRoute) + window.location.hash;
+
+        window.location.replace(redirectUrl);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
