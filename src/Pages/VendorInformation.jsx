@@ -71,7 +71,7 @@ export default function VendorInformation() {
             Apply to Become a Vendor →
           </a>
 
-          <h3 className="text-xl font-semibold mt-12 mb-4">AI Training Node Integration</h3>
+          <h3 className="text-xl font-semibold mt-12 mb-4">AI data pipeline integration</h3>
           <p className="text-[#d1d5db] mb-6">
             Integrate your datasets into DataCrawl’s distributed network so AI systems 
             can query them securely during training and inference.
