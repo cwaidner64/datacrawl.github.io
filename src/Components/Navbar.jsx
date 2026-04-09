@@ -17,9 +17,7 @@ function Navbar() {
   const navLinks = [
     { to: '/about', label: 'About' },
     { to: '/vendor/information', label: 'Vendors' },
-    { to: '/investors', label: 'Investors' },
     { to: '/contact', label: 'Contact' },
-    { to: '/market', label: 'Marketplace' },
     { to: '/services', label: 'Services' },
   ];
 

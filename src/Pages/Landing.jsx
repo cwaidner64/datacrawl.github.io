@@ -65,44 +65,41 @@ export default function Landing() {
             setIsSubmitting(false);
         }
     };
-
- const headers = [
+    const headers = [
         {
             label: "Features",
-            title: "Data Monetization Infrastructure",
+            title: "API Marketplace + SDK Generator",
         },
         {
             label: "Usage",
-            title: "Built for Robotics, AI, and Autonomous Systems"
+            title: "Built for Developers & Enterprises"
         },
         {
             label: "Demo",
-            title: "Try Our Data Platform"
+            title: "Try Our API Platform"
         },
         {
             label: "Pricing",
             link: "/Pricing",
             title: "Choose Your Plan",
-            subtext: "Pricing points for all needs"
+            subtext: "Flexible pricing for B2C and B2B"
         },
         {
             label: "Register",
-            title: "Start Building with DataCrawl",
-            subtext: "Secure access to robotics and automotive datasets"
+            title: "Start Building with DataCrawl APIs",
+            subtext: "Discover, integrate, and monetize in minutes"
         },
         {
             label: "Enterprise",
-            title: "Source Large-Scale Data",
-            subtext: "Built for teams with high-volume data procurement needs"
+            title: "Enterprise-Grade API Infrastructure",
+            subtext: "High-volume access, custom SLAs, and dedicated support"
         },
-    ]
+    ];
 
     const navLinks = [
         { to: '/about', label: 'About' },
         { to: '/vendor/information', label: 'Vendors' },
-        { to: '/investors', label: 'Investors' },
         { to: '/contact', label: 'Contact' },
-        { to: '/market', label: 'Marketplace' },
             { to: '/services', label: 'Services' },
     ];
 
@@ -236,60 +233,71 @@ export default function Landing() {
                     )}
 
 
-                    {/* HERO TEXT */}
-<div className="flex flex-col items-start w-full sm:w-[85%] md:w-[60%] lg:w-[45%] xl:w-[35%] 
-               relative top-20 sm:top-16 md:top-8 lg:top-4 z-10">
+                  {/* HERO TEXT */}
+                    <div className="flex flex-col items-start w-full sm:w-[85%] md:w-[60%] lg:w-[45%] xl:w-[35%] 
+                                   relative top-20 sm:top-16 md:top-8 lg:top-4 z-10">
 
-    {/* Main Title */}
-    <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-    >
-        <h1 className="font-bold text-7xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 
-                       leading-none tracking-tighter text-[#E3E3E3] mb-4">
-            DataCrawl
-        </h1>
-    </motion.div>
+                        {/* Main Title */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.9, ease: "easeOut" }}
+                        >
+                            <h1 className="font-bold text-7xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 
+                                           leading-none tracking-tighter text-[#E3E3E3] mb-4">
+                                DataCrawl
+                            </h1>
+                        </motion.div>
 
-    {/* Tagline */}
-    <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
-    >
-        <p className="text-[#BFBFBF] text-xl md:text-2xl font-light tracking-wide mb-10">
-            Data Monetization Infrastructure
-        </p>
-    </motion.div>
+                        {/* Tagline */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+                        >
+                            <p className="text-[#BFBFBF] text-xl md:text-2xl font-light tracking-wide mb-10">
+                                API accessibility infrastructure and marketplace
+                            </p>
+                        </motion.div>
 
-    {/* CTA Section */}
-    <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
-        className="flex flex-col items-start"
-    >
-        <button
-            onClick={() => setShowForm(true)}
-            className="px-10 py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 
-                       text-white font-semibold text-lg rounded-xl transition-all 
-                       duration-200 hover:scale-105 shadow-lg shadow-blue-900/30"
-        >
-            Get Started
-        </button>
+                        {/* Sub-tagline */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
+                        >
+                            <p className="text-[#AFAFAF] text-lg md:text-xl max-w-lg mb-10">
+                                Discover powerful APIs • Subscribe in one click • 
+                                Generate custom SDKs with visual mapping • 
+                                Seamless B2C and B2B integration
+                            </p>
+                        </motion.div>
 
-        <p className="text-sm text-[#888] mt-4 tracking-wide">
-            Trusted by robotics teams, AI startups, and data engineers
-        </p>
-    </motion.div>
-</div>
+                        {/* CTA Section */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
+                            className="flex flex-col items-start"
+                        >
+                            <button
+                                onClick={() => setShowForm(true)}
+                                className="px-10 py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 
+                                           text-white font-semibold text-lg rounded-xl transition-all 
+                                           duration-200 hover:scale-105 shadow-lg shadow-blue-900/30"
+                            >
+                                Get Early Access
+                            </button>
+
+                            <p className="text-sm text-[#888] mt-4 tracking-wide">
+                                Trusted by developers, AI teams, and enterprise platforms
+                            </p>
+                        </motion.div>
+                    </div>
 
                 </main>
 
             </motion.div>
-
-
 
             {/* FEATURES */}
             <section className="flex flex-col bg-[#111111] items-center justify-center px-6 md:px-10 xl:px-35 py-40">
@@ -298,31 +306,30 @@ export default function Landing() {
 
                 <div className="mt-30 grid grid-cols-1 md:grid-cols-2 gap-12 w-full justify-items-center">
 
-
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" />}
-                        name="Dataset Discovery"
-                        description="Search a growing network of data providers and open source data."
+                        name="API Discovery"
+                        description="Browse and search a growing marketplace of high-quality APIs from verified providers."
                         glow={true}
                         glowClass="left-[43px] top-[37px]"
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
-                        name="Secure Training"
-                        description="Secure authenication and billing infrastructure"
+                        name="Secure Monetization"
+                        description="Built-in billing, authentication, and usage tracking for providers and consumers."
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Settings.svg`} className="w-12" />}
-                        name="Data Pipelines"
-                        description="Link to our easy to use monetization infrastructure for data repos"
+                        name="SDK Generator"
+                        description="Generate tailored SDKs in your preferred language with our intuitive mapping interface."
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/API.svg`} className="w-12" />}
-                        name="Developer APIs"
-                        description="Integrate robotics platforms, sensor systems, and fleet software using powerful APIs."
+                        name="B2C & B2B solutions"
+                        description="Seamless API integrations for more efficient development"
                         glow={true}
                         glowClass="bottom-[20px] right-[161px]"
                     />
@@ -333,14 +340,12 @@ export default function Landing() {
                     className="mt-16 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
                     onClick={() => navigate('/market')}
                 >
-                    Explore Features
+                    Explore the Marketplace of Public facing APIs
                 </button>
 
             </section>
 
-
-
-            {/* INDUSTRY USE CASES */}
+            {/* INDUSTRY USE CASES / WHO IT'S FOR */}
 
             <div className="w-screen px-6 md:px-10 xl:px-35 pt-20 pb-40 flex flex-col text-[#E3E3E3] bg-[#111111] items-center gap-16">
 
@@ -348,69 +353,68 @@ export default function Landing() {
 
                 <div className="flex flex-col md:flex-row gap-16 mt-20">
 
-                    <Need img="landing/usage/development.svg" text="Robotics AI Training" />
-                    <Need img="landing/usage/data-science.svg" text="Autonomous Vehicle Data" />
-                    <Need img="landing/usage/marketing.svg" text="Fleet Analytics" />
+                    <Need img="landing/usage/development.svg" text="Individual Developers & Startups" />
+                    <Need img="landing/usage/data-science.svg" text="AI & Machine Learning Teams" />
+                    <Need img="landing/usage/marketing.svg" text="SaaS Product Builders" />
 
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-16">
 
-                    <Need img="landing/usage/e-commerce.svg" text="Sensor Dataset Discovery" />
-                    <Need img="landing/usage/content.svg" text="Mobility Platforms" />
-                    <Need img="landing/usage/seo.svg" text="Industrial Robotics" />
+                    <Need img="landing/usage/e-commerce.svg" text="Enterprise Integration Teams" />
+                    <Need img="landing/usage/content.svg" text="API-First Companies" />
+                    <Need img="landing/usage/seo.svg" text="Data & Analytics Platforms" />
 
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-16">
 
-                    <Need img="landing/Earth Globe.svg" text="Geospatial Drone Data" />
-                    <Need img="landing/Sparkles.svg" text="Remote Sensing" />
-                    <Need img="landing/Audio Wave.svg" text="Spatial Analytics" />
+                    <Need img="landing/Earth Globe.svg" text="Robotics & Autonomous Systems" />
+                    <Need img="landing/Sparkles.svg" text="IoT & Sensor Networks" />
+                    <Need img="landing/Audio Wave.svg" text="Geospatial & Mobility Solutions" />
 
                 </div>
 
             </div>
 
-
-
-            {/* ENTERPRISE DATA BUYERS */}
+            {/* ENTERPRISE SECTION */}
 
             <section className="flex flex-col bg-[#0d0d0d] items-center justify-center px-6 md:px-10 xl:px-35 py-40 border-t border-[#1e1e1e]">
 
                 <Header {...headers[5]} />
 
                 <p className="text-[#969696] mt-6 text-center max-w-2xl text-base font-[Heebo]">
-                    Connect directly with verified large-scale data suppliers. Source custom datasets,
-                    negotiate volume contracts, and integrate data pipelines at enterprise scale.
+                    Powerful infrastructure for high-volume API consumption and distribution. 
+                    Custom SDKs, dedicated mapping tools, advanced analytics, SLAs, and private marketplaces.
+
                 </p>
 
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 w-full justify-items-center">
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Done.svg`} className="w-10" />}
-                        name="Supplier Directory"
-                        description="Connect with large-scale data suppliers across industries and domains. "
+                        name="Private Marketplaces"
+                        description="Create branded, invite-only API catalogs for your organization or partners."
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/User.svg`} className="w-10" />}
-                        name="Supplier Matching"
-                        description="We find and connect you to supplier matching your requirements."
+                        name="Advanced SDK Mapping"
+                        description="Visual interface to map complex API responses to your internal models."
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" />}
-                        name="Volume"
-                        description="Scale your workflows/applications seamlessly with easy to use SDKs."
+                        name="High-Volume Scaling"
+                        description="Enterprise-grade rate limits, usage analytics, and cost controls."
                         glow={true}
                         glowClass="left-[43px] top-[37px]"
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
-                        name="Compliance"
-                        description="Complete data provenance and lineage for secure and compliant data sourcing and usage."
+                        name="Compliance & Governance"
+                        description="Full audit trails, data lineage, SOC2/GDPR readiness, and SSO."
                     />
 
                 </div>
@@ -419,21 +423,20 @@ export default function Landing() {
                     className="mt-16 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
                     onClick={() => setShowForm(true)}
                 >
-                    Connect with Suppliers
+                    Talk to Enterprise Sales
                 </button>
 
             </section>
 
-
-
-            {/* REGISTER CTA */}
+            {/* REGISTER / GET STARTED CTA */}
 
             <section className="flex flex-col bg-[#111111] items-center px-10 xl:px-35 pb-20">
 
                 <Header {...headers[4]} />
 
                 <p className="text-[#969696] mt-4 text-center max-w-xl">
-                    Access robotics, automotive, and geospatial datasets, or integrate your own APIs.
+                    Join developers and companies discovering, integrating, 
+                    and monetizing APIs with our marketplace and SDK tools.
                 </p>
 
                 <div className="py-16">
@@ -442,13 +445,14 @@ export default function Landing() {
                         className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
                         onClick={() => setShowForm(true)}
                     >
-                        Get Started
+                        Get Started Free
                     </button>
 
                 </div>
 
             </section>
 
+            {/* Early Access Modal - unchanged */}
             {showForm && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
 
@@ -503,9 +507,10 @@ export default function Landing() {
                                 className="p-3 rounded bg-[#111] text-white disabled:opacity-50"
                             >
                                 <option value="">Select role</option>
-                                <option>Robotics Engineer</option>
-                                <option>ML Engineer</option>
-                                <option>Founder</option>
+                                <option>Developer</option>
+                                <option>ML/AI Engineer</option>
+                                <option>Founder / Startup</option>
+                                <option>Enterprise Architect</option>
                                 <option>Other</option>
                             </select>
 
@@ -517,11 +522,12 @@ export default function Landing() {
                                 disabled={isSubmitting}
                                 className="p-3 rounded bg-[#111] text-white disabled:opacity-50"
                             >
-                                <option value="">What are you trying to do?</option>
-                                <option>Train models</option>
-                                <option>Access datasets</option>
-                                <option>Build pipelines</option>
-                                <option>Explore</option>
+                                <option value="">What are you looking to do?</option>
+                                <option>Discover & integrate APIs</option>
+                                <option>Generate custom SDKs</option>
+                                <option>Monetize my APIs</option>
+                                <option>Enterprise integration</option>
+                                <option>Explore the platform</option>
                             </select>
 
                             <button
@@ -529,7 +535,7 @@ export default function Landing() {
                                 disabled={isSubmitting}
                                 className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed p-3 rounded text-white font-bold"
                             >
-                                {isSubmitting ? 'Sending...' : 'Submit'}
+                                {isSubmitting ? 'Sending...' : 'Submit Request'}
                             </button>
 
                             <button
