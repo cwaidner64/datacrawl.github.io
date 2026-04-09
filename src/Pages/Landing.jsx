@@ -316,7 +316,7 @@ export default function Landing() {
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
-                        name="Secure Monetization"
+                        name="Secure Billing"
                         description="Built-in billing, authentication, and usage tracking for providers and consumers."
                     />
 
@@ -328,7 +328,7 @@ export default function Landing() {
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/API.svg`} className="w-12" />}
-                        name="B2C & B2B solutions"
+                        name="B2C&B2B solutions"
                         description="Seamless API integrations for more efficient development"
                         glow={true}
                         glowClass="bottom-[20px] right-[161px]"
@@ -393,19 +393,19 @@ export default function Landing() {
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Done.svg`} className="w-10" />}
-                        name="Private Marketplaces"
+                        name="Private Market"
                         description="Create branded, invite-only API catalogs for your organization or partners."
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/User.svg`} className="w-10" />}
-                        name="Advanced SDK Mapping"
+                        name="SDK Mapping"
                         description="Visual interface to map complex API responses to your internal models."
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" />}
-                        name="High-Volume Scaling"
+                        name="Volume Scaling"
                         description="Enterprise-grade rate limits, usage analytics, and cost controls."
                         glow={true}
                         glowClass="left-[43px] top-[37px]"

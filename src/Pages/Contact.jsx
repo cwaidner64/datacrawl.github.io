@@ -4,6 +4,7 @@ import Header from "../Components/Landing/Header";
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -46,12 +47,31 @@ export default function Contact() {
         {/* Contact Form */}
         <div className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-6 sm:p-10 w-full max-w-xl">
           {submitted ? (
-            <div className="text-center text-blue-400 text-xl font-semibold py-12">
-              Thank you for reaching out!<br />
-              <span className="text-[#d1d5db] text-base font-normal mt-4 block">
-                Make sure your email client opened with the message ready to send. If not, email us directly at{" "}
+            <div className="flex flex-col gap-6">
+              <div className="text-center text-blue-400 text-xl font-semibold">
+                Thank you for reaching out!
+              </div>
+              <p className="text-[#aaa] text-sm text-center">
+                Make sure your email client opened with the message ready to send. If not, copy the message below and email us directly at{" "}
                 <a href="mailto:contact@datacrawl.org" className="text-blue-400 hover:underline">contact@datacrawl.org</a>
-              </span>
+              </p>
+              <div className="bg-[#2a2a2a] border border-[#444] rounded-lg p-4 text-sm text-[#d1d5db] whitespace-pre-wrap font-mono">
+                {`To: contact@datacrawl.org\nSubject: ${form.subject}\n\nName: ${form.name}\nEmail: ${form.email}\n\n${form.message}`}
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `To: contact@datacrawl.org\nSubject: ${form.subject}\n\nName: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
+                  ).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  });
+                }}
+                className="bg-[#333] hover:bg-[#444] text-white px-6 py-2 rounded-lg font-semibold transition text-sm"
+              >
+                {copied ? "Copied!" : "Copy Message"}
+              </button>
             </div>
           ) : (
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>

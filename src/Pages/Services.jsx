@@ -10,8 +10,8 @@ export default function Services() {
         <section className="flex flex-col items-center text-center mb-10 sm:mb-20">
           <Header
             label="Services"
-            title="Data Pipeline Solutions"
-            subtext="We build end-to-end data pipelines that connect data owners with AI and robotics teams. From sourcing the right datasets to finding paying clients for your data — we handle the full flow."
+            title="Custom API Integration Solutions"
+            subtext="Powerful visual mapping and instant SDK generation to simplify API integration for developers and enterprises."
           />
         </section>
 
@@ -19,68 +19,68 @@ export default function Services() {
         <section className="mb-10 sm:mb-20">
           <div className="grid md:grid-cols-3 gap-8">
 
-            {/* Data Sourcing for Clients */}
+            {/* Custom Mapping */}
             <div className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-8 flex flex-col">
-              <h2 className="text-2xl font-semibold mb-4">Data Sourcing</h2>
+              <h2 className="text-2xl font-semibold mb-4">Custom Mapping</h2>
               <p className="text-[#d1d5db] mb-6 flex-grow">
-                We help AI developers, robotics engineers, and research teams find and access the exact real-world datasets they need.
+                Transform complex API responses into your exact data model using our intuitive visual mapping interface.
               </p>
               <ul className="space-y-3 text-[#d1d5db]">
                 <li className="flex items-start gap-3">
                   <span className="text-blue-400 mt-1">•</span>
-                  Curated robotics & sensor data
+                  Visual field mapping
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-blue-400 mt-1">•</span>
-                  Autonomous vehicle telemetry
+                  Real-time preview
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-blue-400 mt-1">•</span>
-                  Custom dataset matching
+                  Nested object support
                 </li>
               </ul>
             </div>
 
-            {/* Client Acquisition for Data Owners */}
+            {/* Instant SDK Generation */}
             <div className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-8 flex flex-col">
-              <h2 className="text-2xl font-semibold mb-4">Client Acquisition</h2>
+              <h2 className="text-2xl font-semibold mb-4">Instant SDK Generation</h2>
               <p className="text-[#d1d5db] mb-6 flex-grow">
-                We find and connect qualified buyers (AI teams, robotics companies, researchers) to your datasets so you can monetize effectively.
+                Generate production-ready SDKs in multiple languages with your custom mappings applied automatically.
               </p>
               <ul className="space-y-3 text-[#d1d5db]">
                 <li className="flex items-start gap-3">
                   <span className="text-blue-400 mt-1">•</span>
-                  Targeted buyer outreach
+                  JavaScript, Python, TypeScript & more
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-blue-400 mt-1">•</span>
-                  Secure deal facilitation
+                  Automatic types & docs
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-blue-400 mt-1">•</span>
-                  Usage-based revenue opportunities
+                  Built-in auth & error handling
                 </li>
               </ul>
             </div>
 
-            {/* End-to-End Data Pipelines */}
+            {/* Marketplace Integration */}
             <div className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-8 flex flex-col">
-              <h2 className="text-2xl font-semibold mb-4">End-to-End Pipelines</h2>
+              <h2 className="text-2xl font-semibold mb-4">Marketplace Access</h2>
               <p className="text-[#d1d5db] mb-6 flex-grow">
-                We design and manage complete data pipelines — from data discovery and integration to delivery and monetization.
+                Discover and integrate APIs effortlessly with custom mapping and unified B2C/B2B support.
               </p>
               <ul className="space-y-3 text-[#d1d5db]">
                 <li className="flex items-start gap-3">
                   <span className="text-blue-400 mt-1">•</span>
-                  Automated API generation
+                  Usage-based billing
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-blue-400 mt-1">•</span>
-                  Secure distributed access
+                  Enterprise security
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-blue-400 mt-1">•</span>
-                  Full pipeline monitoring & analytics
+                  Flexible access controls
                 </li>
               </ul>
             </div>
@@ -90,15 +90,15 @@ export default function Services() {
 
         {/* How It Works */}
         <section className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-6 sm:p-10 mb-8 sm:mb-12">
-          <h2 className="text-2xl font-semibold mb-6 text-center">How Our Data Pipelines Work</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-center">How Custom Mapping Works</h2>
           <div className="max-w-3xl mx-auto space-y-6 text-[#d1d5db] text-center">
             <p>
-              We act as the bridge between data owners and data consumers. Our platform finds the right matches, builds reliable pipelines, 
-              and ensures secure, low-latency data delivery without requiring centralized storage.
+              Stop writing boilerplate code to reshape API responses. Our visual mapping tool lets you 
+              transform any API output into your preferred data structure instantly.
             </p>
             <p>
-              Whether you own valuable operational data or need high-quality datasets for training AI models, we handle the complex middle layer — 
-              sourcing, matching, integration, access control, and monetization.
+              Connect an API, map fields visually, and generate a clean, type-safe SDK tailored to your application — 
+              perfect for both individual developers and enterprise teams.
             </p>
           </div>
         </section>
@@ -107,35 +107,34 @@ export default function Services() {
         <section className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-6 sm:p-10 mb-8 sm:mb-12">
           <h2 className="text-2xl font-semibold mb-6 text-center">What We Offer</h2>
           <p className="text-[#cbd5e1] text-center mb-10 max-w-2xl mx-auto">
-            From data owners looking to monetize to AI teams searching for quality datasets — our pipelines scale to your needs.
+            Accelerate API integration with intelligent mapping and SDK tools.
           </p>
           
           <ul className="max-w-3xl mx-auto space-y-6 text-[#d1d5db]">
             <li className="flex gap-4">
               <span className="text-blue-400 font-bold text-xl shrink-0">01</span>
-              <span>Find qualified buyers for your datasets and manage the full monetization pipeline.</span>
+              <span>Visual mapping to reshape API responses into your exact data model.</span>
             </li>
             <li className="flex gap-4">
               <span className="text-blue-400 font-bold text-xl shrink-0">02</span>
-              <span>Source and deliver the right real-world data for AI, robotics, and research projects.</span>
+              <span>Instant SDK generation with your custom mappings included.</span>
             </li>
             <li className="flex gap-4">
               <span className="text-blue-400 font-bold text-xl shrink-0">03</span>
-              <span>Build secure, automated data pipelines with API access and distributed delivery.</span>
+              <span>Support for complex nested structures and transformations.</span>
             </li>
             <li className="flex gap-4">
               <span className="text-blue-400 font-bold text-xl shrink-0">04</span>
-              <span>End-to-end support including matching, integration, billing, and performance tracking.</span>
+              <span>Enterprise features with version control and team collaboration.</span>
             </li>
           </ul>
         </section>
 
         {/* CTA */}
         <section className="flex flex-col items-center text-center">
-          <h2 className="text-2xl font-semibold mb-4">Ready to Build Your Data Pipeline?</h2>
+          <h2 className="text-2xl font-semibold mb-4">Ready to Simplify API Integrations?</h2>
           <p className="text-[#d1d5db] max-w-lg mb-6">
-            Whether you're a data owner looking for clients or an AI team needing quality datasets, 
-            we can build the right pipeline for you.
+            Let our custom mapping tools handle the heavy lifting.
           </p>
           <p className="text-[#aaa]">
             Contact us at{" "}
