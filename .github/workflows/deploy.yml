@@ -17,7 +17,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      VITE_BASE_PATH: /datacrawl.github.io/
+      VITE_BASE_PATH: /
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
 
       - name: Verify built base path
         run: |
-          if ! grep -q 'src="/datacrawl.github.io/assets/' dist/index.html; then
+          if ! grep -q 'src="/assets/' dist/index.html; then
             echo 'dist/index.html does not contain the expected project-site asset path.'
             exit 1
           fi
