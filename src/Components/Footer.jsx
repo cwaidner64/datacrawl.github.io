@@ -21,18 +21,9 @@ function Footer() {
                             </span>
                             <p className="text-[#928F8F] mt-8 text-s xl:px-2">Data has never been easier</p>
                             <div className="flex flex-row h-[30px] mt-6 sm:mt-10 justify-start gap-2">
-                                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                                    <img src={`${import.meta.env.BASE_URL}landing/Instagram.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
-                                </a>
-                                <a href="https://www.github.com/datacrawl" target="_blank" rel="noopener noreferrer">
+                                <a href="https://github.com/DataCrawl-hq" target="_blank" rel="noopener noreferrer">
                                     <img src={`${import.meta.env.BASE_URL}landing/GitHub.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
-                                </a>
-                                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                                    <img src={`${import.meta.env.BASE_URL}landing/Facebook.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
-                                </a>
-                                <a href="https://www.x.com" target="_blank" rel="noopener noreferrer">
-                                    <img src={`${import.meta.env.BASE_URL}landing/X.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
-                                </a>
+                                </a>   
                                 <a href="https://www.linkedin.com/company/datacrawl-org" target="_blank" rel="noopener noreferrer">
                                     <img src={`${import.meta.env.BASE_URL}landing/LinkedIn.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
                                 </a>
