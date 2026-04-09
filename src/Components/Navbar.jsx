@@ -17,7 +17,7 @@ function Navbar() {
     <nav className="py-4 md:py-6 px-4 md:px-6 bg-transparent text-white w-full absolute top-0 z-50">
       <div className="max-w-full flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <img src={`${import.meta.env.BASE_URL}/public/Logo-basic.svg`} alt="DataCrawl Logo" className="w-8 h-8" />
+          <img src={`${import.meta.env.BASE_URL}Logo-basic.svg`} alt="DataCrawl Logo" className="w-8 h-8" />
           <Link to="/" className="text-white hover:text-gray-300 text-xl font-bold" onClick={() => setMenuOpen(false)}>
             <h1>DataCrawl</h1>
           </Link>
