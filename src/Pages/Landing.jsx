@@ -1,4 +1,3 @@
-import Login from "../Components/LoginPage"
 import React from "react"
 import { motion } from 'motion/react';
 
@@ -11,7 +10,6 @@ import PricingCard from "../Components/Landing/PricingCard";
 import Header from "../Components/Landing/Header";
 import Need from "../Components/Landing/Need";
 import '../App.css';
-import { useAuth } from "../Components/AuthContext";
 import {
     Menu,
     X,
@@ -22,8 +20,6 @@ import {
 export default function Landing() {
 
     const navigate = useNavigate();
-    const { isLoggedIn, loggedInEmail, handleLogout } = useAuth();
-    const userId = localStorage.getItem('DCuserId');
 
     const [menuOpen, setMenuOpen] = useState(false);
     const [showForm, setShowForm] = useState(false);
@@ -145,31 +141,6 @@ export default function Landing() {
                         </div>
 
                         <div className="hidden md:flex gap-4 lg:gap-6 items-center">
-
-                            {isLoggedIn ? (
-                                <>
-                                    <span className="text-white font-semibold max-w-[180px] truncate">{loggedInEmail}</span>
-
-                                    <button
-                                        className="px-3 py-1 rounded-3xl bg-red-600 hover:bg-red-700 text-white"
-                                        onClick={handleLogout}
-                                    >
-                                        Logout
-                                    </button>
-
-                                    <button
-                                        className="px-3 py-1 rounded-3xl bg-blue-600 hover:bg-blue-700 text-white"
-                                        onClick={() => navigate(`/profile/${userId}`)}
-                                    >
-                                        Profile
-                                    </button>
-                                </>
-                            ) : (
-                                <>
-                                   
-                                </>
-                            )}
-
                         </div>
 
                         <button
@@ -198,36 +169,15 @@ export default function Landing() {
                             </div>
 
                             <div className="mt-4 pt-4 border-t border-[#2b2b2b] flex flex-col gap-2">
-                                {isLoggedIn ? (
-                                    <>
-                                        <span className="px-3 text-sm text-[#bdbdbd] truncate">{loggedInEmail}</span>
-                                        <button
-                                            className="w-full px-3 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
-                                            onClick={() => handleMobileNavigate(`/profile/${userId}`)}
-                                        >
-                                            Profile
-                                        </button>
-                                        <button
-                                            className="w-full px-3 py-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold transition-colors"
-                                            onClick={() => {
-                                                handleLogout();
-                                                setMenuOpen(false);
-                                            }}
-                                        >
-                                            Logout
-                                        </button>
-                                    </>
-                                ) : (
-                                    <button
-                                        className="w-full px-3 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
-                                        onClick={() => {
-                                            setShowForm(true);
-                                            setMenuOpen(false);
-                                        }}
-                                    >
-                                        Get Started
-                                    </button>
-                                )}
+                                <button
+                                    className="w-full px-3 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
+                                    onClick={() => {
+                                        setShowForm(true);
+                                        setMenuOpen(false);
+                                    }}
+                                >
+                                    Get Started
+                                </button>
                             </div>
                         </div>
                     )}

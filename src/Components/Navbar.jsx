@@ -1,18 +1,10 @@
 // src/Components/Navbar.jsx
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from './AuthContext';
-import { LogOut, Menu, UserCircle, X } from 'lucide-react';
-import { hasAdminAccess } from "../utils/authClaims";
+import { Link } from "react-router-dom";
+import { Menu, X } from 'lucide-react';
 
 function Navbar() {
-  const { isLoggedIn, loggedInEmail, handleLogout, isLoading, isInitialized, accessToken } = useAuth();
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const navigate = useNavigate();
-  const isAdmin = hasAdminAccess(accessToken);
-
-  const userId = localStorage.getItem('DCuserId');
-  const profileHref = userId ? `/profile/${userId}` : '/account';
 
   const navLinks = [
     { to: '/about', label: 'About' },
@@ -20,12 +12,6 @@ function Navbar() {
     { to: '/contact', label: 'Contact' },
     { to: '/services', label: 'Services' },
   ];
-
-  const handleLogoutClick = () => {
-    handleLogout();
-    setMenuOpen(false);
-    navigate('/login');
-  };
 
   return (
     <nav className="py-4 md:py-6 px-4 md:px-6 bg-transparent text-white w-full absolute top-0 z-50">
@@ -55,23 +41,6 @@ function Navbar() {
                 </Link>
               </li>
             ))}
-
-            {isLoggedIn && isAdmin && (
-              <>
-                <li>
-                  <Link to="/admin/vendor-applications" className="text-white hover:text-gray-400">
-                    Admin Review
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/admin/vendor-endpoints" className="text-white hover:text-gray-400">
-                    Admin Endpoints
-                  </Link>
-                </li>
-              </>
-            )}
-
-        
           </ul>
         </div>
       </div>
@@ -89,44 +58,6 @@ function Navbar() {
                 {link.label}
               </Link>
             ))}
-
-            {isLoggedIn && isAdmin && (
-              <>
-                <Link to="/admin/vendor-applications" className="text-left" onClick={() => setMenuOpen(false)}>
-                  Admin Review
-                </Link>
-                <Link to="/admin/vendor-endpoints" className="text-left" onClick={() => setMenuOpen(false)}>
-                  Admin Endpoints
-                </Link>
-              </>
-            )}
-          </div>
-
-          <div className="mt-4 pt-4 border-t border-[#2b2b2b]">
-            {!isInitialized || isLoading ? (
-              <div className="text-sm text-gray-400">Loading...</div>
-            ) : isLoggedIn ? (
-              <div className="flex flex-col gap-3">
-                <span className="text-white text-sm break-all">{loggedInEmail}</span>
-                <Link
-                  to={profileHref}
-                  className="px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-[500] transition-all duration-200 text-center"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Profile
-                </Link>
-                <button
-                  className="px-3 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-[500] transition-all duration-200"
-                  onClick={handleLogoutClick}
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <div className="flex flex-col gap-3">
-               
-              </div>
-            )}
           </div>
         </div>
       )}

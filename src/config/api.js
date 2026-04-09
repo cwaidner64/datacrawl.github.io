@@ -10,14 +10,7 @@ export const API_ENDPOINTS = {
     demoSuccess: "/demo/success",
     downloadById: "/download/{id}",
   },
-  auth: {
-    login: "/api/v1/auth/login",
-    register: "/api/v1/auth/register",
-    validateToken: "/api/v1/auth/validate-token",
-    refreshToken: "/api/v1/auth/refresh",
-    googleStart: "/api/v1/auth/google/start",
-    googleCallback: "/api/v1/auth/google/callback",
-  },
+
   market: {
     categories: "/market/categories",
     items: "/market/items/v2",
@@ -107,21 +100,6 @@ export const buildApiUrl = (path) => {
   return `${normalizedBase}${normalizedPath}`;
 };
 
-const ACCESS_TOKEN_STORAGE_KEY = "DCaccessToken";
-const REFRESH_TOKEN_STORAGE_KEY = "DCrefreshToken";
-const TOKEN_UPDATED_EVENT = "dc-auth-token-updated";
-let activeRefreshPromise = null;
-
-const REFRESH_TOKEN_FAILURE_CODES = new Set([
-  "refresh_token_invalid",
-  "refresh_token_expired",
-  "refresh_token_revoked",
-]);
-const AUTH_PATHS_WITHOUT_REFRESH = new Set([
-  API_ENDPOINTS.auth.login,
-  API_ENDPOINTS.auth.register,
-  API_ENDPOINTS.auth.refreshToken,
-]);
 
 const extractErrorDetails = async (response, fallbackMessage) => {
   try {
@@ -159,31 +137,6 @@ const extractErrorDetails = async (response, fallbackMessage) => {
   }
 };
 
-const updateStoredTokens = ({ accessToken = null, refreshToken = null, clearRefresh = false } = {}) => {
-  if (accessToken) {
-    localStorage.setItem(ACCESS_TOKEN_STORAGE_KEY, accessToken);
-  } else {
-    localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);
-  }
-
-  if (refreshToken) {
-    localStorage.setItem(REFRESH_TOKEN_STORAGE_KEY, refreshToken);
-  } else if (clearRefresh) {
-    localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
-  }
-
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(
-      new CustomEvent(TOKEN_UPDATED_EVENT, {
-        detail: {
-          token: accessToken || null,
-          accessToken: accessToken || null,
-          refreshToken: refreshToken || null,
-        },
-      }),
-    );
-  }
-};
 
 const createHttpError = ({ status, message, errorCode, fieldErrors }) => {
   const error = new Error(message);
@@ -191,15 +144,6 @@ const createHttpError = ({ status, message, errorCode, fieldErrors }) => {
   error.errorCode = errorCode || null;
   error.fieldErrors = fieldErrors || null;
   return error;
-};
-
-const shouldSkipRefreshForPath = (path) => {
-  if (!path) {
-    return false;
-  }
-
-  const normalizedPath = path.split("?")[0];
-  return AUTH_PATHS_WITHOUT_REFRESH.has(normalizedPath);
 };
 
 const applyPathParams = (pathTemplate, params = {}) =>
@@ -214,90 +158,11 @@ const getAdminApiKeyHeaders = ({ adminApiKey } = {}) => ({
   ...(adminApiKey ? { "X-Admin-Api-Key": adminApiKey } : {}),
 });
 
-const GOOGLE_OAUTH_MESSAGE_TYPE = "google_oauth_result";
-const GOOGLE_OAUTH_POPUP_TIMEOUT_MS = 120_000;
 
-const getApiOrigin = () => {
-  try {
-    return new URL(API_BASE).origin;
-  } catch {
-    if (typeof window !== "undefined") {
-      return window.location.origin;
-    }
-    return "";
-  }
-};
-
-export const isRefreshTokenTerminalError = (error) =>
-  error?.status === 401 && REFRESH_TOKEN_FAILURE_CODES.has(error?.errorCode || "");
-
-export const refreshAccessToken = async () => {
-  if (activeRefreshPromise) {
-    return activeRefreshPromise;
-  }
-
-  activeRefreshPromise = (async () => {
-    const refreshToken = localStorage.getItem(REFRESH_TOKEN_STORAGE_KEY);
-    if (!refreshToken) {
-      const missingTokenError = new Error("No refresh token available.");
-      missingTokenError.status = 401;
-      missingTokenError.errorCode = "refresh_token_invalid";
-      throw missingTokenError;
-    }
-
-    const response = await fetch(buildApiUrl(API_ENDPOINTS.auth.refreshToken), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        refresh_token: refreshToken,
-      }),
-    });
-
-    if (!response.ok) {
-      const fallbackMessage = `Request failed with status ${response.status}.`;
-      const details = await extractErrorDetails(response, fallbackMessage);
-      throw createHttpError({
-        status: response.status,
-        message: details.message,
-        errorCode: details.errorCode,
-      });
-    }
-
-    const contentType = response.headers.get("content-type") || "";
-    const data = contentType.includes("application/json") ? await response.json() : null;
-    const refreshedAccessToken = data?.access_token || data?.token || data?.accessToken || null;
-    const refreshedRefreshToken = data?.refresh_token || data?.refreshToken || null;
-
-    if (!refreshedAccessToken) {
-      throw new Error("Refresh succeeded but no access token was returned.");
-    }
-
-    if (!refreshedRefreshToken) {
-      throw new Error("Refresh succeeded but no refresh token was returned.");
-    }
-
-    updateStoredTokens({
-      accessToken: refreshedAccessToken,
-      refreshToken: refreshedRefreshToken,
-    });
-    return {
-      accessToken: refreshedAccessToken,
-      refreshToken: refreshedRefreshToken,
-    };
-  })();
-
-  try {
-    return await activeRefreshPromise;
-  } finally {
-    activeRefreshPromise = null;
-  }
-};
 
 const request = async (
   path,
-  { method = "GET", token, body, headers = {}, skipAuthRefresh = false } = {},
+  { method = "GET", token, body, headers = {} } = {},
 ) => {
   const isFormDataBody = typeof FormData !== "undefined" && body instanceof FormData;
 
@@ -325,30 +190,6 @@ const request = async (
       fieldErrors: details.fieldErrors,
     });
 
-    const shouldAttemptRefresh =
-      !skipAuthRefresh &&
-      response.status === 401 &&
-      token &&
-      !shouldSkipRefreshForPath(path);
-
-    if (shouldAttemptRefresh) {
-      try {
-        const refreshedSession = await refreshAccessToken();
-        return request(path, {
-          method,
-          token: refreshedSession.accessToken,
-          body,
-          headers,
-          skipAuthRefresh: true,
-        });
-      } catch (refreshError) {
-        if (isRefreshTokenTerminalError(refreshError)) {
-          updateStoredTokens({ accessToken: null, clearRefresh: true });
-        }
-        throw refreshError;
-      }
-    }
-
     throw currentError;
   }
 
@@ -369,148 +210,6 @@ export const getAuthHeaders = (token) => ({
   ...(token ? { Authorization: `Bearer ${token}` } : {}),
 });
 
-export const loginUser = ({ email, password }) =>
-  request(API_ENDPOINTS.auth.login, {
-    method: "POST",
-    body: { email, password },
-  });
-
-export const buildGoogleOAuthStartUrl = ({
-  redirectUri,
-  responseMode = "web_message",
-  clientOrigin,
-} = {}) => {
-  const backendOrigin = getApiOrigin();
-  const resolvedRedirectUri = redirectUri || `${backendOrigin}${API_ENDPOINTS.auth.googleCallback}`;
-  const resolvedClientOrigin =
-    clientOrigin || (typeof window !== "undefined" ? window.location.origin : "");
-
-  const startUrl = new URL(buildApiUrl(API_ENDPOINTS.auth.googleStart));
-  startUrl.searchParams.set("redirect_uri", resolvedRedirectUri);
-
-  if (responseMode) {
-    startUrl.searchParams.set("response_mode", responseMode);
-  }
-
-  if (responseMode === "web_message" && resolvedClientOrigin) {
-    startUrl.searchParams.set("client_origin", resolvedClientOrigin);
-  }
-
-  return startUrl.toString();
-};
-
-export const loginWithGooglePopup = ({
-  timeoutMs = GOOGLE_OAUTH_POPUP_TIMEOUT_MS,
-  popupName = "google_oauth",
-  popupFeatures = "width=520,height=720",
-} = {}) => {
-  if (typeof window === "undefined") {
-    throw new Error("Google login is only available in a browser environment.");
-  }
-
-  const backendOrigin = getApiOrigin();
-  const startUrl = buildGoogleOAuthStartUrl({
-    responseMode: "web_message",
-    clientOrigin: window.location.origin,
-    redirectUri: `${backendOrigin}${API_ENDPOINTS.auth.googleCallback}`,
-  });
-
-  const popup = window.open(startUrl, popupName, popupFeatures);
-  if (!popup) {
-    throw new Error("Popup blocked by browser.");
-  }
-
-  return new Promise((resolve, reject) => {
-    let timeoutHandle = null;
-    let popupClosePollHandle = null;
-
-    const cleanup = () => {
-      if (timeoutHandle) {
-        clearTimeout(timeoutHandle);
-      }
-      if (popupClosePollHandle) {
-        clearInterval(popupClosePollHandle);
-      }
-      window.removeEventListener("message", handleMessage);
-      try {
-        popup.close();
-      } catch {
-        // no-op
-      }
-    };
-
-    const rejectWithCleanup = (error) => {
-      cleanup();
-      reject(error instanceof Error ? error : new Error(String(error || "Google login failed.")));
-    };
-
-    const resolveWithCleanup = (result) => {
-      cleanup();
-      resolve(result);
-    };
-
-    const handleMessage = (event) => {
-      if (event.origin !== backendOrigin) {
-        return;
-      }
-
-      const payload = event.data || {};
-      if (payload.type !== GOOGLE_OAUTH_MESSAGE_TYPE) {
-        return;
-      }
-
-      if (payload.error) {
-        rejectWithCleanup(new Error(payload.error));
-        return;
-      }
-
-      resolveWithCleanup(payload.result || null);
-    };
-
-    timeoutHandle = setTimeout(() => {
-      rejectWithCleanup(new Error("Google login timed out."));
-    }, timeoutMs);
-
-    popupClosePollHandle = setInterval(() => {
-      if (popup.closed) {
-        rejectWithCleanup(new Error("Google login popup was closed before completing sign in."));
-      }
-    }, 500);
-
-    window.addEventListener("message", handleMessage);
-  });
-};
-
-export const AUTH_EVENTS = {
-  tokenUpdated: TOKEN_UPDATED_EVENT,
-};
-
-export const persistAccessToken = (token) => {
-  updateStoredTokens({ accessToken: token || null });
-};
-
-export const persistSessionTokens = ({ accessToken, refreshToken }) => {
-  updateStoredTokens({
-    accessToken: accessToken || null,
-    refreshToken: refreshToken || null,
-  });
-};
-
-export const clearSessionTokens = () => {
-  updateStoredTokens({ accessToken: null, clearRefresh: true });
-};
-
-export const registerUser = ({ email, password }) =>
-  request(API_ENDPOINTS.auth.register, {
-    method: "POST",
-    body: { email, password },
-  });
-
-export const validateAuthToken = (token) =>
-  request(API_ENDPOINTS.auth.validateToken, {
-    method: "GET",
-    token,
-  });
 
 export const fetchMarketCategories = async (token) =>
   request(API_ENDPOINTS.market.categories, {
