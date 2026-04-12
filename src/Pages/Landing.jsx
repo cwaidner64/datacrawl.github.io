@@ -23,7 +23,7 @@ export default function Landing() {
 
     const [menuOpen, setMenuOpen] = useState(false);
     const [showForm, setShowForm] = useState(false);
-    const [formData, setFormData] = useState({ name: '', email: '', role: '', intent: '' });
+    const [formData, setFormData] = useState({ name: '', company: '', email: '', role: '', intent: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState('');
     const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -33,30 +33,36 @@ export default function Landing() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         setSubmitError('');
         setSubmitSuccess(false);
 
         try {
-            const subject = encodeURIComponent(`Early Access Request - ${formData.name}`);
-            const body = encodeURIComponent(
-                `Name: ${formData.name}\n` +
-                `Email: ${formData.email}\n` +
-                `Role: ${formData.role}\n` +
-                `Intent: ${formData.intent}\n\n` +
-                `Message:\nEarly access request from ${formData.name} (${formData.email}).`
-            );
+            const response = await fetch('https://hook.us2.make.com/5jpdk7qebo4irz6ip4u7hyjjyajvs4j3', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name.trim(),
+                    company: formData.company.trim(),
+                    email: formData.email.trim(),
+                    role: formData.role,
+                    intent: formData.intent,
+                    submitted_at: new Date().toISOString(),
+                }),
+            });
 
-            window.location.href = `mailto:contact@datacrawl.org?subject=${subject}&body=${body}`;
+            if (!response.ok) {
+                throw new Error(`Webhook failed: ${response.status}`);
+            }
 
             setSubmitSuccess(true);
             setShowForm(false);
-            setFormData({ name: '', email: '', role: '', intent: '' });
+            setFormData({ name: '', company: '', email: '', role: '', intent: '' });
         } catch (error) {
-            console.error('Error preparing email:', error);
-            setSubmitError('Unable to open your email client. Please email contact@datacrawl.org manually.');
+            console.error('Failed to send early access request:', error);
+            setSubmitError('Unable to submit right now. Please try again in a moment.');
         } finally {
             setIsSubmitting(false);
         }
@@ -448,6 +454,17 @@ export default function Landing() {
                                 className="p-3 rounded bg-[#111] text-white disabled:opacity-50"
                             />
 
+                            <input
+                                type="text"
+                                name="company"
+                                placeholder="Company name"
+                                value={formData.company}
+                                required
+                                onChange={handleChange}
+                                disabled={isSubmitting}
+                                className="p-3 rounded bg-[#111] text-white disabled:opacity-50"
+                            />
+
                             <select
                                 name="role"
                                 value={formData.role}
@@ -477,7 +494,8 @@ export default function Landing() {
                                 <option>Generate custom SDKs</option>
                                 <option>Monetize my APIs</option>
                                 <option>Enterprise integration</option>
-                                <option>Explore the platform</option>
+                                <option>Explore the platform</option>\
+                                <option>Demo</option>
                             </select>
 
                             <button

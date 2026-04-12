@@ -2,27 +2,45 @@ import React, { useState } from "react";
 import Header from "../Components/Landing/Header";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({ name: "", company: "", email: "", subject: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const subject = form.subject?.trim() || "Contact Form Submission";
-    const body = [
-      `Name: ${form.name || ""}`,
-      `Email: ${form.email || ""}`,
-      "",
-      form.message || "",
-    ].join("\n");
+    setIsSubmitting(true);
+    setError("");
 
-    const mailtoUrl = `mailto:contact@datacrawl.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoUrl;
-    setSubmitted(true);
+    try {
+      const response = await fetch("https://hook.us2.make.com/5jpdk7qebo4irz6ip4u7hyjjyajvs4j3", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          company: form.company.trim(),
+          email: form.email.trim(),
+          subject: form.subject.trim(),
+          message: form.message.trim(),
+          submitted_at: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Webhook failed: ${response.status}`);
+      }
+
+      setSubmitted(true);
+    } catch (submitErr) {
+      console.error("Failed to send contact form:", submitErr);
+      setError("Unable to send your message right now. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -49,29 +67,11 @@ export default function Contact() {
           {submitted ? (
             <div className="flex flex-col gap-6">
               <div className="text-center text-blue-400 text-xl font-semibold">
-                Thank you for reaching out!
+                Message sent successfully!
               </div>
               <p className="text-[#aaa] text-sm text-center">
-                Make sure your email client opened with the message ready to send. If not, copy the message below and email us directly at{" "}
-                <a href="mailto:contact@datacrawl.org" className="text-blue-400 hover:underline">contact@datacrawl.org</a>
+                Thank you for reaching out. We received your message and will get back to you soon.
               </p>
-              <div className="bg-[#2a2a2a] border border-[#444] rounded-lg p-4 text-sm text-[#d1d5db] whitespace-pre-wrap font-mono">
-                {`To: contact@datacrawl.org\nSubject: ${form.subject}\n\nName: ${form.name}\nEmail: ${form.email}\n\n${form.message}`}
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  navigator.clipboard.writeText(
-                    `To: contact@datacrawl.org\nSubject: ${form.subject}\n\nName: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
-                  ).then(() => {
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 2000);
-                  });
-                }}
-                className="bg-[#333] hover:bg-[#444] text-white px-6 py-2 rounded-lg font-semibold transition text-sm"
-              >
-                {copied ? "Copied!" : "Copy Message"}
-              </button>
             </div>
           ) : (
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
@@ -100,6 +100,18 @@ export default function Contact() {
                 />
               </div>
               <div>
+                <label className="block text-[#d1d5db] mb-2 font-semibold" htmlFor="company">Company Name</label>
+                <input
+                  className="w-full px-4 py-2 rounded-lg bg-[#222] text-white border border-[#444] focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={form.company}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div>
                 <label className="block text-[#d1d5db] mb-2 font-semibold" htmlFor="subject">Subject</label>
                 <input
                   className="w-full px-4 py-2 rounded-lg bg-[#222] text-white border border-[#444] focus:outline-none focus:ring-2 focus:ring-blue-600"
@@ -122,11 +134,15 @@ export default function Contact() {
                   required
                 />
               </div>
+              {error && (
+                <p className="text-red-400 text-sm">{error}</p>
+              )}
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition mt-2"
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </form>
           )}
