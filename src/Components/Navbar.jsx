@@ -11,6 +11,7 @@ function Navbar() {
     { to: '/vendor/information', label: 'Vendors' },
     { to: '/contact', label: 'Contact' },
     { to: '/services', label: 'Services' },
+    {to: '/validation', label: 'Validation Layer'},
   ];
 
   return (

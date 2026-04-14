@@ -12,7 +12,7 @@ import Investors from "./Pages/Investors";
 import About from "./Pages/About";
 import MarketplaceTool from "./Pages/MarketplaceTool";
 import Services from "./Pages/Services";
-
+import Validation from "./Pages/Validation";
 
 const ONBOARDING_ROUTE = "/onboarding/profile";
 
@@ -28,17 +28,15 @@ function AppContent({ handleData, data }) {
       {!hideNavbar && <Navbar />}
       <div className="flex-1 flex flex-col">
         <Routes>
-
           <Route path="/vendor/information" exact element={<VendorInfo />} />
           <Route path="/contact" exact element={<Contact />} />
           <Route path="/investors" exact element={<Investors />} />
           <Route path="/about" exact element={<About />} />
           <Route path="/market" exact element={<MarketplaceTool />} />
           <Route path="/services" exact element={<Services />} />
- 
-  
+          <Route path="/validation" exact element={<Validation />} />
+          <Route path="/pricing" exact element={<Pricing />} />
         </Routes>
-      
       </div>
       <Footer />
     </div>
@@ -59,5 +57,6 @@ function App() {
     </Router>
   );
 }
+
 //   <Route path="/Search" exact element={<Search onSearchSubmit={handleData} />} />
 export default App;

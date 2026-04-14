@@ -34,6 +34,7 @@ function Footer() {
                             <div className="flex flex-col font-[Heebo]">
                                 <p className="font-bold text-s mb-[35px]">Products</p>
                                 <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/market')}>DataMarket</p>
+                                <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/validation')}>Validation Layer</p>
                                 <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/services')}>Services</p>
 
                    

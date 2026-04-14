@@ -70,7 +70,7 @@ export default function Landing() {
     const headers = [
         {
             label: "Features",
-            title: "API Marketplace + SDK Generator",
+            title: "APIs on demand + Critical validation layer + custom SDKs",
         },
         {
             label: "Usage",
@@ -103,6 +103,7 @@ export default function Landing() {
         { to: '/vendor/information', label: 'Vendors' },
         { to: '/contact', label: 'Contact' },
             { to: '/services', label: 'Services' },
+        {to: '/validation', label: 'Validation Layer'},
     ];
 
     const handleMobileNavigate = (to) => {
@@ -211,9 +212,14 @@ export default function Landing() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
                         >
-                            <p className="text-[#BFBFBF] text-xl md:text-2xl font-light tracking-wide mb-10">
-                                API accessibility infrastructure and marketplace
-                            </p>
+                            <div className="mb-10">
+                                <p className="text-[#BFBFBF] text-xl md:text-2xl font-light tracking-wide">
+                                    API accessibility infrastructure
+                                </p>
+                                <p className="mt-2 text-sm md:text-base italic text-[#9F9F9F]">
+                                    Data made easier
+                                </p>
+                            </div>
                         </motion.div>
 
                         {/* Sub-tagline */}
@@ -223,7 +229,7 @@ export default function Landing() {
                             transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
                         >
                             <p className="text-[#AFAFAF] text-lg md:text-xl max-w-lg mb-10">
-                                Discover powerful APIs • Subscribe in one click • 
+                                Discover powerful APIs • API validation systems • 
                                 Generate custom SDKs with visual mapping • 
                                 Seamless B2C and B2B integration
                             </p>
@@ -246,7 +252,7 @@ export default function Landing() {
                             </button>
 
                             <p className="text-sm text-[#888] mt-4 tracking-wide">
-                                Trusted by developers, AI teams, and enterprise platforms
+                                Trusted by developers, automation teams, and enterprise platforms
                             </p>
                         </motion.div>
                     </div>
@@ -272,8 +278,8 @@ export default function Landing() {
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
-                        name="Secure Billing"
-                        description="Built-in billing, authentication, and usage tracking for providers and consumers."
+                        name="Validation Layer"
+                        description="Critical infrastructure for secure, reliable API access. Policy-based controls, usage analytics, and monitoring tools."
                     />
 
                     <FeatureCard
@@ -310,7 +316,7 @@ export default function Landing() {
                 <div className="flex flex-col md:flex-row gap-16 mt-20">
 
                     <Need img="landing/usage/development.svg" text="Individual Developers & Startups" />
-                    <Need img="landing/usage/data-science.svg" text="AI & Machine Learning Teams" />
+                    <Need img="landing/usage/data-science.svg" text="Automation & AI Teams" />
                     <Need img="landing/usage/marketing.svg" text="SaaS Product Builders" />
 
                 </div>
@@ -356,7 +362,7 @@ export default function Landing() {
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/User.svg`} className="w-10" />}
                         name="SDK Mapping"
-                        description="Visual interface to map complex API responses to your internal models."
+                        description="Have our team create custom mapping interfaces and SDK generators tailored to your APIs and data models."
                     />
 
                     <FeatureCard
@@ -369,8 +375,8 @@ export default function Landing() {
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
-                        name="Compliance & Governance"
-                        description="Full audit trails, data lineage, SOC2/GDPR readiness, and SSO."
+                        name="Peace of Mind"
+                        description="Spend less time debugging integrations and dreaded support tickets, and more time building your product and integrations."
                     />
 
                 </div>
