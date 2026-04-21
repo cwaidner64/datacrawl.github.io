@@ -19,7 +19,7 @@ function Footer() {
                                 <img src={`${import.meta.env.BASE_URL}landing/Logo.svg`} className="w-12" />
                                 <p className="text-[20px] ">DataCrawl</p>
                             </span>
-                            <p className="text-[#928F8F] mt-8 text-s xl:px-2">Data has never been easier</p>
+                            <p className="text-[#928F8F] mt-8 text-s xl:px-2">Data made easier</p>
                             <div className="flex flex-row h-[30px] mt-6 sm:mt-10 justify-start gap-2">
                                 <a href="https://github.com/DataCrawl-hq" target="_blank" rel="noopener noreferrer">
                                     <img src={`${import.meta.env.BASE_URL}landing/GitHub.svg`} className="hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" />
@@ -33,19 +33,15 @@ function Footer() {
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-12 md:flex md:flex-row md:gap-20 md:justify-evenly md:ml-100 mb-6 md:mb-25">
                             <div className="flex flex-col font-[Heebo]">
                                 <p className="font-bold text-s mb-[35px]">Products</p>
-                                <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/market')}>DataMarket</p>
                                 <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/validation')}>Validation Layer</p>
-                                <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/services')}>Services</p>
-
+                                
                    
                             </div>
 
                             <div className="flex flex-col font-[Heebo]">
                                 <p className="font-bold text-s mb-[35px]">Company</p>
                                 <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/about')}>About</p>
-                                <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/investors')}>Investors</p>
                                 <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/contact')}>Contact</p>
-                                <p className="text-[#928F8F] text-s mb-[25px] hover:cursor-pointer hover:scale-[1.05] hover:text-[#b6b1b1] duration-500" onClick={() => navigate('/vendor/information')}>Vendors</p>
                             </div>
 
                 

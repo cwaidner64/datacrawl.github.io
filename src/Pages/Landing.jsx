@@ -23,7 +23,7 @@ export default function Landing() {
 
     const [menuOpen, setMenuOpen] = useState(false);
     const [showForm, setShowForm] = useState(false);
-    const [formData, setFormData] = useState({ name: '', company: '', email: '', role: '', intent: '' });
+    const [formData, setFormData] = useState({ name: '', company: '', email: '', role: '', intent: '', comment: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState('');
     const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -49,6 +49,7 @@ export default function Landing() {
                     email: formData.email.trim(),
                     role: formData.role,
                     intent: formData.intent,
+                    comment: formData.comment.trim(),
                     submitted_at: new Date().toISOString(),
                 }),
             });
@@ -59,7 +60,7 @@ export default function Landing() {
 
             setSubmitSuccess(true);
             setShowForm(false);
-            setFormData({ name: '', company: '', email: '', role: '', intent: '' });
+            setFormData({ name: '', company: '', email: '', role: '', intent: '', comment: '' });
         } catch (error) {
             console.error('Failed to send early access request:', error);
             setSubmitError('Unable to submit right now. Please try again in a moment.');
@@ -67,10 +68,17 @@ export default function Landing() {
             setIsSubmitting(false);
         }
     };
+    const renderCheck = (value) => {
+    if (value === true)
+        return <span className="text-green-400 font-bold text-lg">✔</span>;
+    if (value === "partial")
+        return <span className="text-yellow-400 font-bold text-lg">~</span>;
+    return <span className="text-red-500 font-bold text-lg">✘</span>;
+};
     const headers = [
         {
             label: "Features",
-            title: "APIs on demand + Critical validation layer + custom SDKs",
+            title: "Self healing API Infrastructure",
         },
         {
             label: "Usage",
@@ -87,9 +95,9 @@ export default function Landing() {
             subtext: "Flexible pricing for B2C and B2B"
         },
         {
-            label: "Register",
-            title: "Start Building with DataCrawl APIs",
-            subtext: "Discover, integrate, and monetize in minutes"
+            label: "Start Using DataCrawl",
+            title: "Stop Breakages Before They Happen",
+            subtext: "Get early access to our self-healing API layer and experience data pipelines that fix themselves before anything breaks downstream."
         },
         {
             label: "Enterprise",
@@ -100,11 +108,92 @@ export default function Landing() {
 
     const navLinks = [
         { to: '/about', label: 'About' },
-        { to: '/vendor/information', label: 'Vendors' },
         { to: '/contact', label: 'Contact' },
-            { to: '/services', label: 'Services' },
         {to: '/validation', label: 'Validation Layer'},
     ];
+
+   const competitiveLandscape = [
+    {
+        competitor: "Monte Carlo",
+        funding: "$200M+",
+        detects: true,
+        corrects: false,
+        learnsSchema: false,
+        makeN8n: false,
+        pricing: "$100K+/yr",
+        gap: "Alerts only. Humans fix everything.",
+    },
+    {
+        competitor: "Datafold",
+        funding: "Well funded",
+        detects: true,
+        corrects: false,
+        learnsSchema: false,
+        makeN8n: false,
+        pricing: "$500+/mo",
+        gap: "Only works at deploy time. Blind at runtime.",
+    },
+    {
+        competitor: "Great Expectations / Soda",
+        funding: "OSS / $30M",
+        detects: true,
+        corrects: false,
+        learnsSchema: false,
+        makeN8n: false,
+        pricing: "Free / $500+",
+        gap: "Manual rules. No automation. High maintenance.",
+    },
+    {
+        competitor: "Bigeye",
+        funding: "$17M",
+        detects: true,
+        corrects: false,
+        learnsSchema: "partial",
+        makeN8n: false,
+        pricing: "$5K–$15K/mo",
+        gap: "Auto monitors, but still no action taken.",
+    },
+    {
+        competitor: "Datadog (Metaplane)",
+        funding: "$36B company",
+        detects: true,
+        corrects: false,
+        learnsSchema: "partial",
+        makeN8n: false,
+        pricing: "Enterprise",
+        gap: "Reactive + expensive. Built for ops, not data fixing.",
+    },
+    {
+        competitor: "Fivetran",
+        funding: "$5.6B",
+        detects: "partial",
+        corrects: "partial",
+        learnsSchema: false,
+        makeN8n: false,
+        pricing: "$$$",
+        gap: "Only works inside its own connectors.",
+    },
+    {
+        competitor: "Acceldata",
+        funding: "$50M",
+        detects: true,
+        corrects: "partial",
+        learnsSchema: false,
+        makeN8n: false,
+        pricing: "Enterprise",
+        gap: "Still early + no HTTP-level correction.",
+    },
+    {
+        competitor: "DataCrawl",
+        funding: "Early",
+        detects: true,
+        corrects: true,
+        learnsSchema: true,
+        makeN8n: true,
+        pricing: "$99/mo",
+        gap: "Only platform that fixes data before it breaks anything downstream.",
+    },
+];
 
     const handleMobileNavigate = (to) => {
         navigate(to);
@@ -214,7 +303,7 @@ export default function Landing() {
                         >
                             <div className="mb-10">
                                 <p className="text-[#BFBFBF] text-xl md:text-2xl font-light tracking-wide">
-                                    API accessibility infrastructure
+                                    Self-healing API layer
                                 </p>
                                 <p className="mt-2 text-sm md:text-base italic text-[#9F9F9F]">
                                     Data made easier
@@ -229,9 +318,8 @@ export default function Landing() {
                             transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
                         >
                             <p className="text-[#AFAFAF] text-lg md:text-xl max-w-lg mb-10">
-                                Discover powerful APIs • API validation systems • 
-                                Generate custom SDKs with visual mapping • 
-                                Seamless B2C and B2B integration
+                               Real-time validation • Schema learning •
+Error correction before downstream failure • Works with any API or webhook • N8N & Make integrations
                             </p>
                         </motion.div>
 
@@ -242,17 +330,27 @@ export default function Landing() {
                             transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
                             className="flex flex-col items-start"
                         >
-                            <button
-                                onClick={() => setShowForm(true)}
-                                className="px-10 py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 
+                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                                <button
+                                    onClick={() => setShowForm(true)}
+                                    className="px-10 py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 
                                            text-white font-semibold text-lg rounded-xl transition-all 
                                            duration-200 hover:scale-105 shadow-lg shadow-blue-900/30"
-                            >
-                                Get Early Access
-                            </button>
+                                >
+                                    Contact Us
+                                </button>
+
+                                <button
+                                    onClick={() => navigate('/validation')}
+                                    className="px-10 py-4 border border-[#2f63d7] text-[#dbeafe] hover:bg-[#1a2750] 
+                                           font-semibold text-lg rounded-xl transition-all duration-200 hover:scale-105"
+                                >
+                                    Try the validator
+                                </button>
+                            </div>
 
                             <p className="text-sm text-[#888] mt-4 tracking-wide">
-                                Trusted by developers, automation teams, and enterprise platforms
+                                Trusted by developers, data engineers, and enterprises worldwide.
                             </p>
                         </motion.div>
                     </div>
@@ -270,8 +368,8 @@ export default function Landing() {
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" />}
-                        name="API Discovery"
-                        description="Browse and search a growing marketplace of high-quality APIs from verified providers."
+                        name="Universal usage"
+                        description="Works with any API, webhook, or data source. "
                         glow={true}
                         glowClass="left-[43px] top-[37px]"
                     />
@@ -279,19 +377,19 @@ export default function Landing() {
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
                         name="Validation Layer"
-                        description="Critical infrastructure for secure, reliable API access. Policy-based controls, usage analytics, and monitoring tools."
+                        description="Stop breakages before they happen."
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/Settings.svg`} className="w-12" />}
-                        name="SDK Generator"
-                        description="Generate tailored SDKs in your preferred language with our intuitive mapping interface."
+                        name="Schema Learning"
+                        description="System that gets smarter with every API call."
                     />
 
                     <FeatureCard
                         icon={<img src={`${import.meta.env.BASE_URL}landing/API.svg`} className="w-12" />}
-                        name="B2C&B2B solutions"
-                        description="Seamless API integrations for more efficient development"
+                        name="Connect Anywhere"
+                        description="N8N, Make, or custom APIs"
                         glow={true}
                         glowClass="bottom-[20px] right-[161px]"
                     />
@@ -300,10 +398,87 @@ export default function Landing() {
 
                 <button
                     className="mt-16 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
-                    onClick={() => navigate('/market')}
+                    onClick={() => navigate('/validation')}
                 >
-                    Explore the Marketplace of Public facing APIs
+                    Use the validator
                 </button>
+
+               <div className="w-full mt-16 bg-[#181818] border border-[#2d2d2d] rounded-2xl p-4 sm:p-6 md:p-8">
+                <h3 className="text-2xl sm:text-3xl font-semibold text-[#F2F2F2] text-center">
+                    Competitive landscape — everyone detects, only one fixes
+                </h3>
+                <p className="text-[#b8b8b8] text-center mt-3 mb-6">
+                    Most tools stop at alerts. DataCrawl prevents failures entirely.
+                </p>
+
+                <div className="overflow-x-auto rounded-xl border border-[#2a2a2a]">
+                    <table className="w-full min-w-[1300px] text-left text-sm text-[#e5e5e5]">
+                        <thead className="bg-[#202020] text-[#f2f2f2]">
+                            <tr>
+                                <th className="px-4 py-3 font-semibold">Company</th>
+                                <th className="px-4 py-3 font-semibold">Scale</th>
+                                <th className="px-4 py-3 font-semibold">Detects</th>
+                                <th className="px-4 py-3 font-semibold">Auto-fixes</th>
+                                <th className="px-4 py-3 font-semibold">Learns schema</th>
+                                <th className="px-4 py-3 font-semibold">Make / n8n</th>
+                                <th className="px-4 py-3 font-semibold">Pricing</th>
+                                <th className="px-4 py-3 font-semibold">Reality</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {competitiveLandscape.map((row, index) => {
+                                const isYou = row.competitor === "DataCrawl";
+
+                                return (
+                                    <tr
+                                        key={row.competitor}
+                                        className={`border-t border-[#2a2a2a] ${
+                                            isYou
+                                                ? "bg-[#1a233a] border-blue-500"
+                                                : index % 2 === 0
+                                                ? "bg-[#151515]"
+                                                : "bg-[#121212]"
+                                        }`}
+                                    >
+                                        <td className="px-4 py-3 font-semibold text-white whitespace-nowrap">
+                                    
+                                            {row.competitor}
+                                        </td>
+
+                                        <td className="px-4 py-3 text-[#d4d4d8] whitespace-nowrap">
+                                            {row.funding}
+                                        </td>
+
+                                        <td className="px-4 py-3 text-center">
+                                            {renderCheck(row.detects)}
+                                        </td>
+
+                                        <td className="px-4 py-3 text-center">
+                                            {renderCheck(row.corrects)}
+                                        </td>
+
+                                        <td className="px-4 py-3 text-center">
+                                            {renderCheck(row.learnsSchema)}
+                                        </td>
+
+                                        <td className="px-4 py-3 text-center">
+                                            {renderCheck(row.makeN8n)}
+                                        </td>
+
+                                        <td className="px-4 py-3 whitespace-nowrap text-[#d4d4d8]">
+                                            {row.pricing}
+                                        </td>
+
+                                        <td className="px-4 py-3 text-[#c8c8c8] min-w-[320px]">
+                                            {row.gap}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
             </section>
 
@@ -339,56 +514,6 @@ export default function Landing() {
 
             </div>
 
-            {/* ENTERPRISE SECTION */}
-
-            <section className="flex flex-col bg-[#0d0d0d] items-center justify-center px-6 md:px-10 xl:px-35 py-40 border-t border-[#1e1e1e]">
-
-                <Header {...headers[5]} />
-
-                <p className="text-[#969696] mt-6 text-center max-w-2xl text-base font-[Heebo]">
-                    Powerful infrastructure for high-volume API consumption and distribution. 
-                    Custom SDKs, dedicated mapping tools, advanced analytics, SLAs, and private marketplaces.
-
-                </p>
-
-                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 w-full justify-items-center">
-
-                    <FeatureCard
-                        icon={<img src={`${import.meta.env.BASE_URL}landing/Done.svg`} className="w-10" />}
-                        name="Private Market"
-                        description="Create branded, invite-only API catalogs for your organization or partners."
-                    />
-
-                    <FeatureCard
-                        icon={<img src={`${import.meta.env.BASE_URL}landing/User.svg`} className="w-10" />}
-                        name="SDK Mapping"
-                        description="Have our team create custom mapping interfaces and SDK generators tailored to your APIs and data models."
-                    />
-
-                    <FeatureCard
-                        icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" />}
-                        name="Volume Scaling"
-                        description="Enterprise-grade rate limits, usage analytics, and cost controls."
-                        glow={true}
-                        glowClass="left-[43px] top-[37px]"
-                    />
-
-                    <FeatureCard
-                        icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" />}
-                        name="Peace of Mind"
-                        description="Spend less time debugging integrations and dreaded support tickets, and more time building your product and integrations."
-                    />
-
-                </div>
-
-                <button
-                    className="mt-16 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
-                    onClick={() => setShowForm(true)}
-                >
-                    Talk to Enterprise Sales
-                </button>
-
-            </section>
 
             {/* REGISTER / GET STARTED CTA */}
 
@@ -396,18 +521,14 @@ export default function Landing() {
 
                 <Header {...headers[4]} />
 
-                <p className="text-[#969696] mt-4 text-center max-w-xl">
-                    Join developers and companies discovering, integrating, 
-                    and monetizing APIs with our marketplace and SDK tools.
-                </p>
-
+              
                 <div className="py-16">
 
                     <button
                         className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
                         onClick={() => setShowForm(true)}
                     >
-                        Get Started Free
+                        Get Started Now
                     </button>
 
                 </div>
@@ -421,7 +542,7 @@ export default function Landing() {
                     <div className="bg-[#1a1a1a] p-8 rounded-xl w-[90%] max-w-md">
 
                         <h2 className="text-white text-xl font-bold mb-6">
-                            Request Early Access
+                            Easy contact form
                         </h2>
 
                         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -479,12 +600,20 @@ export default function Landing() {
                                 disabled={isSubmitting}
                                 className="p-3 rounded bg-[#111] text-white disabled:opacity-50"
                             >
-                                <option value="">Select role</option>
-                                <option>Developer</option>
-                                <option>ML/AI Engineer</option>
-                                <option>Founder / Startup</option>
-                                <option>Enterprise Architect</option>
-                                <option>Other</option>
+                                <option value="">What best describes you?</option>
+
+                                <option value="dev-individual">Individual Developer</option>
+                                <option value="dev-team">Developer (on a team)</option>
+
+                                <option value="data-engineer">Data / Backend Engineer</option>
+                                <option value="ml-engineer">ML / AI Engineer</option>
+
+                                <option value="founder">Founder / Startup</option>
+                                <option value="product">Product / Engineering Manager</option>
+
+                                <option value="enterprise">Enterprise / Architect</option>
+
+                                <option value="other">Other</option>
                             </select>
 
                             <select
@@ -495,14 +624,34 @@ export default function Landing() {
                                 disabled={isSubmitting}
                                 className="p-3 rounded bg-[#111] text-white disabled:opacity-50"
                             >
-                                <option value="">What are you looking to do?</option>
-                                <option>Discover & integrate APIs</option>
-                                <option>Generate custom SDKs</option>
-                                <option>Monetize my APIs</option>
-                                <option>Enterprise integration</option>
-                                <option>Explore the platform</option>\
-                                <option>Demo</option>
+                                <option value="">What problem are you trying to solve?</option>
+
+                                <option value="debugging">Spending too much time debugging broken APIs</option>
+
+                                <option value="schema-breaks">Schema changes / payload mismatches breaking systems</option>
+
+                                <option value="bad-data">Bad or inconsistent API data causing downstream issues</option>
+
+                                <option value="automation">Fixing unreliable webhooks / automation workflows</option>
+
+                                <option value="preventative">Looking for a preventative validation layer</option>
+
+                                <option value="exploring">Just exploring / learning about the product</option>
+
+                                <option value="buying">Evaluating for team or company use</option>
+
+                                <option value="demo">Want a demo / walkthrough</option>
                             </select>
+
+                            <textarea
+                                name="comment"
+                                placeholder="Optional comment"
+                                value={formData.comment}
+                                onChange={handleChange}
+                                disabled={isSubmitting}
+                                rows={3}
+                                className="p-3 rounded bg-[#111] text-white disabled:opacity-50 resize-y"
+                            />
 
                             <button
                                 type="submit"

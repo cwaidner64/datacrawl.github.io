@@ -20,6 +20,63 @@ export default function Validation() {
     },
   ];
 
+  const validatorCoverage = [
+    ["TC-01", "Simple rename", "Schema evolution", "Key remapping", "PASS"],
+    ["TC-02", "Multiple renames", "Schema evolution", "Parallel remapping", "PASS"],
+    ["TC-03", "Rename conflict", "Schema conflict", "Original key wins", "PASS"],
+    ["TC-04", "Unix -> ISO timestamp", "Type normalization", "Format conversion", "PASS"],
+    ["TC-05", "Boolean string -> bool", "Type normalization", '"true" -> true', "PASS"],
+    ["TC-06", "Number string -> number", "Type normalization", '"45" -> 45', "PASS"],
+    ["TC-07", "Numeric object -> array", "Structural normalization", "Object -> array", "PASS"],
+    ["TC-08", "Deep nested flattening", "Structural ambiguity", "Not handled", "SKIP"],
+    ["TC-09", "Q&A label rename", "Semantic mapping", "Not handled", "SKIP"],
+    ["TC-10", "Envelope unwrap", "Structural normalization", "data.* removed", "PASS"],
+    ["TC-11", "Single-item array unwrap", "Structural normalization", "[x] -> x", "PASS"],
+    ["TC-12", "Empty required field", "Data quality", "Flag anomaly", "PASS (anomaly)"],
+    ["TC-13", "Whitespace field", "Data quality", "Flag anomaly", "PASS (anomaly)"],
+    ["TC-14", "ISO offset -> UTC Z", "Time normalization", "Standardize timezone", "PASS"],
+    ["TC-15", "Far future date", "Data validation", "Flag only", "PASS (flagged)"],
+    ["TC-16", "Duplicate question keys", "Data consistency", "Flag duplicates", "PASS (flagged)"],
+    ["TC-17", "XSS payload", "Security detection", "Detect only", "PASS"],
+    ["TC-18", "SQL injection", "Security detection", "Detect only", "PASS"],
+    ["TC-19", "Prompt injection", "Security detection", "Flag only", "PASS"],
+    ["TC-20", "Oversized payload", "Transport validation", "Reject (413)", "PASS"],
+    ["TC-21", "Unicode normalization", "Encoding normalization", "Normalize text", "PASS"],
+    ["TC-22", "Out-of-order delivery", "Ordering logic", "Sort by timestamp", "PASS"],
+    ["TC-23", "Malformed JSON", "Transport validation", "Reject (400)", "PASS"],
+    ["TC-24", "Duplicate delivery", "Idempotency", "Reject duplicate (409)", "PASS"],
+    ["TC-25", "Airtable failure handling", "Integration", "Track success metadata", "PASS"],
+    ["TC-26", "Full schema change", "Schema drift", "Flag change", "PASS"],
+    ["TC-27", "Drift velocity", "Schema drift", "Flag trend", "PASS"],
+    ["TC-28", "Confidence gaming", "Out of scope", "Not handled", "SKIP"],
+  ];
+
+  const getOutcomeClass = (outcome) => {
+    if (outcome.startsWith("PASS")) {
+      return "text-[#39FF14]";
+    }
+    if (outcome.startsWith("SKIP")) {
+      return "text-[#facc15]";
+    }
+    return "text-[#d1d5db]";
+  };
+
+  const getBehaviorClass = (behavior, outcome) => {
+    const behaviorLower = behavior.toLowerCase();
+    const outcomeLower = outcome.toLowerCase();
+    const isTagOnly =
+      behaviorLower.includes("flag") ||
+      behaviorLower.includes("detect only") ||
+      behaviorLower.includes("not handled") ||
+      outcomeLower.includes("flagged") ||
+      outcomeLower.includes("anomaly") ||
+      outcomeLower.startsWith("skip");
+
+    return isTagOnly
+      ? "text-[#facc15] bg-[#2a2300]"
+      : "text-[#86efac] bg-[#052e16]";
+  };
+
   return (
     <div className="min-h-screen bg-[#111111] text-white py-12 sm:py-20 px-4 font-[Heebo]">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
@@ -73,6 +130,56 @@ export default function Validation() {
               Use it to validate API definitions early, reduce integration friction,
               and keep downstream systems easier to maintain.
             </p>
+          </div>
+        </section>
+
+        <section className="w-full max-w-6xl mb-12">
+          <div className="bg-[#181818] border border-[#303030] rounded-3xl p-4 sm:p-6">
+            <h2 className="text-2xl sm:text-3xl font-semibold mb-2 text-[#F2F2F2] text-center">
+              Validator Coverage
+            </h2>
+            <p className="text-[#a3a3a3] text-sm sm:text-base text-center mb-6">
+              The following conditions are currently covered by the validator.
+            </p>
+
+            <div className="overflow-x-auto rounded-2xl border border-[#2f2f2f]">
+              <table className="w-full min-w-[980px] text-left text-sm sm:text-base">
+                <thead className="bg-[#202020] text-[#e5e5e5]">
+                  <tr>
+                    <th className="px-4 py-3 font-semibold">ID</th>
+                    <th className="px-4 py-3 font-semibold">Test Case</th>
+                    <th className="px-4 py-3 font-semibold">Category</th>
+                    <th className="px-4 py-3 font-semibold">Behavior</th>
+                    <th className="px-4 py-3 font-semibold">Outcome</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {validatorCoverage.map((row, index) => (
+                    <tr
+                      key={row[0]}
+                      className={`border-t border-[#2b2b2b] ${
+                        index % 2 === 0 ? "bg-[#151515]" : "bg-[#121212]"
+                      }`}
+                    >
+                      <td className="px-4 py-3 text-[#f3f4f6] whitespace-nowrap">{row[0]}</td>
+                      <td className="px-4 py-3 text-[#e5e7eb] whitespace-nowrap">{row[1]}</td>
+                      <td className="px-4 py-3 text-[#cbd5e1] whitespace-nowrap">{row[2]}</td>
+                      <td
+                        className={`px-4 py-3 whitespace-nowrap ${getBehaviorClass(
+                          row[3],
+                          row[4]
+                        )}`}
+                      >
+                        {row[3]}
+                      </td>
+                      <td className={`px-4 py-3 whitespace-nowrap font-semibold ${getOutcomeClass(row[4])}`}>
+                        {row[4]}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
       </div>

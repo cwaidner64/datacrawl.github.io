@@ -11,7 +11,7 @@ export default function About() {
           <Header
             label="About Us"
             title="Meet DataCrawl"
-            subtext="The API Marketplace with Instant SDK Generation — making APIs discoverable, integrable, and monetizable for everyone."
+            subtext="Stopping broken pipelines since 2026"
           />
         </section>
 
@@ -23,34 +23,39 @@ export default function About() {
             <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 rounded-l-2xl" />
             <span className="text-blue-400 text-xs font-semibold tracking-widest uppercase mb-4 block pl-4 sm:pl-6">Our Mission</span>
             <p className="text-white text-xl sm:text-2xl font-medium leading-relaxed pl-4 sm:pl-6">
-              Making high-quality APIs instantly usable by removing the biggest barriers: 
-              discovery, integration complexity, and monetization friction.
+            Build world-class infrastructure that simplifies data pipelines and accelerate automation.
             </p>
           </div>
 
           {/* Our Values */}
           <div className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-10">
-            <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Our Values</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Our Goals</h2>
             <ul className="space-y-4 text-[#d1d5db]">
               <li className="flex items-start gap-3">
+          
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Developer experience first — from discovery to production in minutes</span>
+                <span>Become the tool that is irresponsible NOT to use</span>
+              </li>
+              <li className="flex items-start gap-3">
+          
+                <span className="text-blue-400 mt-1 text-xl">•</span>
+                <span>Build self healing schemas</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Powerful yet simple SDK generation with visual mapping</span>
+                <span>Accelerate automation across all data workflows</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Seamless support for both individual developers (B2C) and enterprises (B2B)</span>
+                <span>Ensure data quality and reliability at every step</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Secure, transparent, and fair monetization for API providers</span>
+                <span>Empower developers with intuitive tools and seamless integrations</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Building the infrastructure layer that accelerates API innovation</span>
+                <span>Foster a community of innovation and collaboration</span>
               </li>
             </ul>
           </div>
@@ -62,50 +67,73 @@ export default function About() {
           <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-center">Why DataCrawl</h2>
           <div className="max-w-3xl mx-auto text-[#d1d5db] space-y-6 text-center">
             <p>
-              Great APIs exist everywhere, but developers waste countless hours on discovery, 
-              authentication setup, SDK writing, response mapping, and integration. 
-              Meanwhile, API providers struggle to reach customers and monetize effectively.
+            DataCrawl was born out of frustration with brittle data pipelines and the lack of tools to ensure data quality and reliability. We set out to build a platform that not only simplifies pipeline management but also empowers developers to automate and innovate with confidence.
             </p>
             <p>
-              DataCrawl fixes both problems. We operate a modern API marketplace where anyone can 
-              discover high-quality APIs, subscribe instantly, and generate custom SDKs with our 
-              intuitive visual mapping interface — all in one unified platform that works seamlessly 
-              for individual developers (B2C) and large enterprise teams (B2B).
-            </p>
-            <p>
-              For providers, we handle billing, usage tracking, marketing, and distribution, 
-              so you can focus on building great APIs while earning recurring revenue.
+            Our team is passionate about solving real-world data challenges and creating infrastructure that makes a tangible difference in how organizations manage their data workflows. We believe in building tools that are not only powerful but also intuitive and accessible to developers of all levels.
             </p>
           </div>
         </section>
 
         {/* What Makes Us Different */}
-        <section className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-10 mb-8 sm:mb-16">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-6 text-center">What Sets Us Apart</h2>
-          <div className="grid md:grid-cols-3 gap-6 text-center">
-            <div>
-              <h3 className="font-semibold mb-3">Instant SDK Generation</h3>
-              <p className="text-[#d1d5db] text-sm">
-                Generate production-ready SDKs in your preferred language with one click — 
-                complete with custom response mapping.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-3">Unified B2C & B2B</h3>
-              <p className="text-[#d1d5db] text-sm">
-                One marketplace that serves solo developers, startups, and large enterprises 
-                with appropriate scaling and controls.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-3">Built-in Monetization</h3>
-              <p className="text-[#d1d5db] text-sm">
-                Providers earn recurring revenue while we manage billing, authentication, 
-                and customer success.
-              </p>
-            </div>
-          </div>
-        </section>
+<section className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-10 mb-8 sm:mb-16">
+  <h2 className="text-xl sm:text-2xl font-semibold mb-6 text-center">
+    Why DataCrawl is different from existing API tools
+  </h2>
+
+  <div className="grid md:grid-cols-3 gap-6 text-left">
+
+    <div>
+      <h3 className="font-semibold mb-2 text-[#f2f2f2]">
+        Others: Detect broken APIs
+      </h3>
+      <p className="text-[#d1d5db] text-sm">
+        Tools like Monte Carlo and Bigeye only flag issues after data breaks.
+        Engineers still have to debug and fix everything manually.
+      </p>
+
+      <h3 className="font-semibold mt-4 mb-2 text-[#60a5fa]">
+        DataCrawl: Fixes API data in real time
+      </h3>
+      <p className="text-[#d1d5db] text-sm">
+        Validates every request at the HTTP layer and prevents bad data from entering your system.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="font-semibold mb-2 text-[#f2f2f2]">
+        Others: Static or rule-based validation
+      </h3>
+      <p className="text-[#d1d5db] text-sm">
+        Great Expectations and Soda require manual rule definitions that break as APIs evolve.
+      </p>
+
+      <h3 className="font-semibold mt-4 mb-2 text-[#60a5fa]">
+        DataCrawl: Learns schemas automatically
+      </h3>
+      <p className="text-[#d1d5db] text-sm">
+        Learns structure from live traffic and adapts validation without manual rules.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="font-semibold mb-2 text-[#f2f2f2]">
+        Others: Observe or monitor APIs
+      </h3>
+      <p className="text-[#d1d5db] text-sm">
+        Fivetran and Datadog-style tools operate after ingestion or within closed systems.
+      </p>
+
+      <h3 className="font-semibold mt-4 mb-2 text-[#60a5fa]">
+        DataCrawl: Sits at the API entry point
+      </h3>
+      <p className="text-[#d1d5db] text-sm">
+        Works with any API or webhook before data enters pipelines — not after.
+      </p>
+    </div>
+
+  </div>
+</section>
 
         {/* CTA */}
         <section className="flex flex-col items-center text-center">

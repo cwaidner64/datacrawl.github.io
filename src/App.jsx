@@ -27,15 +27,10 @@ function AppContent({ handleData, data }) {
       </Routes>
       {!hideNavbar && <Navbar />}
       <div className="flex-1 flex flex-col">
-        <Routes>
-          <Route path="/vendor/information" exact element={<VendorInfo />} />
+        <Routes>       
           <Route path="/contact" exact element={<Contact />} />
-          <Route path="/investors" exact element={<Investors />} />
           <Route path="/about" exact element={<About />} />
-          <Route path="/market" exact element={<MarketplaceTool />} />
-          <Route path="/services" exact element={<Services />} />
           <Route path="/validation" exact element={<Validation />} />
-          <Route path="/pricing" exact element={<Pricing />} />
         </Routes>
       </div>
       <Footer />

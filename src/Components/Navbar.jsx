@@ -8,9 +8,7 @@ function Navbar() {
 
   const navLinks = [
     { to: '/about', label: 'About' },
-    { to: '/vendor/information', label: 'Vendors' },
     { to: '/contact', label: 'Contact' },
-    { to: '/services', label: 'Services' },
     {to: '/validation', label: 'Validation Layer'},
   ];
 
