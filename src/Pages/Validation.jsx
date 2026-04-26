@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Components/Landing/Header";
 
 export default function Validation() {
@@ -51,6 +51,53 @@ export default function Validation() {
     ["TC-28", "Confidence gaming", "Out of scope", "Not handled", "SKIP"],
   ];
 
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", company: "", role: "", intent: "", comment: "", plan: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError("");
+    try {
+      const response = await fetch("https://hook.us2.make.com/5jpdk7qebo4irz6ip4u7hyjjyajvs4j3", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          company: formData.company.trim(),
+          role: formData.role,
+          intent: formData.intent,
+          comment: formData.comment.trim(),
+          plan: formData.plan,
+          source: "validator-pricing",
+          submitted_at: new Date().toISOString(),
+        }),
+      });
+      if (!response.ok) throw new Error(`Webhook failed: ${response.status}`);
+      setSubmitSuccess(true);
+    } catch (err) {
+      console.error("Validator contact form error:", err);
+      setSubmitError("Unable to send your request right now. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  const openForm = (plan) => {
+    setFormData({ name: "", email: "", company: "", role: "", intent: "", comment: "", plan });
+    setSubmitError("");
+    setSubmitSuccess(false);
+    setShowForm(true);
+  };
+
   const getOutcomeClass = (outcome) => {
     if (outcome.startsWith("PASS")) {
       return "text-[#39FF14]";
@@ -79,6 +126,120 @@ export default function Validation() {
 
   return (
     <div className="min-h-screen bg-[#111111] text-white py-12 sm:py-20 px-4 font-[Heebo]">
+      {showForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-[#1a1a1a] p-8 rounded-xl w-[90%] max-w-md max-h-[90vh] overflow-y-auto">
+            <h2 className="text-white text-xl font-bold mb-1">Request Access</h2>
+            {formData.plan && (
+              <p className="text-[#7dd3fc] text-sm mb-6">Plan: {formData.plan}</p>
+            )}
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {submitError && (
+                <div className="bg-red-600/20 border border-red-600 text-red-400 p-3 rounded text-sm">
+                  {submitError}
+                </div>
+              )}
+              {submitSuccess && (
+                <div className="bg-green-600/20 border border-green-600 text-green-400 p-3 rounded text-sm">
+                  Thank you! Your request has been sent to contact@datacrawl.org
+                </div>
+              )}
+              <input
+                type="text"
+                name="name"
+                placeholder="Preferred name"
+                value={formData.name}
+                required
+                onChange={handleChange}
+                disabled={isSubmitting || submitSuccess}
+                className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                required
+                onChange={handleChange}
+                disabled={isSubmitting || submitSuccess}
+                className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50"
+              />
+              <input
+                type="text"
+                name="company"
+                placeholder="Company name"
+                value={formData.company}
+                required
+                onChange={handleChange}
+                disabled={isSubmitting || submitSuccess}
+                className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50"
+              />
+              <select
+                name="role"
+                value={formData.role}
+                required
+                onChange={handleChange}
+                disabled={isSubmitting || submitSuccess}
+                className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50"
+              >
+                <option value="">What best describes you?</option>
+                <option value="dev-individual">Individual Developer</option>
+                <option value="dev-team">Developer (on a team)</option>
+                <option value="data-engineer">Data / Backend Engineer</option>
+                <option value="ml-engineer">ML / AI Engineer</option>
+                <option value="founder">Founder / Startup</option>
+                <option value="product">Product / Engineering Manager</option>
+                <option value="enterprise">Enterprise / Architect</option>
+                <option value="other">Other</option>
+              </select>
+              <select
+                name="intent"
+                value={formData.intent}
+                required
+                onChange={handleChange}
+                disabled={isSubmitting || submitSuccess}
+                className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50"
+              >
+                <option value="">What problem are you trying to solve?</option>
+                <option value="debugging">Spending too much time debugging broken APIs</option>
+                <option value="schema-breaks">Schema changes / payload mismatches breaking systems</option>
+                <option value="bad-data">Bad or inconsistent API data causing downstream issues</option>
+                <option value="automation">Fixing unreliable webhooks / automation workflows</option>
+                <option value="preventative">Looking for a preventative validation layer</option>
+                <option value="exploring">Just exploring / learning about the product</option>
+                <option value="buying">Evaluating for team or company use</option>
+                <option value="demo">Want a demo / walkthrough</option>
+              </select>
+              <textarea
+                name="comment"
+                placeholder="Optional comment"
+                value={formData.comment}
+                onChange={handleChange}
+                disabled={isSubmitting || submitSuccess}
+                rows={3}
+                className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50 resize-y"
+              />
+              {!submitSuccess && (
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed p-3 rounded text-white font-bold"
+                >
+                  {isSubmitting ? "Sending..." : "Submit Request"}
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => { setShowForm(false); setSubmitError(""); setSubmitSuccess(false); }}
+                disabled={isSubmitting}
+                className="text-gray-400 mt-2 disabled:opacity-50 hover:text-gray-200 transition"
+              >
+                {submitSuccess ? "Close" : "Cancel"}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
       <div className="max-w-6xl mx-auto flex flex-col items-center">
         <section className="flex flex-col items-center mt-6 sm:mt-10 mb-12 sm:mb-20 text-center">
           <Header
@@ -133,6 +294,90 @@ export default function Validation() {
           </div>
         </section>
 
+        <section className="w-full max-w-5xl mb-16 sm:mb-20">
+          <div className="text-center mb-10">
+            <span className="inline-block text-xs font-semibold tracking-widest text-[#7dd3fc] uppercase border border-[#1e4a6e] bg-[#0d2133] px-4 py-1.5 rounded-full mb-4">
+              Validator Pricing
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-[#F2F2F2] mb-3">
+              Access the Validation Layer
+            </h2>
+            <p className="text-[#9f9f9f] max-w-xl mx-auto text-sm sm:text-base leading-7">
+              Contact us to get started. Both plans require an access request — we onboard teams directly.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            {/* Starter */}
+            <div className="bg-[#181818] border border-[#2f2f2f] rounded-2xl p-6 sm:p-8 flex flex-col">
+              <p className="text-xs font-semibold tracking-widest text-[#9ca3af] uppercase mb-3">Starter</p>
+              <div className="flex items-end gap-1 mb-1">
+                <span className="text-4xl font-bold text-[#7dd3fc]">$49</span>
+                <span className="text-[#9f9f9f] text-sm mb-1">/mo</span>
+              </div>
+              <p className="text-[#6b7280] text-sm italic mb-6">Stop common pipeline issues</p>
+              <ul className="space-y-3 text-sm text-[#d1d5db] mb-8 flex-1">
+                {[
+                  "50,000 requests / month",
+                  "3 pipelines",
+                  "Rule-based fixes",
+                  "Basic anomaly detection",
+                  "Email alerts",
+                ].map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <span className="mt-0.5 text-[#39FF14] select-none">✓</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                onClick={() => openForm("Starter — $49/mo")}
+                className="block w-full text-center bg-transparent border border-[#7dd3fc] text-[#7dd3fc] hover:bg-[#7dd3fc] hover:text-[#111111] transition font-semibold rounded-lg px-6 py-2.5 text-sm mt-auto"
+              >
+                Contact to Access
+              </button>
+            </div>
+
+            {/* Pro */}
+            <div className="bg-[#191f2e] border-2 border-[#3b82f6] rounded-2xl p-6 sm:p-8 flex flex-col relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="bg-[#3b82f6] text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide">
+                  Popular
+                </span>
+              </div>
+              <p className="text-xs font-semibold tracking-widest text-[#93c5fd] uppercase mb-3">Pro</p>
+              <div className="flex items-end gap-1 mb-1">
+                <span className="text-4xl font-bold text-[#93c5fd]">$149</span>
+                <span className="text-[#9f9f9f] text-sm mb-1">/mo</span>
+              </div>
+              <p className="text-[#6b7280] text-sm italic mb-6">Run production workflows without silent failures</p>
+              <ul className="space-y-3 text-sm text-[#d1d5db] mb-8 flex-1">
+                {[
+                  "250,000 requests / month",
+                  "Up to 20 pipelines",
+                  "Full auto-correction (rules)",
+                  "Priority processing",
+                  "Advanced drift detection",
+                  "Logs + insights",
+                ].map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <span className="mt-0.5 text-[#39FF14] select-none">✓</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                onClick={() => openForm("Pro — $149/mo")}
+                className="block w-full text-center bg-[#3b82f6] hover:bg-[#2563eb] text-white transition font-semibold rounded-lg px-6 py-2.5 text-sm mt-auto"
+              >
+                Contact to Access
+              </button>
+            </div>
+          </div>
+        </section>
+
         <section className="w-full max-w-6xl mb-12">
           <div className="bg-[#181818] border border-[#303030] rounded-3xl p-4 sm:p-6">
             <h2 className="text-2xl sm:text-3xl font-semibold mb-2 text-[#F2F2F2] text-center">
@@ -147,7 +392,7 @@ export default function Validation() {
                 <thead className="bg-[#202020] text-[#e5e5e5]">
                   <tr>
                     <th className="px-4 py-3 font-semibold">ID</th>
-                    <th className="px-4 py-3 font-semibold">Test Case</th>
+                    <th className="px-4 py-3 font-semibold">Test Case (TC-#)</th>
                     <th className="px-4 py-3 font-semibold">Category</th>
                     <th className="px-4 py-3 font-semibold">Behavior</th>
                     <th className="px-4 py-3 font-semibold">Outcome</th>
