@@ -1,7 +1,13 @@
 import React from "react";
 import Header from "../Components/Landing/Header";
+import { usePageMeta } from "../utils/usePageMeta";
 
 export default function About() {
+  usePageMeta({
+    title: "About",
+    description: "Learn about DataCrawl — the team building self-healing API infrastructure to stop webhook breakages and schema drift before they hit production.",
+    canonical: "https://www.datacrawl.org/about",
+  });
   return (
     <div className="min-h-screen bg-[#111111] text-white py-12 sm:py-20 px-4 font-[Heebo]">
       <div className="max-w-5xl mx-auto">

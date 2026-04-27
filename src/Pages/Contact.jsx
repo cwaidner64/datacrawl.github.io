@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import Header from "../Components/Landing/Header";
+import { usePageMeta } from "../utils/usePageMeta";
 
 export default function Contact() {
+  usePageMeta({
+    title: "Contact",
+    description: "Get in touch with the DataCrawl team. Questions about webhook validation, pricing, or enterprise integrations — we respond within one business day.",
+    canonical: "https://www.datacrawl.org/contact",
+  });
   const [form, setForm] = useState({ name: "", company: "", email: "", subject: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -3,22 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DataCrawl</title>
-  <meta name="description" content="DataCrawl prevents API and webhook failures with validation, drift detection, and automated correction workflows." />
+  <title>DataCrawl — Webhook Validation &amp; API Schema Drift Prevention</title>
+  <meta name="description" content="DataCrawl catches webhook payload mismatches, schema drift, and API breakages before they reach your automations. Real-time validation layer for Make, n8n, Zapier, and custom APIs. 14-day free trial." />
+  <meta name="keywords" content="webhook validation, API schema drift, payload mismatch, n8n webhook fix, Make.com webhook breakage, Zapier payload mismatch, self-healing API, schema validation, API monitoring, data pipeline reliability" />
   <meta name="theme-color" content="#111111" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.datacrawl.org/" />
+
+  <!-- Favicon -->
   <link rel="icon" href="/Logo-basic.svg" type="image/svg+xml" />
   <link rel="shortcut icon" href="/Logo-basic.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/Logo-basic.svg" />
   <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="DataCrawl" />
+  <meta property="og:title" content="DataCrawl — Webhook Validation &amp; API Schema Drift Prevention" />
+  <meta property="og:description" content="Stop webhook breakages and schema drift before they destroy your automations. DataCrawl validates every payload, learns your schema, and auto-corrects mismatches in real time. Works with Make, n8n, Zapier, and any API." />
+  <meta property="og:url" content="https://www.datacrawl.org/" />
+  <meta property="og:image" content="https://www.datacrawl.org/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DataCrawl — Webhook Validation &amp; API Schema Drift Prevention" />
+  <meta name="twitter:description" content="Stop webhook breakages and schema drift before they destroy your automations. Real-time validation for Make, n8n, Zapier, and any API." />
+  <meta name="twitter:image" content="https://www.datacrawl.org/og-image.png" />
+
+  <!-- Structured Data -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "DataCrawl",
-      "url": "https://www.datacrawl.org",
-      "logo": "https://www.datacrawl.org/Logo-basic.svg"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.datacrawl.org/#organization",
+          "name": "DataCrawl",
+          "url": "https://www.datacrawl.org",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.datacrawl.org/Logo-basic.svg"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "contact@datacrawl.org",
+            "contactType": "customer support"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://www.datacrawl.org/#software",
+          "name": "DataCrawl",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "url": "https://www.datacrawl.org",
+          "description": "Real-time webhook validation, API schema drift detection, and automated payload correction for Make, n8n, Zapier, and custom APIs.",
+          "offers": {
+            "@type": "Offer",
+            "price": "49",
+            "priceCurrency": "USD",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "49",
+              "priceCurrency": "USD",
+              "billingIncrement": 1,
+              "unitCode": "MON"
+            }
+          },
+          "publisher": {
+            "@id": "https://www.datacrawl.org/#organization"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.datacrawl.org/#website",
+          "url": "https://www.datacrawl.org",
+          "name": "DataCrawl",
+          "publisher": {
+            "@id": "https://www.datacrawl.org/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.datacrawl.org/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
     }
   </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E28R6XQVVP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E28R6XQVVP');
+  </script>
+
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);

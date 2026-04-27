@@ -13,6 +13,9 @@ import About from "./Pages/About";
 import MarketplaceTool from "./Pages/MarketplaceTool";
 import Services from "./Pages/Services";
 import Validation from "./Pages/Validation";
+import MakeWebhookBreakage from "./Pages/guides/MakeWebhookBreakage";
+import N8nSchemaDrift from "./Pages/guides/N8nSchemaDrift";
+import ZapierPayloadMismatch from "./Pages/guides/ZapierPayloadMismatch";
 
 const ONBOARDING_ROUTE = "/onboarding/profile";
 
@@ -31,6 +34,10 @@ function AppContent({ handleData, data }) {
           <Route path="/contact" exact element={<Contact />} />
           <Route path="/about" exact element={<About />} />
           <Route path="/validation" exact element={<Validation />} />
+          <Route path="/pricing" exact element={<Pricing />} />
+          <Route path="/guides/make-webhook-breakage" element={<MakeWebhookBreakage />} />
+          <Route path="/guides/n8n-schema-drift" element={<N8nSchemaDrift />} />
+          <Route path="/guides/zapier-payload-mismatch" element={<ZapierPayloadMismatch />} />
         </Routes>
       </div>
       <Footer />

@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import Header from "../Components/Landing/Header";
+import { useNavigate } from "react-router-dom";
+import { usePageMeta } from "../utils/usePageMeta";
 
 export default function Validation() {
+  usePageMeta({
+    title: "Webhook & API Validation Layer",
+    description: "Test DataCrawl's live webhook validation layer. Paste any JSON payload and see real-time schema validation, drift detection, and auto-correction in action.",
+    canonical: "https://www.datacrawl.org/validation",
+  });
+
+  const navigate = useNavigate();
   const capabilities = [
     {
       title: "Schema Validation",
@@ -126,6 +135,16 @@ export default function Validation() {
 
   return (
     <div className="min-h-screen bg-[#111111] text-white py-12 sm:py-20 px-4 font-[Heebo]">
+      {/* Back nav */}
+      <div className="max-w-6xl mx-auto mb-8 flex items-center gap-4">
+        <button onClick={() => navigate("/")} className="text-[#9a9a9a] hover:text-[#E3E3E3] text-sm transition-colors">
+          ← Home
+        </button>
+        <span className="text-[#3a3a3a]">·</span>
+        <button onClick={() => navigate("/pricing")} className="text-blue-400 hover:underline text-sm">
+          View Pricing
+        </button>
+      </div>
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-[#1a1a1a] p-8 rounded-xl w-[90%] max-w-md max-h-[90vh] overflow-y-auto">
@@ -305,6 +324,10 @@ export default function Validation() {
             <p className="text-[#9f9f9f] max-w-xl mx-auto text-sm sm:text-base leading-7">
               Contact us to get started. Both plans require an access request — we onboard teams directly.
             </p>
+            <div className="flex items-center justify-center gap-2 mt-4">
+              <span className="text-[#39FF14] text-sm font-semibold">✓</span>
+              <span className="text-[#a3a3a3] text-sm">14-day free trial + demo &mdash; no credit card required</span>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
@@ -427,6 +450,27 @@ export default function Validation() {
             </div>
           </div>
         </section>
+
+        {/* CTA */}
+        <section className="w-full max-w-3xl mb-16 text-center">
+          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-3">Ready to protect your production webhooks?</h2>
+          <p className="text-[#9a9a9a] mb-6 text-sm">Start your 14-day free trial and validate real payloads from day one.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => navigate("/pricing")}
+              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200"
+            >
+              View Pricing
+            </button>
+            <button
+              onClick={() => navigate("/contact")}
+              className="px-8 py-3 border border-[#3a3a3a] text-[#E3E3E3] hover:bg-[#1e1e1e] rounded-xl font-semibold transition-all duration-200"
+            >
+              Talk to Us
+            </button>
+          </div>
+        </section>
+
       </div>
     </div>
   );

@@ -8,8 +8,9 @@ function Navbar() {
 
   const navLinks = [
     { to: '/about', label: 'About' },
+    { to: '/pricing', label: 'Pricing' },
     { to: '/contact', label: 'Contact' },
-    {to: '/validation', label: 'Validation Layer'},
+    { to: '/validation', label: 'Validation Layer' },
   ];
 
   return (
