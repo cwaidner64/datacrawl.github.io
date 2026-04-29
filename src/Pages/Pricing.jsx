@@ -3,10 +3,84 @@ import Header from "../Components/Landing/Header";
 import { useNavigate } from "react-router-dom";
 import { usePageMeta } from "../utils/usePageMeta";
 
+const pricingPlans = [
+  {
+    name: "Starter",
+    subtitle: "Monitored Coverage",
+    price: "$99",
+    period: "/mo",
+    description: "For individual developers running a few critical automations",
+    features: [
+      "Up to 3 monitored pipelines",
+      "Webhook schema validation layer",
+      "Basic schema drift detection",
+      "Rule-based payload normalization",
+      "Human review for critical failures (best effort)",
+      "Email alerts when issues are detected",
+      "14-day free trial",
+    ],
+    cta: "Start Free Trial",
+    highlight: false,
+  },
+  {
+    name: "Pro",
+    subtitle: "Managed Reliability",
+    price: "$349",
+    period: "/mo",
+    description: "For teams where automation downtime directly impacts revenue or ops",
+    features: [
+      "Up to 10 monitored pipelines",
+      "Everything in Starter",
+      "Priority failure triage",
+      "Custom validation & correction rules",
+      "Webhook replay + audit logs",
+      "Slack incident notifications",
+      "Faster manual resolution of edge cases",
+    ],
+    cta: "Start Free Trial",
+    highlight: true,
+  },
+  {
+    name: "Reliability+",
+    subtitle: "High-Trust Coverage",
+    price: "$1,000",
+    period: "/mo",
+    description: "For production systems where failures are expensive and immediate response matters",
+    features: [
+      "Up to 25 monitored pipelines (contracted scope)",
+      "Proactive monitoring of schema drift",
+      "Guaranteed incident response window",
+      "Manual intervention for critical failures",
+      "Advanced correction rules + system tuning",
+      "Priority support channel",
+    ],
+    cta: "Upgrade to Reliability+",
+    highlight: false,
+  },
+  {
+    name: "Enterprise",
+    subtitle: "Reliability SLA Coverage",
+    price: "Custom",
+    period: "",
+    description: "For mission-critical infrastructure with strict uptime requirements",
+    features: [
+      "Unlimited pipeline coverage (scoped contract)",
+      "Dedicated reliability monitoring",
+      "SLA-backed response times",
+      "On-premise or VPC deployment option",
+      "SSO / SAML support",
+      "Custom integrations + onboarding",
+      "Dedicated account coverage",
+    ],
+    cta: "Contact Us",
+    highlight: false,
+  },
+];
+
 export default function Pricing() {
   usePageMeta({
     title: "Pricing",
-    description: "Transparent pricing for webhook validation and API schema drift detection. Starter at $49/mo, Pro at $199/mo, Enterprise custom. 14-day free trial — no credit card required.",
+    description: "Transparent pricing for monitored webhook reliability coverage. Starter at $99/mo, Pro at $349/mo, Reliability+ at $1,000/mo, and Enterprise custom coverage.",
     canonical: "https://www.datacrawl.org/pricing",
   });
 
@@ -16,6 +90,8 @@ export default function Pricing() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const selectedPlan = pricingPlans.find((plan) => formData.plan.startsWith(plan.name));
+  const modalActionLabel = selectedPlan?.cta || "Start Free Trial";
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -65,7 +141,7 @@ export default function Pricing() {
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-[#1a1a1a] p-8 rounded-xl w-[90%] max-w-md max-h-[90vh] overflow-y-auto">
-            <h2 className="text-white text-xl font-bold mb-1">Start Your Free Trial</h2>
+            <h2 className="text-white text-xl font-bold mb-1">{modalActionLabel}</h2>
             {formData.plan && (
               <p className="text-[#7dd3fc] text-sm mb-6">Plan: {formData.plan}</p>
             )}
@@ -106,7 +182,7 @@ export default function Pricing() {
               <textarea name="comment" placeholder="Optional comment" value={formData.comment} onChange={handleChange} disabled={isSubmitting || submitSuccess} rows={3} className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50 resize-y" />
               {!submitSuccess && (
                 <button type="submit" disabled={isSubmitting} className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed p-3 rounded text-white font-bold">
-                  {isSubmitting ? "Sending..." : "Start Free Trial"}
+                  {isSubmitting ? "Sending..." : modalActionLabel}
                 </button>
               )}
               <button type="button" onClick={() => { setShowForm(false); setSubmitError(""); setSubmitSuccess(false); }} disabled={isSubmitting} className="text-gray-400 mt-2 disabled:opacity-50 hover:text-gray-200 transition">
@@ -123,86 +199,67 @@ export default function Pricing() {
         <section className="flex flex-col items-center mt-6 sm:mt-10 mb-10 sm:mb-16 text-center">
           <Header
             label="Pricing"
-            title="Start Free. No Credit Card Required."
-            subtext="14-day free trial on every plan. Full access from day one."
+            title="Reliability Coverage For Every Stage"
+            subtext="Choose the level of monitoring, intervention, and response your automations need."
           />
           <p className="text-[#d1d5db] max-w-2xl mt-6 leading-7">
-            Try DataCrawl&apos;s validation layer with your real webhooks before you ever pay anything.
+            Start with monitored coverage, then move up to managed reliability and SLA-backed response as your workflows become more critical.
           </p>
         </section>
 
         {/* Plan Cards */}
-        <section className="w-full max-w-3xl mb-16 sm:mb-20">
-          <div className="grid md:grid-cols-2 gap-6">
+        <section className="w-full max-w-6xl mb-16 sm:mb-20">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {pricingPlans.map((plan) => {
+              const planLabel = plan.price === "Custom" ? plan.name : `${plan.name} - ${plan.price}${plan.period}`;
 
-            {/* Starter */}
-            <div className="bg-[#181818] border border-[#2f2f2f] rounded-2xl p-6 sm:p-8 flex flex-col">
-              <p className="text-xs font-semibold tracking-widest text-[#9ca3af] uppercase mb-3">Starter</p>
-              <div className="flex items-end gap-1 mb-1">
-                <span className="text-4xl font-bold text-[#7dd3fc]">$49</span>
-                <span className="text-[#9f9f9f] text-sm mb-1">/mo</span>
-              </div>
-              <p className="text-[#6b7280] text-sm italic mb-6">Stop common pipeline issues</p>
-              <ul className="space-y-3 text-sm text-[#d1d5db] mb-8 flex-1">
-                {[
-                  "50,000 requests / month",
-                  "3 webhook sources",
-                  "Rule-based auto-correction",
-                  "Basic anomaly detection",
-                  "Email alerts",
-                ].map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <span className="mt-0.5 text-[#39FF14] select-none">✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                onClick={() => openForm("Starter — $49/mo")}
-                className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white transition font-semibold rounded-lg px-6 py-2.5 text-sm mt-auto"
-              >
-                Start Free Trial
-              </button>
-              <p className="text-xs text-[#6b7280] mt-3 text-center">14 days free. No credit card required.</p>
-            </div>
+              return (
+                <div
+                  key={plan.name}
+                  className={[
+                    "rounded-2xl p-6 sm:p-8 flex flex-col relative",
+                    plan.highlight
+                      ? "bg-[#191f2e] border-2 border-[#3b82f6]"
+                      : "bg-[#181818] border border-[#2f2f2f]",
+                  ].join(" ")}
+                >
+                  {plan.highlight && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                      <span className="bg-[#3b82f6] text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide">Popular</span>
+                    </div>
+                  )}
 
-            {/* Pro */}
-            <div className="bg-[#191f2e] border-2 border-[#3b82f6] rounded-2xl p-6 sm:p-8 flex flex-col relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-[#3b82f6] text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide">Popular</span>
-              </div>
-              <p className="text-xs font-semibold tracking-widest text-[#93c5fd] uppercase mb-3">Pro</p>
-              <div className="flex items-end gap-1 mb-1">
-                <span className="text-4xl font-bold text-[#93c5fd]">$149</span>
-                <span className="text-[#9f9f9f] text-sm mb-1">/mo</span>
-              </div>
-              <p className="text-[#6b7280] text-sm italic mb-6">Run production workflows without silent failures</p>
-              <ul className="space-y-3 text-sm text-[#d1d5db] mb-8 flex-1">
-                {[
-                  "250,000 requests / month",
-                  "Up to 20 webhook sources",
-                  "Full auto-correction (rules)",
-                  "Priority processing",
-                  "Advanced drift detection",
-                  "Logs + insights",
-                ].map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <span className="mt-0.5 text-[#39FF14] select-none">✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                onClick={() => openForm("Pro — $149/mo")}
-                className="block w-full text-center bg-[#3b82f6] hover:bg-[#2563eb] text-white transition font-semibold rounded-lg px-6 py-2.5 text-sm mt-auto"
-              >
-                Start Free Trial
-              </button>
-              <p className="text-xs text-[#6b7280] mt-3 text-center">14 days free. No credit card required.</p>
-            </div>
+                  <p className={`text-xs font-semibold tracking-widest uppercase mb-2 ${plan.highlight ? "text-[#93c5fd]" : "text-[#9ca3af]"}`}>
+                    {plan.name}
+                  </p>
+                  <p className="text-sm text-[#7dd3fc] mb-4">{plan.subtitle}</p>
 
+                  <div className="flex items-end gap-1 mb-3">
+                    <span className={`text-4xl font-bold ${plan.highlight ? "text-[#93c5fd]" : "text-[#7dd3fc]"}`}>{plan.price}</span>
+                    {plan.period && <span className="text-[#9f9f9f] text-sm mb-1">{plan.period}</span>}
+                  </div>
+
+                  <p className="text-[#d1d5db] text-sm leading-6 mb-6">{plan.description}</p>
+
+                  <ul className="space-y-3 text-sm text-[#d1d5db] mb-8 flex-1">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <span className="mt-0.5 text-[#39FF14] select-none">✓</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    type="button"
+                    onClick={() => (plan.name === "Enterprise" ? navigate("/contact") : openForm(planLabel))}
+                    className={`block w-full text-center text-white transition font-semibold rounded-lg px-6 py-2.5 text-sm mt-auto ${plan.highlight ? "bg-[#3b82f6] hover:bg-[#2563eb]" : "bg-blue-600 hover:bg-blue-700"}`}
+                  >
+                    {plan.cta}
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </section>
 

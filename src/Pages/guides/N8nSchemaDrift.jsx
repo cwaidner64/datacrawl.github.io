@@ -5,7 +5,7 @@ import { usePageMeta } from "../../utils/usePageMeta";
 export default function N8nSchemaDrift() {
   usePageMeta({
     title: "Fixing n8n Schema Drift: Webhook and API Payload Changes",
-    description: "n8n workflows break when upstream APIs change their payload schema. Learn how to detect schema drift in n8n, fix broken webhook nodes, and prevent future failures with automated validation.",
+    description: "n8n workflows break when upstream APIs change their payload schema. Learn how to detect schema drift, repair broken webhook nodes, and reduce future failures with stronger validation and intake controls.",
     canonical: "https://www.datacrawl.org/guides/n8n-schema-drift",
   });
 
@@ -44,7 +44,7 @@ export default function N8nSchemaDrift() {
             <li><a href="#n8n-impact" className="hover:underline">2. How schema drift breaks n8n workflows</a></li>
             <li><a href="#detection" className="hover:underline">3. How to detect schema drift in n8n</a></li>
             <li><a href="#fix" className="hover:underline">4. Fixing broken n8n webhook nodes</a></li>
-            <li><a href="#prevent" className="hover:underline">5. Preventing schema drift with automated validation</a></li>
+            <li><a href="#prevent" className="hover:underline">5. Reducing schema drift risk in production</a></li>
           </ol>
         </nav>
 
@@ -104,20 +104,20 @@ export default function N8nSchemaDrift() {
           </ul>
           <div className="mt-6 bg-[#1a1f30] border border-blue-500/30 rounded-xl p-5">
             <p className="text-blue-300 text-sm font-semibold mb-1">The fragility problem</p>
-            <p className="text-[#9a9a9a] text-sm">Renaming fields in workflow expressions works, but the workflow is still fragile. The next schema change will break it again. A validation layer that learns your schema and auto-corrects drift is a more durable solution.</p>
+            <p className="text-[#9a9a9a] text-sm">Renaming fields in workflow expressions works, but it does not change the operating model. If the upstream payload changes again, the workflow stays fragile unless you add a stable normalization or validation step ahead of it.</p>
           </div>
         </section>
 
         <section id="prevent" className="mb-12">
-          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-4">Preventing schema drift with automated validation</h2>
+          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-4">Reducing schema drift risk in production</h2>
           <p className="text-[#b8b8b8] mb-6 leading-relaxed">
-            DataCrawl acts as a validation proxy between your API providers and your n8n webhook triggers. It learns the expected schema, detects drift the moment a payload changes, and applies automatic corrections — so your n8n workflows keep running even when upstream schemas shift.
+            Durable n8n workflows usually rely on a stable intake pattern instead of trusting every upstream provider to preserve field names and shapes forever.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             {[
-              { step: "01", title: "Connect", desc: "Route your n8n webhook URL through DataCrawl. No changes to the sender." },
-              { step: "02", title: "Validate", desc: "Every payload is checked against the learned schema in real time." },
-              { step: "03", title: "Correct", desc: "Known drift patterns are auto-corrected. Unrecoverable changes trigger alerts." },
+              { step: "01", title: "Validate", desc: "Check incoming payloads for required fields, expected types, and known structural assumptions before downstream nodes execute." },
+              { step: "02", title: "Normalize", desc: "Translate renamed keys, envelope changes, and type inconsistencies into a stable internal shape used by the workflow." },
+              { step: "03", title: "Version + Alert", desc: "Track schema changes explicitly and alert on unknown drift so teams can review changes before production damage spreads." },
             ].map((item) => (
               <div key={item.step} className="bg-[#181818] border border-[#2a2a2a] rounded-xl p-5">
                 <span className="text-4xl font-black text-[#1e2a45]">{item.step}</span>
@@ -126,12 +126,15 @@ export default function N8nSchemaDrift() {
               </div>
             ))}
           </div>
+          <p className="text-[#b8b8b8] leading-relaxed">
+            Teams often implement this with a lightweight middleware service, a gateway worker, or explicit normalization nodes in front of business logic. If you want that coverage without maintaining it yourself, DataCrawl can provide it as a managed layer in front of n8n.
+          </p>
         </section>
 
         {/* CTA */}
         <div className="bg-[#1a233a] border border-blue-500/40 rounded-2xl p-8 text-center">
-          <h3 className="text-2xl font-bold text-[#E3E3E3] mb-3">Protect your n8n workflows from schema drift</h3>
-          <p className="text-[#9a9a9a] mb-6">14-day free trial. No credit card required. Up and running in minutes.</p>
+          <h3 className="text-2xl font-bold text-[#E3E3E3] mb-3">Need a managed way to handle schema drift?</h3>
+          <p className="text-[#9a9a9a] mb-6">You can build your own validation and normalization layer, or use DataCrawl to manage drift detection, correction, and response in front of n8n.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate("/pricing")}

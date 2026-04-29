@@ -3,29 +3,103 @@ import Header from "../Components/Landing/Header";
 import { useNavigate } from "react-router-dom";
 import { usePageMeta } from "../utils/usePageMeta";
 
+const pricingPlans = [
+  {
+    name: "Starter",
+    subtitle: "Monitored Coverage",
+    price: "$99",
+    period: "/mo",
+    description: "For individual developers running a few critical automations",
+    features: [
+      "Up to 3 monitored pipelines",
+      "Webhook schema validation layer",
+      "Basic schema drift detection",
+      "Rule-based payload normalization",
+      "Human review for critical failures (best effort)",
+      "Email alerts when issues are detected",
+      "14-day free trial",
+    ],
+    cta: "Start Free Trial",
+    highlight: false,
+  },
+  {
+    name: "Pro",
+    subtitle: "Managed Reliability",
+    price: "$349",
+    period: "/mo",
+    description: "For teams where automation downtime directly impacts revenue or ops",
+    features: [
+      "Up to 10 monitored pipelines",
+      "Everything in Starter",
+      "Priority failure triage",
+      "Custom validation & correction rules",
+      "Webhook replay + audit logs",
+      "Slack incident notifications",
+      "Faster manual resolution of edge cases",
+    ],
+    cta: "Start Free Trial",
+    highlight: true,
+  },
+  {
+    name: "Reliability+",
+    subtitle: "High-Trust Coverage",
+    price: "$1,000",
+    period: "/mo",
+    description: "For production systems where failures are expensive and immediate response matters",
+    features: [
+      "Up to 25 monitored pipelines (contracted scope)",
+      "Proactive monitoring of schema drift",
+      "Guaranteed incident response window",
+      "Manual intervention for critical failures",
+      "Advanced correction rules + system tuning",
+      "Priority support channel",
+    ],
+    cta: "Upgrade to Reliability+",
+    highlight: false,
+  },
+  {
+    name: "Enterprise",
+    subtitle: "Reliability SLA Coverage",
+    price: "Custom",
+    period: "",
+    description: "For mission-critical infrastructure with strict uptime requirements",
+    features: [
+      "Unlimited pipeline coverage (scoped contract)",
+      "Dedicated reliability monitoring",
+      "SLA-backed response times",
+      "On-premise or VPC deployment option",
+      "SSO / SAML support",
+      "Custom integrations + onboarding",
+      "Dedicated account coverage",
+    ],
+    cta: "Contact Us",
+    highlight: false,
+  },
+];
+
 export default function Validation() {
   usePageMeta({
     title: "Webhook & API Validation Layer",
-    description: "Test DataCrawl's live webhook validation layer. Paste any JSON payload and see real-time schema validation, drift detection, and auto-correction in action.",
+    description: "See how the validation layer supports webhook and API reliability work by catching contract issues, drift, and malformed payloads before they disrupt downstream services.",
     canonical: "https://www.datacrawl.org/validation",
   });
 
   const navigate = useNavigate();
   const capabilities = [
     {
-      title: "Schema Validation",
+      title: "Protect Service Contracts",
       description:
-        "Check request and response structures before they reach production integrations.",
+        "Verify payload structure before it reaches live automations, internal tools, or customer-facing services.",
     },
     {
-      title: "Contract Consistency",
+      title: "Reduce Operational Breakage",
       description:
-        "Detect mismatched fields, required parameters, and formatting issues across endpoints.",
+        "Catch renamed fields, missing requirements, and formatting drift before they turn into incidents and manual cleanup.",
     },
     {
-      title: "Integration Readiness",
+      title: "Support Reliability Work",
       description:
-        "Give teams a cleaner path to shipping APIs with predictable behavior and fewer downstream errors.",
+        "Give engineering teams a clearer view of what needs normalization, flagging, or intervention to keep critical flows stable.",
     },
   ];
 
@@ -65,6 +139,8 @@ export default function Validation() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const selectedPlan = pricingPlans.find((plan) => formData.plan.startsWith(plan.name));
+  const modalActionLabel = selectedPlan?.cta || "Request Access";
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -148,7 +224,7 @@ export default function Validation() {
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-[#1a1a1a] p-8 rounded-xl w-[90%] max-w-md max-h-[90vh] overflow-y-auto">
-            <h2 className="text-white text-xl font-bold mb-1">Request Access</h2>
+            <h2 className="text-white text-xl font-bold mb-1">{modalActionLabel}</h2>
             {formData.plan && (
               <p className="text-[#7dd3fc] text-sm mb-6">Plan: {formData.plan}</p>
             )}
@@ -244,7 +320,7 @@ export default function Validation() {
                   disabled={isSubmitting}
                   className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed p-3 rounded text-white font-bold"
                 >
-                  {isSubmitting ? "Sending..." : "Submit Request"}
+                  {isSubmitting ? "Sending..." : modalActionLabel}
                 </button>
               )}
               <button
@@ -263,13 +339,13 @@ export default function Validation() {
         <section className="flex flex-col items-center mt-6 sm:mt-10 mb-12 sm:mb-20 text-center">
           <Header
             label="Validation Layer"
-            title="API Validation Layer"
-            subtext="A concise validation layer for checking API quality, consistency, and integration readiness."
+            title="What The Validation Layer Handles"
+            subtext="A service-oriented view of how payload validation, drift detection, and correction support more reliable webhook and API operations."
           />
 
           <p className="text-[#d1d5db] max-w-2xl mt-6 text-base sm:text-lg leading-8">
-            DataCrawl&apos;s API validation layer helps teams verify endpoint structure,
-            payload quality, and contract reliability before release.
+            This layer exists to support the reliability work around your service: checking inbound data,
+            identifying drift, and reducing the chance that malformed payloads break production workflows.
           </p>
         </section>
 
@@ -292,23 +368,15 @@ export default function Validation() {
         <section className="w-full max-w-4xl mb-12 text-center">
           <div className="bg-[#181818] border border-[#303030] rounded-3xl px-6 py-8 sm:px-10 sm:py-10">
             <h2 className="text-2xl sm:text-3xl font-semibold mb-4 text-[#F2F2F2]">
-              Available Now
+              How It Supports The Service
             </h2>
             <p className="text-[#d1d5db] leading-8 mb-6 max-w-2xl mx-auto">
-              The validation layer is available via
-              <a
-                href="https://api.datacrawl.org/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-[#7dd3fc] hover:text-[#bae6fd] transition ml-2"
-              >
-                https://api.datacrawl.org/
-              </a>
-              .
+              The validation layer can sit in front of webhook and API service entry points
+              to inspect requests before they propagate into downstream systems.
             </p>
             <p className="text-[#9f9f9f] max-w-2xl mx-auto leading-7">
-              Use it to validate API definitions early, reduce integration friction,
-              and keep downstream systems easier to maintain.
+              In practice, that means fewer silent failures, cleaner handoffs between services,
+              and faster investigation when upstream schemas change unexpectedly.
             </p>
           </div>
         </section>
@@ -316,98 +384,83 @@ export default function Validation() {
         <section className="w-full max-w-5xl mb-16 sm:mb-20">
           <div className="text-center mb-10">
             <span className="inline-block text-xs font-semibold tracking-widest text-[#7dd3fc] uppercase border border-[#1e4a6e] bg-[#0d2133] px-4 py-1.5 rounded-full mb-4">
-              Validator Pricing
+              Service Coverage
             </span>
             <h2 className="text-2xl sm:text-3xl font-semibold text-[#F2F2F2] mb-3">
-              Access the Validation Layer
+              Reliability Coverage Around The Validation Layer
             </h2>
             <p className="text-[#9f9f9f] max-w-xl mx-auto text-sm sm:text-base leading-7">
-              Contact us to get started. Both plans require an access request — we onboard teams directly.
+              These plans describe the level of monitoring, intervention, and response wrapped around the validation service.
             </p>
             <div className="flex items-center justify-center gap-2 mt-4">
               <span className="text-[#39FF14] text-sm font-semibold">✓</span>
-              <span className="text-[#a3a3a3] text-sm">14-day free trial + demo &mdash; no credit card required</span>
+              <span className="text-[#a3a3a3] text-sm">14-day free trial for the managed service layer &mdash; no credit card required</span>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {/* Starter */}
-            <div className="bg-[#181818] border border-[#2f2f2f] rounded-2xl p-6 sm:p-8 flex flex-col">
-              <p className="text-xs font-semibold tracking-widest text-[#9ca3af] uppercase mb-3">Starter</p>
-              <div className="flex items-end gap-1 mb-1">
-                <span className="text-4xl font-bold text-[#7dd3fc]">$49</span>
-                <span className="text-[#9f9f9f] text-sm mb-1">/mo</span>
-              </div>
-              <p className="text-[#6b7280] text-sm italic mb-6">Stop common pipeline issues</p>
-              <ul className="space-y-3 text-sm text-[#d1d5db] mb-8 flex-1">
-                {[
-                  "50,000 requests / month",
-                  "3 pipelines",
-                  "Rule-based fixes",
-                  "Basic anomaly detection",
-                  "Email alerts",
-                ].map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <span className="mt-0.5 text-[#39FF14] select-none">✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                onClick={() => openForm("Starter — $49/mo")}
-                className="block w-full text-center bg-transparent border border-[#7dd3fc] text-[#7dd3fc] hover:bg-[#7dd3fc] hover:text-[#111111] transition font-semibold rounded-lg px-6 py-2.5 text-sm mt-auto"
-              >
-                Contact to Access
-              </button>
-            </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 max-w-6xl mx-auto">
+            {pricingPlans.map((plan) => {
+              const planLabel = plan.price === "Custom" ? plan.name : `${plan.name} - ${plan.price}${plan.period}`;
 
-            {/* Pro */}
-            <div className="bg-[#191f2e] border-2 border-[#3b82f6] rounded-2xl p-6 sm:p-8 flex flex-col relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-[#3b82f6] text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide">
-                  Popular
-                </span>
-              </div>
-              <p className="text-xs font-semibold tracking-widest text-[#93c5fd] uppercase mb-3">Pro</p>
-              <div className="flex items-end gap-1 mb-1">
-                <span className="text-4xl font-bold text-[#93c5fd]">$149</span>
-                <span className="text-[#9f9f9f] text-sm mb-1">/mo</span>
-              </div>
-              <p className="text-[#6b7280] text-sm italic mb-6">Run production workflows without silent failures</p>
-              <ul className="space-y-3 text-sm text-[#d1d5db] mb-8 flex-1">
-                {[
-                  "250,000 requests / month",
-                  "Up to 20 pipelines",
-                  "Full auto-correction (rules)",
-                  "Priority processing",
-                  "Advanced drift detection",
-                  "Logs + insights",
-                ].map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <span className="mt-0.5 text-[#39FF14] select-none">✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                onClick={() => openForm("Pro — $149/mo")}
-                className="block w-full text-center bg-[#3b82f6] hover:bg-[#2563eb] text-white transition font-semibold rounded-lg px-6 py-2.5 text-sm mt-auto"
-              >
-                Contact to Access
-              </button>
-            </div>
+              return (
+                <div
+                  key={plan.name}
+                  className={[
+                    "rounded-2xl p-6 sm:p-8 flex flex-col relative",
+                    plan.highlight
+                      ? "bg-[#191f2e] border-2 border-[#3b82f6]"
+                      : "bg-[#181818] border border-[#2f2f2f]",
+                  ].join(" ")}
+                >
+                  {plan.highlight && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                      <span className="bg-[#3b82f6] text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide">
+                        Popular
+                      </span>
+                    </div>
+                  )}
+
+                  <p className={`text-xs font-semibold tracking-widest uppercase mb-2 ${plan.highlight ? "text-[#93c5fd]" : "text-[#9ca3af]"}`}>
+                    {plan.name}
+                  </p>
+                  <p className="text-sm text-[#7dd3fc] mb-4">{plan.subtitle}</p>
+
+                  <div className="flex items-end gap-1 mb-3">
+                    <span className={`text-4xl font-bold ${plan.highlight ? "text-[#93c5fd]" : "text-[#7dd3fc]"}`}>{plan.price}</span>
+                    {plan.period && <span className="text-[#9f9f9f] text-sm mb-1">{plan.period}</span>}
+                  </div>
+
+                  <p className="text-[#d1d5db] text-sm leading-6 mb-6">{plan.description}</p>
+
+                  <ul className="space-y-3 text-sm text-[#d1d5db] mb-8 flex-1">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <span className="mt-0.5 text-[#39FF14] select-none">✓</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    type="button"
+                    onClick={() => (plan.name === "Enterprise" ? navigate("/contact") : openForm(planLabel))}
+                    className={`block w-full text-center text-white transition font-semibold rounded-lg px-6 py-2.5 text-sm mt-auto ${plan.highlight ? "bg-[#3b82f6] hover:bg-[#2563eb]" : "bg-blue-600 hover:bg-blue-700"}`}
+                  >
+                    {plan.cta}
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </section>
 
         <section className="w-full max-w-6xl mb-12">
           <div className="bg-[#181818] border border-[#303030] rounded-3xl p-4 sm:p-6">
             <h2 className="text-2xl sm:text-3xl font-semibold mb-2 text-[#F2F2F2] text-center">
-              Validator Coverage
+              Validation Coverage
             </h2>
             <p className="text-[#a3a3a3] text-sm sm:text-base text-center mb-6">
-              The following conditions are currently covered by the validator.
+              These are the conditions the service can currently inspect, normalize, reject, or flag for review.
             </p>
 
             <div className="overflow-x-auto rounded-2xl border border-[#2f2f2f]">
@@ -453,8 +506,8 @@ export default function Validation() {
 
         {/* CTA */}
         <section className="w-full max-w-3xl mb-16 text-center">
-          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-3">Ready to protect your production webhooks?</h2>
-          <p className="text-[#9a9a9a] mb-6 text-sm">Start your 14-day free trial and validate real payloads from day one.</p>
+          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-3">Need stronger reliability around your production flows?</h2>
+          <p className="text-[#9a9a9a] mb-6 text-sm">Review service coverage, then choose the level of monitoring and response your workflows require.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate("/pricing")}

@@ -5,7 +5,7 @@ import { usePageMeta } from "../../utils/usePageMeta";
 export default function ZapierPayloadMismatch() {
   usePageMeta({
     title: "Troubleshooting Zapier Payload Mismatches",
-    description: "Zapier zaps fail when webhook payloads don't match what the Zap expects. Learn how to diagnose Zapier payload mismatches, fix field mapping errors, and prevent future failures with schema validation.",
+    description: "Zapier zaps fail when webhook payloads do not match what the Zap expects. Learn how to diagnose payload mismatches, repair mappings, and reduce future breakage with better validation and change handling.",
     canonical: "https://www.datacrawl.org/guides/zapier-payload-mismatch",
   });
 
@@ -44,7 +44,7 @@ export default function ZapierPayloadMismatch() {
             <li><a href="#types-of-mismatch" className="hover:underline">2. Types of payload mismatches in Zapier</a></li>
             <li><a href="#diagnose" className="hover:underline">3. How to diagnose a Zapier payload mismatch</a></li>
             <li><a href="#fix" className="hover:underline">4. Fixing field mapping errors</a></li>
-            <li><a href="#prevent" className="hover:underline">5. Preventing future mismatches with a validation layer</a></li>
+            <li><a href="#prevent" className="hover:underline">5. Preventing future mismatches in production</a></li>
           </ol>
         </nav>
 
@@ -112,7 +112,7 @@ export default function ZapierPayloadMismatch() {
           </ol>
           <div className="mt-6 bg-[#1a1f30] border border-blue-500/30 rounded-xl p-5">
             <p className="text-blue-300 text-sm font-semibold mb-1">Why this keeps happening</p>
-            <p className="text-[#9a9a9a] text-sm">Zapier has no built-in mechanism to detect when an API changes its payload format. Every time your provider updates their schema, you repeat this diagnosis cycle manually. A validation proxy handles this automatically.</p>
+            <p className="text-[#9a9a9a] text-sm">Zapier has limited schema-change awareness at the trigger level. If providers change field names or nesting without notice, teams usually end up re-sampling, re-mapping, and re-testing by hand unless they add stronger intake validation upstream.</p>
           </div>
         </section>
 
@@ -133,40 +133,30 @@ export default function ZapierPayloadMismatch() {
         </section>
 
         <section id="prevent" className="mb-12">
-          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-4">Preventing future mismatches with a validation layer</h2>
-          <p className="text-[#b8b8b8] mb-6 leading-relaxed">
-            DataCrawl intercepts webhook payloads before they reach Zapier. It validates every payload against the learned schema, corrects known field renames and type mismatches automatically, and alerts you to structural changes that require manual attention — before your Zap ever sees bad data.
+          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-4">Preventing future mismatches in production</h2>
+          <p className="text-[#b8b8b8] mb-4 leading-relaxed">
+            The most reliable fix is not repeated manual remapping. It is adding process and guardrails before Zapier becomes the first place schema changes are discovered.
           </p>
-          <div className="bg-[#181818] border border-[#2a2a2a] rounded-xl overflow-hidden">
-            <div className="grid grid-cols-2 divide-x divide-[#2a2a2a]">
-              <div className="p-6">
-                <p className="text-red-400 font-semibold text-sm mb-3">Without DataCrawl</p>
-                <ul className="flex flex-col gap-2 text-[#888] text-xs">
-                  <li>• Provider renames field silently</li>
-                  <li>• Zap maps wrong/empty data</li>
-                  <li>• CRM, Sheets, Slack get bad records</li>
-                  <li>• You find out from a customer complaint</li>
-                  <li>• 4 hours to debug and re-map</li>
-                </ul>
-              </div>
-              <div className="p-6">
-                <p className="text-green-400 font-semibold text-sm mb-3">With DataCrawl</p>
-                <ul className="flex flex-col gap-2 text-[#888] text-xs">
-                  <li>• Provider renames field silently</li>
-                  <li>• DataCrawl detects the drift instantly</li>
-                  <li>• Auto-corrects the field name</li>
-                  <li>• Zap receives normalized payload</li>
-                  <li>• You get a Slack alert, not a crisis</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <ul className="flex flex-col gap-3 text-[#b8b8b8] text-sm mb-6">
+            {[
+              "Version webhook payloads when possible so downstream Zaps are not surprised by breaking changes.",
+              "Keep a known-good sample payload library and re-test critical Zaps whenever upstream providers ship changes.",
+              "Add a normalization step before sensitive actions so renamed or reformatted fields are translated into a stable internal shape.",
+              "Route payloads through a small intake service or middleware that validates required fields, rejects malformed requests, and logs raw payloads for debugging.",
+              "Turn on Zapier error alerts and maintain a runbook for re-sampling triggers, updating mappings, and verifying downstream actions.",
+            ].map((point, i) => (
+              <li key={i} className="flex gap-2"><span className="text-green-400 mt-0.5 shrink-0">✓</span>{point}</li>
+            ))}
+          </ul>
+          <p className="text-[#b8b8b8] leading-relaxed">
+            If you do not want to build and operate that intake layer yourself, DataCrawl can handle that validation, normalization, drift detection, and alerting for you before payloads ever reach Zapier.
+          </p>
         </section>
 
         {/* CTA */}
         <div className="bg-[#1a233a] border border-blue-500/40 rounded-2xl p-8 text-center">
-          <h3 className="text-2xl font-bold text-[#E3E3E3] mb-3">Stop chasing Zapier payload mismatches</h3>
-          <p className="text-[#9a9a9a] mb-6">DataCrawl validates and corrects payloads before they reach your Zaps. 14-day free trial.</p>
+          <h3 className="text-2xl font-bold text-[#E3E3E3] mb-3">Want this handled for you?</h3>
+          <p className="text-[#9a9a9a] mb-6">You can build your own validation and normalization layer, or use DataCrawl to manage that reliability coverage in front of your Zaps.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate("/pricing")}

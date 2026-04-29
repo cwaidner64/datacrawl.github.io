@@ -5,7 +5,7 @@ import { usePageMeta } from "../../utils/usePageMeta";
 export default function MakeWebhookBreakage() {
   usePageMeta({
     title: "How to Fix Make.com Webhook Breakages",
-    description: "Make.com webhook scenarios break when an API provider renames a field, adds a required key, or changes a payload structure. Learn how to detect and auto-fix Make.com webhook breakages with DataCrawl.",
+    description: "Make.com webhook scenarios break when an API provider renames a field, adds a required key, or changes a payload structure. Learn how to detect, repair, and reduce future breakages with better validation and normalization.",
     canonical: "https://www.datacrawl.org/guides/make-webhook-breakage",
   });
 
@@ -44,7 +44,7 @@ export default function MakeWebhookBreakage() {
             <li><a href="#common-causes" className="hover:underline">2. The most common payload mismatch causes</a></li>
             <li><a href="#debugging" className="hover:underline">3. How to debug a broken scenario</a></li>
             <li><a href="#prevention" className="hover:underline">4. Preventing breakages with schema validation</a></li>
-            <li><a href="#datacrawl" className="hover:underline">5. Auto-fixing Make.com webhook breakages with DataCrawl</a></li>
+            <li><a href="#datacrawl" className="hover:underline">5. Managed alternative to handling it yourself</a></li>
           </ol>
         </nav>
 
@@ -87,7 +87,7 @@ export default function MakeWebhookBreakage() {
           </ol>
           <div className="mt-6 bg-[#1a1f30] border border-blue-500/30 rounded-xl p-5">
             <p className="text-blue-300 text-sm font-semibold mb-1">The problem with manual debugging</p>
-            <p className="text-[#9a9a9a] text-sm">This works once. But the next time your provider changes their API — which happens without notice — you repeat the whole process. DataCrawl automates the detection and correction so you do not have to.</p>
+            <p className="text-[#9a9a9a] text-sm">This works for the current incident, but it does not remove the underlying fragility. If providers keep changing payloads without notice, teams need a repeatable validation and normalization layer, not just better firefighting.</p>
           </div>
         </section>
 
@@ -106,19 +106,22 @@ export default function MakeWebhookBreakage() {
               <li key={i} className="flex gap-2"><span className="text-green-400 mt-0.5 shrink-0">✓</span>{point}</li>
             ))}
           </ul>
+          <p className="text-[#b8b8b8] mt-6 leading-relaxed">
+            In practice, teams usually implement this with one of three patterns: a small middleware service in front of the webhook, a gateway worker that validates and rewrites payloads, or a Make intake scenario dedicated to normalization before business logic runs.
+          </p>
         </section>
 
         <section id="datacrawl" className="mb-12">
-          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-4">Auto-fixing Make.com webhook breakages with DataCrawl</h2>
+          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-4">Managed alternative to handling it yourself</h2>
           <p className="text-[#b8b8b8] mb-6 leading-relaxed">
-            DataCrawl sits in front of your Make.com webhook trigger as a validation proxy. It learns the expected payload schema from real traffic, detects drift the moment a provider changes their API, and applies automatic corrections — so your scenarios keep running even when upstream APIs change.
+            If you do not want to build and operate that validation layer yourself, DataCrawl can sit in front of your Make.com webhook trigger, detect schema drift, normalize known issues, and alert on changes that still need human review.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             {[
-              { icon: "🔍", title: "Schema learning", desc: "Observes real webhook traffic and automatically builds the expected schema." },
-              { icon: "⚡", title: "Real-time validation", desc: "Every request is validated before it reaches your Make.com scenario." },
-              { icon: "🔧", title: "Auto-correction", desc: "Known renames and type changes are corrected automatically per your rules." },
-              { icon: "🔔", title: "Instant alerts", desc: "Unrecoverable mismatches trigger Slack or email alerts before your scenario errors." },
+              { icon: "🔍", title: "Drift detection", desc: "Watch for renamed fields, shape changes, and missing required data before scenarios break." },
+              { icon: "⚡", title: "Intake validation", desc: "Check each request before it reaches the modules that depend on a stable payload shape." },
+              { icon: "🔧", title: "Normalization", desc: "Rewrite known field and type issues into a consistent format for downstream steps." },
+              { icon: "🔔", title: "Operational alerts", desc: "Escalate changes that should not be auto-corrected so teams can review safely." },
             ].map((item) => (
               <div key={item.title} className="bg-[#181818] border border-[#2a2a2a] rounded-xl p-5 flex gap-3">
                 <span className="text-2xl shrink-0">{item.icon}</span>
@@ -133,8 +136,8 @@ export default function MakeWebhookBreakage() {
 
         {/* CTA */}
         <div className="bg-[#1a233a] border border-blue-500/40 rounded-2xl p-8 text-center">
-          <h3 className="text-2xl font-bold text-[#E3E3E3] mb-3">Stop debugging Make.com webhook breakages manually</h3>
-          <p className="text-[#9a9a9a] mb-6">Set up DataCrawl in minutes. 14-day free trial, no credit card required.</p>
+          <h3 className="text-2xl font-bold text-[#E3E3E3] mb-3">Want someone else to operate that layer?</h3>
+          <p className="text-[#9a9a9a] mb-6">Build the validation and normalization workflow yourself, or use DataCrawl if you want managed coverage around your Make.com automations.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate("/pricing")}
