@@ -422,24 +422,24 @@ export default function Landing() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full justify-items-center">
             <FeatureCard
               icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" alt="" />}
-              name="Universal Compatibility"
+              name="Compatibility"
               description="Works with any API, webhook, or data source. HTTP-level interception means zero lock-in."
               glow={true}
               glowClass="left-[43px] top-[37px]"
             />
             <FeatureCard
               icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" alt="" />}
-              name="Rule-Based Validation"
+              name="Validation"
               description="Stop payload mismatches and schema breakages before they reach your automations using established rules and adaptive patterns."
             />
             <FeatureCard
               icon={<img src={`${import.meta.env.BASE_URL}landing/Settings.svg`} className="w-12" alt="" />}
-              name="Schema Drift Detection"
+              name="Drift Detection"
               description="Learns patterns from real traffic and alerts you the moment a provider changes their API. New edge cases are flagged for review."
             />
             <FeatureCard
               icon={<img src={`${import.meta.env.BASE_URL}landing/API.svg`} className="w-12" alt="" />}
-              name="Native Integrations"
+              name="Native Support"
               description="First-class support for Make.com, n8n, Zapier, Pipedream, and custom REST APIs."
               glow={true}
               glowClass="bottom-[20px] right-[161px]"
