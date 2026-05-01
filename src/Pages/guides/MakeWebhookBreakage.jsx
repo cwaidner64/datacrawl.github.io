@@ -85,6 +85,20 @@ export default function MakeWebhookBreakage() {
             <li className="flex gap-3"><span className="text-blue-400 font-bold shrink-0">4.</span> If fields are missing or renamed, update the downstream module field mappings to match the new keys.</li>
             <li className="flex gap-3"><span className="text-blue-400 font-bold shrink-0">5.</span> Re-run the scenario with <strong className="text-[#E3E3E3]">Run Once</strong> to confirm the fix, then enable automatic scheduling.</li>
           </ol>
+          <div className="mt-6 bg-[#181818] border border-[#2a2a2a] rounded-xl p-5">
+            <p className="text-blue-300 text-sm font-semibold mb-2">Example incident log</p>
+            <pre className="text-xs text-[#9a9a9a] whitespace-pre-wrap leading-relaxed font-mono">{`Webhook bundle received:
+{
+  "email": "buyer@example.com",
+  "order_total": 189.00
+}
+
+Expected by mapped module:
+customer_email
+
+Observed failure:
+The email field in the downstream module resolves to empty because the sender renamed customer_email to email.`}</pre>
+          </div>
           <div className="mt-6 bg-[#1a1f30] border border-blue-500/30 rounded-xl p-5">
             <p className="text-blue-300 text-sm font-semibold mb-1">The problem with manual debugging</p>
             <p className="text-[#9a9a9a] text-sm">This works for the current incident, but it does not remove the underlying fragility. If providers keep changing payloads without notice, teams need a repeatable validation and normalization layer, not just better firefighting.</p>
@@ -157,7 +171,11 @@ export default function MakeWebhookBreakage() {
         {/* Related guides */}
         <div className="mt-12">
           <p className="text-[#888] text-sm mb-4">Related guides</p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button onClick={() => navigate("/make-webhook-errors")} className="text-left bg-[#181818] border border-[#2a2a2a] rounded-xl p-4 hover:border-[#3a3a3a] transition-colors flex-1">
+              <p className="text-blue-400 text-xs mb-1">SEO page</p>
+              <p className="text-[#E3E3E3] text-sm font-semibold">Make.com webhook errors</p>
+            </button>
             <button onClick={() => navigate("/guides/n8n-schema-drift")} className="text-left bg-[#181818] border border-[#2a2a2a] rounded-xl p-4 hover:border-[#3a3a3a] transition-colors flex-1">
               <p className="text-blue-400 text-xs mb-1">n8n</p>
               <p className="text-[#E3E3E3] text-sm font-semibold">Fixing n8n Schema Drift</p>

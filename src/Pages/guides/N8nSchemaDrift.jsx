@@ -87,6 +87,22 @@ export default function N8nSchemaDrift() {
             <li className="flex gap-3"><span className="text-blue-400 font-bold shrink-0">3.</span> Add a <strong className="text-[#E3E3E3]">Set node</strong> after the trigger to log all incoming keys — this helps catch drift faster when you add logging before it matters.</li>
             <li className="flex gap-3"><span className="text-blue-400 font-bold shrink-0">4.</span> Check the API provider's changelog or webhook docs for recent updates. Many providers change silently without versioning.</li>
           </ol>
+          <div className="mt-6 bg-[#181818] border border-[#2a2a2a] rounded-xl p-5">
+            <p className="text-blue-300 text-sm font-semibold mb-2">Example execution data</p>
+            <pre className="text-xs text-[#9a9a9a] whitespace-pre-wrap leading-relaxed font-mono">{`Node input:
+{
+  "userId": 42,
+  "status": true
+}
+
+Workflow expression:
+{{ $json["user_id"] }}
+
+Observed result:
+undefined
+
+This is a classic schema drift incident: the webhook is healthy, but the workflow still depends on the old key.`}</pre>
+          </div>
         </section>
 
         <section id="fix" className="mb-12">
@@ -154,7 +170,11 @@ export default function N8nSchemaDrift() {
         {/* Related guides */}
         <div className="mt-12">
           <p className="text-[#888] text-sm mb-4">Related guides</p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button onClick={() => navigate("/n8n-schema-drift")} className="text-left bg-[#181818] border border-[#2a2a2a] rounded-xl p-4 hover:border-[#3a3a3a] transition-colors flex-1">
+              <p className="text-blue-400 text-xs mb-1">SEO page</p>
+              <p className="text-[#E3E3E3] text-sm font-semibold">Fix n8n schema drift issues</p>
+            </button>
             <button onClick={() => navigate("/guides/make-webhook-breakage")} className="text-left bg-[#181818] border border-[#2a2a2a] rounded-xl p-4 hover:border-[#3a3a3a] transition-colors flex-1">
               <p className="text-blue-400 text-xs mb-1">Make.com</p>
               <p className="text-[#E3E3E3] text-sm font-semibold">Fixing Make.com Webhook Breakages</p>

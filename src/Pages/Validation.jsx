@@ -87,51 +87,20 @@ export default function Validation() {
   const navigate = useNavigate();
   const capabilities = [
     {
-      title: "Protect Service Contracts",
+      title: "Catch Schema Drift Before Workflows Break",
       description:
-        "Verify payload structure before it reaches live automations, internal tools, or customer-facing services.",
+        "When an upstream API renames a field or changes a payload structure, DataCrawl catches it at intake — before Make, n8n, or Zapier tries to map a field that no longer exists.",
     },
     {
-      title: "Reduce Operational Breakage",
+      title: "Fix Known Breakpoints Automatically",
       description:
-        "Catch renamed fields, missing requirements, and formatting drift before they turn into incidents and manual cleanup.",
+        "Known field renames, type mismatches, and safe normalizations are rewritten before they hit production logic. No manual replay. No chasing logs to find what changed.",
     },
     {
-      title: "Support Reliability Work",
+      title: "Flag New Issues Before Clients Notice",
       description:
-        "Give engineering teams a clearer view of what needs normalization, flagging, or intervention to keep critical flows stable.",
+        "When a new payload pattern appears that doesn't match the expected schema, it's flagged with context — not discovered three days later in a client complaint.",
     },
-  ];
-
-  const validatorCoverage = [
-    ["TC-01", "Simple rename", "Schema evolution", "Key remapping", "PASS"],
-    ["TC-02", "Multiple renames", "Schema evolution", "Parallel remapping", "PASS"],
-    ["TC-03", "Rename conflict", "Schema conflict", "Original key wins", "PASS"],
-    ["TC-04", "Unix -> ISO timestamp", "Type normalization", "Format conversion", "PASS"],
-    ["TC-05", "Boolean string -> bool", "Type normalization", '"true" -> true', "PASS"],
-    ["TC-06", "Number string -> number", "Type normalization", '"45" -> 45', "PASS"],
-    ["TC-07", "Numeric object -> array", "Structural normalization", "Object -> array", "PASS"],
-    ["TC-08", "Deep nested flattening", "Structural ambiguity", "Not handled", "SKIP"],
-    ["TC-09", "Q&A label rename", "Semantic mapping", "Not handled", "SKIP"],
-    ["TC-10", "Envelope unwrap", "Structural normalization", "data.* removed", "PASS"],
-    ["TC-11", "Single-item array unwrap", "Structural normalization", "[x] -> x", "PASS"],
-    ["TC-12", "Empty required field", "Data quality", "Flag anomaly", "PASS (anomaly)"],
-    ["TC-13", "Whitespace field", "Data quality", "Flag anomaly", "PASS (anomaly)"],
-    ["TC-14", "ISO offset -> UTC Z", "Time normalization", "Standardize timezone", "PASS"],
-    ["TC-15", "Far future date", "Data validation", "Flag only", "PASS (flagged)"],
-    ["TC-16", "Duplicate question keys", "Data consistency", "Flag duplicates", "PASS (flagged)"],
-    ["TC-17", "XSS payload", "Security detection", "Detect only", "PASS"],
-    ["TC-18", "SQL injection", "Security detection", "Detect only", "PASS"],
-    ["TC-19", "Prompt injection", "Security detection", "Flag only", "PASS"],
-    ["TC-20", "Oversized payload", "Transport validation", "Reject (413)", "PASS"],
-    ["TC-21", "Unicode normalization", "Encoding normalization", "Normalize text", "PASS"],
-    ["TC-22", "Out-of-order delivery", "Ordering logic", "Sort by timestamp", "PASS"],
-    ["TC-23", "Malformed JSON", "Transport validation", "Reject (400)", "PASS"],
-    ["TC-24", "Duplicate delivery", "Idempotency", "Reject duplicate (409)", "PASS"],
-    ["TC-25", "Airtable failure handling", "Integration", "Track success metadata", "PASS"],
-    ["TC-26", "Full schema change", "Schema drift", "Flag change", "PASS"],
-    ["TC-27", "Drift velocity", "Schema drift", "Flag trend", "PASS"],
-    ["TC-28", "Confidence gaming", "Out of scope", "Not handled", "SKIP"],
   ];
 
   const [showForm, setShowForm] = useState(false);
@@ -181,32 +150,6 @@ export default function Validation() {
     setSubmitError("");
     setSubmitSuccess(false);
     setShowForm(true);
-  };
-
-  const getOutcomeClass = (outcome) => {
-    if (outcome.startsWith("PASS")) {
-      return "text-[#39FF14]";
-    }
-    if (outcome.startsWith("SKIP")) {
-      return "text-[#facc15]";
-    }
-    return "text-[#d1d5db]";
-  };
-
-  const getBehaviorClass = (behavior, outcome) => {
-    const behaviorLower = behavior.toLowerCase();
-    const outcomeLower = outcome.toLowerCase();
-    const isTagOnly =
-      behaviorLower.includes("flag") ||
-      behaviorLower.includes("detect only") ||
-      behaviorLower.includes("not handled") ||
-      outcomeLower.includes("flagged") ||
-      outcomeLower.includes("anomaly") ||
-      outcomeLower.startsWith("skip");
-
-    return isTagOnly
-      ? "text-[#facc15] bg-[#2a2300]"
-      : "text-[#86efac] bg-[#052e16]";
   };
 
   return (
@@ -340,13 +283,26 @@ export default function Validation() {
           <Header
             label="Validation Layer"
             title="What The Validation Layer Handles"
-            subtext="A service-oriented view of how payload validation, drift detection, and correction support more reliable webhook and API operations."
+            subtext="Prevent webhook and API failures before they break automations in Make, n8n, Zapier, and custom systems."
           />
 
           <p className="text-[#d1d5db] max-w-2xl mt-6 text-base sm:text-lg leading-8">
-            This layer exists to support the reliability work around your service: checking inbound data,
-            identifying drift, and reducing the chance that malformed payloads break production workflows.
+            DataCrawl sits in front of your webhook intake and catches schema drift, malformed payloads, and broken field mappings before they reach your automations. Known issues are fixed automatically. New ones are flagged before they cause client-visible damage.
           </p>
+        </section>
+
+        <section className="w-full max-w-4xl mb-12">
+          <div className="bg-[#181818] border border-[#2a2a2a] rounded-2xl p-6 sm:p-8">
+            <h2 className="text-xl sm:text-2xl font-semibold text-[#E3E3E3] mb-4">
+              Automation breaks are usually silent — until they're expensive
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-3 text-[#b8b8b8] text-sm leading-relaxed">
+              <p>• An API renames a field and your CRM stops receiving lead data</p>
+              <p>• A payload wraps differently and downstream steps silently skip</p>
+              <p>• A type changes from string to integer and the mapping fails with no alert</p>
+              <p>• You find out days later because a client reports missing records</p>
+            </div>
+          </div>
         </section>
 
         <section className="w-full max-w-5xl mb-14 sm:mb-20">
@@ -368,15 +324,10 @@ export default function Validation() {
         <section className="w-full max-w-4xl mb-12 text-center">
           <div className="bg-[#181818] border border-[#303030] rounded-3xl px-6 py-8 sm:px-10 sm:py-10">
             <h2 className="text-2xl sm:text-3xl font-semibold mb-4 text-[#F2F2F2]">
-              How It Supports The Service
+              How It Prevents Failures
             </h2>
-            <p className="text-[#d1d5db] leading-8 mb-6 max-w-2xl mx-auto">
-              The validation layer can sit in front of webhook and API service entry points
-              to inspect requests before they propagate into downstream systems.
-            </p>
-            <p className="text-[#9f9f9f] max-w-2xl mx-auto leading-7">
-              In practice, that means fewer silent failures, cleaner handoffs between services,
-              and faster investigation when upstream schemas change unexpectedly.
+            <p className="text-[#d1d5db] leading-8 max-w-2xl mx-auto">
+              DataCrawl intercepts every incoming webhook payload before it reaches Make, n8n, Zapier, or your custom logic. Schema drift is caught at ingestion, known breakpoints are fixed automatically, and anything new is flagged with enough context to resolve quickly — not discovered after bad data is already downstream.
             </p>
           </div>
         </section>
@@ -396,6 +347,15 @@ export default function Validation() {
               <span className="text-[#39FF14] text-sm font-semibold">✓</span>
               <span className="text-[#a3a3a3] text-sm">14-day free trial for the managed service layer &mdash; no credit card required</span>
             </div>
+          </div>
+
+          <div className="bg-[#181818] border border-[#2a2a2a] rounded-2xl p-6 sm:p-8 mb-10 max-w-3xl mx-auto">
+            <h3 className="text-lg font-semibold text-[#E3E3E3] mb-4 text-center">Who this is for</h3>
+            <ul className="space-y-3 text-[#b8b8b8] text-sm">
+              <li className="flex items-start gap-2"><span className="text-blue-400 mt-0.5">•</span> Automation agencies managing client workflows in Make, n8n, or Zapier</li>
+              <li className="flex items-start gap-2"><span className="text-blue-400 mt-0.5">•</span> Teams running production automations where silent failures mean lost revenue or bad CRM data</li>
+              <li className="flex items-start gap-2"><span className="text-blue-400 mt-0.5">•</span> Healthcare, insurance, and fintech integrations with fragile API schemas that can't corrupt downstream records</li>
+            </ul>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 max-w-6xl mx-auto">
@@ -454,60 +414,10 @@ export default function Validation() {
           </div>
         </section>
 
-        <section className="w-full max-w-6xl mb-12">
-          <div className="bg-[#181818] border border-[#303030] rounded-3xl p-4 sm:p-6">
-            <h2 className="text-2xl sm:text-3xl font-semibold mb-2 text-[#F2F2F2] text-center">
-              Validation Coverage
-            </h2>
-            <p className="text-[#a3a3a3] text-sm sm:text-base text-center mb-6">
-              These are the conditions the service can currently inspect, normalize, reject, or flag for review.
-            </p>
-
-            <div className="overflow-x-auto rounded-2xl border border-[#2f2f2f]">
-              <table className="w-full min-w-[980px] text-left text-sm sm:text-base">
-                <thead className="bg-[#202020] text-[#e5e5e5]">
-                  <tr>
-                    <th className="px-4 py-3 font-semibold">ID</th>
-                    <th className="px-4 py-3 font-semibold">Test Case (TC-#)</th>
-                    <th className="px-4 py-3 font-semibold">Category</th>
-                    <th className="px-4 py-3 font-semibold">Behavior</th>
-                    <th className="px-4 py-3 font-semibold">Outcome</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {validatorCoverage.map((row, index) => (
-                    <tr
-                      key={row[0]}
-                      className={`border-t border-[#2b2b2b] ${
-                        index % 2 === 0 ? "bg-[#151515]" : "bg-[#121212]"
-                      }`}
-                    >
-                      <td className="px-4 py-3 text-[#f3f4f6] whitespace-nowrap">{row[0]}</td>
-                      <td className="px-4 py-3 text-[#e5e7eb] whitespace-nowrap">{row[1]}</td>
-                      <td className="px-4 py-3 text-[#cbd5e1] whitespace-nowrap">{row[2]}</td>
-                      <td
-                        className={`px-4 py-3 whitespace-nowrap ${getBehaviorClass(
-                          row[3],
-                          row[4]
-                        )}`}
-                      >
-                        {row[3]}
-                      </td>
-                      <td className={`px-4 py-3 whitespace-nowrap font-semibold ${getOutcomeClass(row[4])}`}>
-                        {row[4]}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
         {/* CTA */}
         <section className="w-full max-w-3xl mb-16 text-center">
-          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-3">Need stronger reliability around your production flows?</h2>
-          <p className="text-[#9a9a9a] mb-6 text-sm">Review service coverage, then choose the level of monitoring and response your workflows require.</p>
+          <h2 className="text-2xl font-bold text-[#E3E3E3] mb-3">Stop debugging broken automations after they fail</h2>
+          <p className="text-[#9a9a9a] mb-6 text-sm">Add a reliability layer in front of your workflows in minutes.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate("/pricing")}

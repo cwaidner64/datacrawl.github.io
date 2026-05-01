@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DataCrawl — Webhook Validation &amp; API Schema Drift Prevention</title>
-  <meta name="description" content="DataCrawl catches webhook payload mismatches, schema drift, and API breakages before they reach your automations. Real-time validation layer for Make, n8n, Zapier, and custom APIs. 14-day free trial." />
+  <title>Webhook Validation for Make, n8n &amp; Zapier | Prevent Schema Drift Failures</title>
+  <meta name="description" content="Detect and fix broken automations caused by webhook schema changes in Make.com, n8n, and Zapier. Auto-correct payload drift before workflows fail." />
   <meta name="keywords" content="webhook validation, API schema drift, payload mismatch, n8n webhook fix, Make.com webhook breakage, Zapier payload mismatch, self-healing API, schema validation, API monitoring, data pipeline reliability" />
   <meta name="theme-color" content="#111111" />
   <meta name="robots" content="index, follow" />
@@ -19,8 +19,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="DataCrawl" />
-  <meta property="og:title" content="DataCrawl — Webhook Validation &amp; API Schema Drift Prevention" />
-  <meta property="og:description" content="Stop webhook breakages and schema drift before they destroy your automations. DataCrawl validates every payload, learns your schema, and auto-corrects mismatches in real time. Works with Make, n8n, Zapier, and any API." />
+  <meta property="og:title" content="Webhook Validation for Make, n8n &amp; Zapier | Prevent Schema Drift Failures" />
+  <meta property="og:description" content="Detect and fix broken automations caused by webhook schema changes in Make.com, n8n, and Zapier. Auto-correct payload drift before workflows fail." />
   <meta property="og:url" content="https://www.datacrawl.org/" />
   <meta property="og:image" content="https://www.datacrawl.org/og-image.png" />
   <meta property="og:image:width" content="1200" />
@@ -28,8 +28,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="DataCrawl — Webhook Validation &amp; API Schema Drift Prevention" />
-  <meta name="twitter:description" content="Stop webhook breakages and schema drift before they destroy your automations. Real-time validation for Make, n8n, Zapier, and any API." />
+  <meta name="twitter:title" content="Webhook Validation for Make, n8n &amp; Zapier | Prevent Schema Drift Failures" />
+  <meta name="twitter:description" content="Detect and fix broken automations caused by webhook schema changes in Make.com, n8n, and Zapier. Auto-correct payload drift before workflows fail." />
   <meta name="twitter:image" content="https://www.datacrawl.org/og-image.png" />
 
   <!-- Structured Data -->
@@ -59,14 +59,14 @@
           "applicationCategory": "DeveloperApplication",
           "operatingSystem": "Web",
           "url": "https://www.datacrawl.org",
-          "description": "Real-time webhook validation, API schema drift detection, and automated payload correction for Make, n8n, Zapier, and custom APIs.",
+          "description": "Webhook validation, schema drift detection, and automated payload correction for Make.com, n8n, Zapier, and custom APIs.",
           "offers": {
             "@type": "Offer",
-            "price": "49",
+            "price": "99",
             "priceCurrency": "USD",
             "priceSpecification": {
               "@type": "UnitPriceSpecification",
-              "price": "49",
+              "price": "99",
               "priceCurrency": "USD",
               "billingIncrement": 1,
               "unitCode": "MON"
@@ -89,6 +89,60 @@
             "target": "https://www.datacrawl.org/?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.datacrawl.org/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is webhook validation and why does it matter?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Webhook validation checks every incoming payload against an expected schema before it reaches your automation or data pipeline. Without it, a renamed field or unexpected null value can silently break Make.com scenarios, n8n workflows, or Zapier zaps before anyone notices."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is DataCrawl different from just writing JSON Schema rules?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Static JSON Schema rules help define expectations, but teams still need payload logging, schema drift detection, normalization for renamed fields or type changes, and a process for edge cases. DataCrawl provides that operating layer as a managed service."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does DataCrawl work with Make.com, n8n, and Zapier?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Any HTTP-based automation stack can place a validation or normalization layer in front of its webhook endpoints, including Make.com, n8n, Zapier, Pipedream, and custom code."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens when a payload mismatch is detected?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Some payload mismatches should be rejected immediately, some can be normalized safely, and some should be flagged for human review before they flow downstream. A mature intake layer lets you set those behaviors per endpoint."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is this fully automated or is there a human component?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It is usually both. Known issues can be handled automatically, but ambiguous or high-risk changes often need review before they should be trusted in production."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does the 14-day free trial include?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The trial includes monitored validation coverage, drift detection, normalization behavior, and the intake layer used in front of supported webhook workflows. No credit card is required to start."
+              }
+            }
+          ]
         }
       ]
     }

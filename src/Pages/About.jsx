@@ -17,7 +17,7 @@ export default function About() {
           <Header
             label="About Us"
             title="Meet DataCrawl"
-            subtext="Building monitored reliability for critical webhook and API workflows"
+            subtext="The reliability layer for Make, n8n, and Zapier automations that can't afford silent failure"
           />
         </section>
 
@@ -29,37 +29,37 @@ export default function About() {
             <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 rounded-l-2xl" />
             <span className="text-blue-400 text-xs font-semibold tracking-widest uppercase mb-4 block pl-4 sm:pl-6">Our Mission</span>
             <p className="text-white text-xl sm:text-2xl font-medium leading-relaxed pl-4 sm:pl-6">
-            Help teams keep webhook and API automations reliable by combining validation, drift detection, and response coverage around the flows they depend on.
+              Stop teams from constantly debugging broken automations instead of building value for their clients.
             </p>
           </div>
 
           {/* Our Values */}
           <div className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-10">
-            <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">What We Optimize For</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">What We Prevent</h2>
             <ul className="space-y-4 text-[#d1d5db]">
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Prevent silent failures before they reach downstream systems or customers</span>
+                <span>Hours lost every week finding why a client's workflow silently stopped working</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Turn recurring schema and payload problems into manageable, monitored rules</span>
+                <span>Bad CRM data caused by payload changes no one was notified about</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Support teams whose revenue or operations depend on reliable automation</span>
+                <span>Schema drift that becomes a client-visible incident before you catch it</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Reduce time spent debugging drift, malformed payloads, and integration breakage</span>
+                <span>Broken field mappings that skip steps, lose leads, and corrupt downstream records</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Pair automation with human review where edge cases still need intervention</span>
+                <span>Debugging work that compounds as each new client adds another set of fragile integrations</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 mt-1 text-xl">•</span>
-                <span>Give teams clearer operational coverage as their workflows become more critical</span>
+                <span>Discovering automation failures only after a client reports missing data or broken routing</span>
               </li>
             </ul>
           </div>
@@ -68,13 +68,16 @@ export default function About() {
 
         {/* Why DataCrawl */}
         <section className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-10 mb-8 sm:mb-16">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-center">Why DataCrawl</h2>
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-center">Why DataCrawl Exists</h2>
           <div className="max-w-3xl mx-auto text-[#d1d5db] space-y-6 text-center">
             <p>
-            DataCrawl started from a simple problem: teams were losing time and money to webhook failures, schema drift, and payload mismatches that were only discovered after something downstream broke. The gap was not just validation software, but reliable coverage around the flows that matter most.
+              Agencies using Make, n8n, and Zapier were constantly firefighting. A webhook would stop working. A field would vanish from a payload. A client would report missing leads three days after the automation quietly broke. The debugging loop repeated itself every few weeks, across every client.
             </p>
             <p>
-            We focus on the layer between incoming data and production operations, where malformed requests, renamed fields, and ambiguous edge cases can either be corrected, flagged, or escalated before they become bigger incidents. That is the operating model reflected across our monitored coverage, managed reliability, and higher-trust plans.
+              The problem wasn't a missing feature. It was that nothing existed at the point where workflows first receive data, before execution, before bad data flows downstream. Existing tools detect failures too late, surface alerts without context, and leave teams to do the operational work themselves.
+            </p>
+            <p>
+              We didn't build another automation tool. We built the layer teams end up needing after workflows start breaking in production, the intake layer that catches schema drift, fixes known breakpoints, and flags new ones before clients see the damage.
             </p>
           </div>
         </section>
@@ -82,56 +85,56 @@ export default function About() {
         {/* What Makes Us Different */}
 <section className="bg-[#1f1f1f] border border-[#333] rounded-2xl p-5 sm:p-10 mb-8 sm:mb-16">
   <h2 className="text-xl sm:text-2xl font-semibold mb-6 text-center">
-    Why DataCrawl is different from typical API tooling
+    What other tools get wrong
   </h2>
 
   <div className="grid md:grid-cols-3 gap-6 text-left">
 
     <div>
       <h3 className="font-semibold mb-2 text-[#f2f2f2]">
-        Others: Alert after something breaks
+        Most tools assume failures are visible
       </h3>
       <p className="text-[#d1d5db] text-sm">
-        Many tools are useful for observability, but they mainly surface problems after the bad payload has already moved downstream.
+        Observability dashboards and error alerts only fire when something crashes loudly. Silent failures, bad data passing through as valid, and skipped steps don't trigger alerts. They just corrupt records quietly.
       </p>
 
       <h3 className="font-semibold mt-4 mb-2 text-[#60a5fa]">
-        DataCrawl: Adds monitored reliability at the entry point
+        DataCrawl catches failures before workflow execution
       </h3>
       <p className="text-[#d1d5db] text-sm">
-        We focus on the point where requests first enter the workflow, so validation, correction, and response can happen before failures spread.
+        DataCrawl operates at the ingestion layer, validating every incoming payload before it reaches your Make, n8n, or Zapier steps. Silent failures get caught before they become invisible damage.
       </p>
     </div>
 
     <div>
       <h3 className="font-semibold mb-2 text-[#f2f2f2]">
-        Others: Rely on static validation alone
+        Most tools stop at detection
       </h3>
       <p className="text-[#d1d5db] text-sm">
-        Static rules help, but they still leave teams owning every new edge case, schema change, and ambiguous mismatch themselves.
+        Alerting tools tell you something broke. They don't tell you what changed in the payload, which field is missing, or whether the issue is a new pattern or a known rename. Your team still has to figure that out.
       </p>
 
       <h3 className="font-semibold mt-4 mb-2 text-[#60a5fa]">
-        DataCrawl: Combines rules with active reliability work
+        DataCrawl fixes known issues automatically
       </h3>
       <p className="text-[#d1d5db] text-sm">
-        Known issues can be normalized automatically, while new or critical failures can be flagged and handled as part of an ongoing monitoring process.
+        Known field renames, type changes, and safe normalizations are rewritten at intake. New or ambiguous issues are flagged with enough context to resolve quickly instead of debugging from a blank log.
       </p>
     </div>
 
     <div>
       <h3 className="font-semibold mb-2 text-[#f2f2f2]">
-        Others: Stop at software features
+        Most tools ignore silent data corruption
       </h3>
       <p className="text-[#d1d5db] text-sm">
-        Most products sell tooling. Teams still need someone to define priorities, respond to incidents, and manage the operational fallout.
+        A workflow that runs successfully but writes wrong data to a CRM won't trigger an alert. It will surface as a client complaint days later when the damage is already done and undoing it is manual work.
       </p>
 
       <h3 className="font-semibold mt-4 mb-2 text-[#60a5fa]">
-        DataCrawl: Sells coverage around the workflow
+        DataCrawl prevents bad data from reaching downstream systems
       </h3>
       <p className="text-[#d1d5db] text-sm">
-        Our pricing and service model are built around coverage levels: monitored pipelines, managed reliability, and stronger response guarantees as systems become more business-critical.
+        DataCrawl rejects or flags payloads that don't match expected structure before they flow into CRMs, databases, or downstream automations. The failure is surfaced at intake, not discovered in a client report.
       </p>
     </div>
 
@@ -140,9 +143,9 @@ export default function About() {
 
         {/* CTA */}
         <section className="flex flex-col items-center text-center">
-          <h2 className="text-2xl font-semibold mb-4">Need reliability coverage for your workflows?</h2>
+          <h2 className="text-2xl font-semibold mb-4">If your automations are already breaking in production, this is the layer you're missing.</h2>
           <p className="text-[#d1d5db] max-w-md mb-8">
-            If your team depends on webhook or API automations that cannot fail silently, we can help scope the right level of monitoring, intervention, and response.
+            If you're debugging client workflows every week, that's not bad luck — it's missing infrastructure. DataCrawl is built to stop it from happening again.
           </p>
           <a 
             href="mailto:contact@datacrawl.org" 

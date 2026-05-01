@@ -110,6 +110,17 @@ export default function ZapierPayloadMismatch() {
             <li className="flex gap-3"><span className="text-blue-400 font-bold shrink-0">4.</span> If field names have changed, update the action step mappings to use the new field name from the refreshed sample.</li>
             <li className="flex gap-3"><span className="text-blue-400 font-bold shrink-0">5.</span> Re-test the Zap with "Test &amp; Review" to confirm the fix before turning it back on.</li>
           </ol>
+          <div className="mt-6 bg-[#181818] border border-[#2a2a2a] rounded-xl p-5">
+            <p className="text-blue-300 text-sm font-semibold mb-2">Example trigger mismatch</p>
+            <pre className="text-xs text-[#9a9a9a] whitespace-pre-wrap leading-relaxed font-mono">{`Original trigger sample:
+contact_email
+
+Live trigger payload:
+email
+
+Observed result:
+The CRM action still maps contact_email, receives an empty string, and the Zap run fails with a missing required field.`}</pre>
+          </div>
           <div className="mt-6 bg-[#1a1f30] border border-blue-500/30 rounded-xl p-5">
             <p className="text-blue-300 text-sm font-semibold mb-1">Why this keeps happening</p>
             <p className="text-[#9a9a9a] text-sm">Zapier has limited schema-change awareness at the trigger level. If providers change field names or nesting without notice, teams usually end up re-sampling, re-mapping, and re-testing by hand unless they add stronger intake validation upstream.</p>
@@ -176,7 +187,11 @@ export default function ZapierPayloadMismatch() {
         {/* Related guides */}
         <div className="mt-12">
           <p className="text-[#888] text-sm mb-4">Related guides</p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button onClick={() => navigate("/zapier-webhook-failures")} className="text-left bg-[#181818] border border-[#2a2a2a] rounded-xl p-4 hover:border-[#3a3a3a] transition-colors flex-1">
+              <p className="text-blue-400 text-xs mb-1">SEO page</p>
+              <p className="text-[#E3E3E3] text-sm font-semibold">Zapier automation troubleshooting</p>
+            </button>
             <button onClick={() => navigate("/guides/make-webhook-breakage")} className="text-left bg-[#181818] border border-[#2a2a2a] rounded-xl p-4 hover:border-[#3a3a3a] transition-colors flex-1">
               <p className="text-blue-400 text-xs mb-1">Make.com</p>
               <p className="text-[#E3E3E3] text-sm font-semibold">Fixing Make.com Webhook Breakages</p>

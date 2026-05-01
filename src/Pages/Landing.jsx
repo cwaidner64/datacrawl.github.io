@@ -5,9 +5,18 @@ import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import FeatureCard from "../Components/Landing/FeatureCard";
 import SparkOverlay from "../Components/SparkOverlay";
 import Need from "../Components/Landing/Need";
+import { usePageMeta } from "../utils/usePageMeta";
 import "../App.css";
 
 export default function Landing() {
+  usePageMeta({
+    title: "Webhook Validation for Make, n8n & Zapier | Prevent Schema Drift Failures",
+    description:
+      "Detect and fix broken automations caused by webhook schema changes in Make.com, n8n, and Zapier. Auto-correct payload drift before workflows fail.",
+    canonical: "https://www.datacrawl.org/",
+    appendBaseTitle: false,
+  });
+
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -78,62 +87,131 @@ export default function Landing() {
     { to: "/about", label: "About" },
     { to: "/pricing", label: "Pricing" },
     { to: "/contact", label: "Contact" },
-    { to: "/validation", label: "Validation Layer" },
+    { to: "/validation", label: "Webhook Validator" },
+  ];
+
+  const seoPages = [
+    {
+      to: "/make-webhook-errors",
+      label: "Fix Make.com webhook errors",
+      description: "Field renames, payload mismatch incidents, and broken scenario mappings.",
+    },
+    {
+      to: "/n8n-schema-drift",
+      label: "Fix n8n schema drift issues",
+      description: "Runtime schema drift and expression failures inside production workflows.",
+    },
+    {
+      to: "/zapier-webhook-failures",
+      label: "Zapier automation troubleshooting",
+      description: "Find webhook failures, missing fields, and broken trigger payloads faster.",
+    },
+    {
+      to: "/api-payload-breakage",
+      label: "API payload breakage",
+      description: "Understand why upstream API payload changes break downstream automations.",
+    },
+    {
+      to: "/automation-failure-monitoring",
+      label: "Automation failure monitoring",
+      description: "Add runtime checks before webhook errors turn into customer-facing incidents.",
+    },
   ];
 
   const competitiveLandscape = [
-    { competitor: "Monte Carlo", funding: "$200M+", detects: true, corrects: false, learnsSchema: false, makeN8n: false, pricing: "$100K+/yr", gap: "Alerts only. Humans fix everything." },
-    { competitor: "Datafold", funding: "Well funded", detects: true, corrects: false, learnsSchema: false, makeN8n: false, pricing: "$500+/mo", gap: "Only works at deploy time. Blind at runtime." },
-    { competitor: "Great Expectations / Soda", funding: "OSS / $30M", detects: true, corrects: false, learnsSchema: false, makeN8n: false, pricing: "Free / $500+", gap: "Manual rules. No automation. High maintenance." },
-    { competitor: "Bigeye", funding: "$17M", detects: true, corrects: false, learnsSchema: "partial", makeN8n: false, pricing: "$5K-$15K/mo", gap: "Auto monitors, but still no action taken." },
-    { competitor: "Datadog (Metaplane)", funding: "$36B company", detects: true, corrects: false, learnsSchema: "partial", makeN8n: false, pricing: "Enterprise", gap: "Reactive + expensive. Built for ops, not data fixing." },
-    { competitor: "Fivetran", funding: "$5.6B", detects: "partial", corrects: "partial", learnsSchema: false, makeN8n: false, pricing: "$$$", gap: "Only works inside its own connectors." },
-    { competitor: "Acceldata", funding: "$50M", detects: true, corrects: "partial", learnsSchema: false, makeN8n: false, pricing: "Enterprise", gap: "Still early + no HTTP-level correction." },
-    { competitor: "DataCrawl", funding: "Early", detects: true, corrects: true, learnsSchema: true, makeN8n: true, pricing: "$99/mo+", gap: "Managed reliability service that fills the gap between SaaS alerting tools and the operational work required to keep webhook workflows stable." },
-  ];
+  {
+    competitor: "Manual Debugging (Status Quo)",
+    funding: "Your time",
+    detects: false,
+    corrects: false,
+    learnsSchema: false,
+    makeN8n: true,
+    pricing: "Hours every week",
+    gap: "You find out from clients. Then you dig through logs, replay runs, and guess what changed."
+  },
+  {
+    competitor: "Custom Error Handling",
+    funding: "Internal effort",
+    detects: "partial",
+    corrects: false,
+    learnsSchema: false,
+    makeN8n: true,
+    pricing: "Dev time",
+    gap: "Catches failures, not silent data issues. Every workflow needs custom logic."
+  },
+  {
+    competitor: "Zapier / Make Built-in Alerts",
+    funding: "Included",
+    detects: "partial",
+    corrects: false,
+    learnsSchema: false,
+    makeN8n: true,
+    pricing: "Included",
+    gap: "Only triggers on hard failures. Silent bad data still flows through."
+  },
+  {
+    competitor: "Internal Monitoring Scripts",
+    funding: "Engineering time",
+    detects: true,
+    corrects: false,
+    learnsSchema: false,
+    makeN8n: "partial",
+    pricing: "High maintenance",
+    gap: "Breaks constantly. Becomes another system to maintain."
+  },
+  {
+    competitor: "DataCrawl",
+    funding: "Early",
+    detects: true,
+    corrects: true,
+    learnsSchema: true,
+    makeN8n: true,
+    pricing: "$99/mo+",
+    gap: "Purpose-built reliability layer for automation teams. Detects drift, fixes known breakpoints, and reduces repeated debugging work."
+  }
+];
 
   const faqs = [
-    {
-      q: "What is webhook validation and why does it matter?",
-      a: "Webhook validation checks every incoming payload against an expected schema before it reaches your automation or data pipeline. Without it, a single renamed field or unexpected null value can silently break Make.com scenarios, n8n workflows, or Zapier zaps — sometimes for hours before anyone notices. DataCrawl makes sure this doesn't happen by providing a monitored layer that validates, corrects, and flags issues in real time.",
-    },
-    {
-      q: "How is DataCrawl different from just writing JSON Schema rules?",
-      a: "Static JSON Schema rules are useful, but they are only one part of a durable setup. Teams still need payload logging, drift detection, normalization for renamed fields or type changes, and an operating process for edge cases. DataCrawl is for teams that want that layer managed rather than building and maintaining it themselves.",
-    },
-    {
-      q: "Does DataCrawl work with Make.com, n8n, and Zapier?",
-      a: "Yes. Any HTTP-based automation stack can put a validation or normalization layer in front of its webhook endpoints, including Make, n8n, Zapier, Pipedream, and custom code. DataCrawl works in that position so teams can add monitored validation coverage without changing the sender side of the integration.",
-    },
-    {
-      q: "What happens when a payload mismatch is detected?",
-      a: "The right response depends on the mismatch. Some issues should be rejected immediately, some can be normalized safely, and some should be flagged for human review before they flow downstream. A mature intake layer lets you set those behaviors per endpoint instead of discovering problems only after production data is wrong.",
-    },
-    {
-      q: "Is this fully automated or is there a human component?",
-      a: "It is usually both. Known issues can be handled automatically, but ambiguous or high-risk changes often need review before they should be trusted in production. That is true whether you run the process internally or use a managed reliability service like DataCrawl.",
-    },
-    {
-      q: "What does the 14-day free trial include?",
-      a: "The trial includes monitored validation coverage, drift detection, normalization behavior, and the intake layer used in front of supported webhook workflows. No credit card is required to start.",
-    },
-  ];
+  {
+    q: "Who is this actually for?",
+    a: "Teams and agencies running client automations on Make, n8n, Zapier, or custom APIs. Especially if you're managing multiple workflows and dealing with breakages, bad data, or constant debugging."
+  },
+  {
+    q: "What problem does this actually solve?",
+    a: "It reduces the time you spend figuring out why automations broke. Instead of digging through logs or waiting for clients to report issues, DataCrawl detects payload changes early and either fixes them or shows exactly what changed."
+  },
+  {
+    q: "How is this different from error handling inside Make or Zapier?",
+    a: "Those tools react after something fails. DataCrawl sits before your workflow runs and checks incoming data, so issues are caught before they break mappings or create bad downstream data."
+  },
+  {
+    q: "Do I need to rebuild my automations?",
+    a: "No. You route your webhook through DataCrawl, and everything else stays the same. It sits in front of your existing workflows."
+  },
+  {
+    q: "What actually gets automated vs handled manually?",
+    a: "Known issues like field renames or type mismatches can be corrected automatically. New or ambiguous changes are flagged with clear context so you can fix them quickly instead of debugging from scratch."
+  },
+  {
+    q: "When does this become worth paying for?",
+    a: "When you're managing multiple automations or clients and spending hours every week fixing breakages, re-running workflows, or dealing with silent failures."
+  }
+];
 
- const pricingPlans = [
+const pricingPlans = [
   {
     name: "Starter",
-    subtitle: "Monitored Coverage",
+    subtitle: "For small automation setups",
     price: "$99",
     period: "/mo",
-    description: "For individual developers running a few critical automations",
+    description: "For freelancers or small teams running a few client automations",
     features: [
-      "Up to 3 monitored pipelines",
-      "Webhook schema validation layer",
-      "Basic schema drift detection",
-      "Rule-based payload normalization",
-      "Human review for critical failures (best effort)",
-      "Email alerts when issues are detected",
-      "14-day free trial",
+      "Up to 3 active workflows",
+      "Webhook validation layer",
+      "Schema drift detection",
+      "Basic auto-correction rules",
+      "Email alerts for issues",
+      "14-day free trial"
     ],
     cta: "Start Free Trial",
     highlight: false,
@@ -141,18 +219,18 @@ export default function Landing() {
 
   {
     name: "Pro",
-    subtitle: "Managed Reliability",
+    subtitle: "For agencies managing multiple clients",
     price: "$349",
     period: "/mo",
-    description: "For teams where automation downtime directly impacts revenue or ops",
+    description: "Reduce debugging time across multiple client automations",
     features: [
-      "Up to 10 monitored pipelines",
+      "Up to 15 active workflows",
       "Everything in Starter",
-      "Priority failure triage",
       "Custom validation & correction rules",
+      "Priority issue detection",
       "Webhook replay + audit logs",
-      "Slack incident notifications",
-      "Faster manual resolution of edge cases",
+      "Slack alerts for failures",
+      "Faster resolution support"
     ],
     cta: "Start Free Trial",
     highlight: true,
@@ -160,23 +238,22 @@ export default function Landing() {
 
   {
     name: "Reliability+",
-    subtitle: "High-Trust Coverage",
+    subtitle: "For high-stakes automation systems",
     price: "$1,000",
     period: "/mo",
-    description: "For production systems where failures are expensive and immediate response matters",
+    description: "For teams where automation failures directly impact revenue",
     features: [
-      "Up to 25 monitored pipelines (contracted scope)",
-      "Proactive monitoring of schema drift",
-      "Guaranteed incident response window",
-      "Manual intervention for critical failures",
-      "Advanced correction rules + system tuning",
-      "Priority support channel",
+      "25+ workflows (custom scope)",
+      "Proactive drift monitoring",
+      "Manual intervention for critical issues",
+      "Advanced correction logic",
+      "Guaranteed response time",
+      "Dedicated support channel"
     ],
-    cta: "Upgrade to Reliability+",
+    cta: "Talk to Sales",
     highlight: false,
   }
 ];
-
   return (
     <div className="bg-[#111111] min-h-screen w-full overflow-x-hidden" id="landing">
 
@@ -268,10 +345,10 @@ export default function Landing() {
               transition={{ duration: 0.9, ease: "easeOut" }}
             >
               <span className="inline-block mb-4 px-3 py-1 rounded-full border border-blue-500/40 bg-blue-500/10 text-blue-300 text-xs font-semibold tracking-wide uppercase">
-                Monitored Webhook Validation Service
+                Webhook Validation for Make.com, n8n, and Zapier
               </span>
-              <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight text-[#E3E3E3] mb-5">
-                Stop broken automations
+              <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight text-[#E3E3E3] mb-5 max-w-4xl">
+                Stop your client automations from silently breaking
               </h1>
             </motion.div>
 
@@ -280,11 +357,14 @@ export default function Landing() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
             >
-              <p className="text-[#AFAFAF] text-base md:text-lg max-w-lg mb-2 leading-relaxed">
-                Make, n8n, Zapier, custom APIs
+              <p className="text-[#AFAFAF] text-base md:text-lg max-w-2xl mb-2 leading-relaxed">
+                Webhook validation for Make.com, n8n, Zapier, and custom APIs.
               </p>
-              <p className="text-[#888] text-sm md:text-base max-w-lg mb-8 leading-relaxed">
-                We monitor, validate, and fix your data pipelines so failures don't hit production.
+              <p className="text-[#888] text-sm md:text-base max-w-2xl mb-4 leading-relaxed">
+                Catch and fix hidden failures in Make, Zapier, and n8n workflows before they turn into bad data, missed actions, and hours of debugging.
+              </p>
+              <p className="text-[#666] text-sm md:text-base max-w-2xl mb-8 leading-relaxed">
+                Built for agencies managing multiple client automations where things work at launch, but quietly degrade over time.
               </p>
             </motion.div>
 
@@ -299,13 +379,13 @@ export default function Landing() {
                   onClick={() => setShowForm(true)}
                   className="px-10 py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold text-lg rounded-xl transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-900/30"
                 >
-                  Start Free Trial
+                  See Where Your Automations Are Breaking
                 </button>
                 <button
                   onClick={() => navigate("/validation")}
                   className="px-10 py-4 border border-[#2f63d7] text-[#dbeafe] hover:bg-[#1a2750] font-semibold text-lg rounded-xl transition-all duration-200 hover:scale-105"
                 >
-                  Try the Validator
+                  See How It Works
                 </button>
               </div>
               <p className="text-sm text-[#888] mt-4 tracking-wide">
@@ -313,13 +393,13 @@ export default function Landing() {
               </p>
               <div className="flex flex-wrap gap-4 mt-3">
                 <span className="flex items-center gap-1.5 text-sm text-[#a3a3a3]">
-                  <span className="text-[#39FF14] font-semibold">✓</span> Monitored validation coverage
+                  <span className="text-[#39FF14] font-semibold">✓</span> Webhook validation coverage
                 </span>
                 <span className="flex items-center gap-1.5 text-sm text-[#a3a3a3]">
-                  <span className="text-[#39FF14] font-semibold">✓</span> No code changes on sender side
+                  <span className="text-[#39FF14] font-semibold">✓</span> Schema drift alerts before workflows fail
                 </span>
                 <span className="flex items-center gap-1.5 text-sm text-[#a3a3a3]">
-                  <span className="text-[#39FF14] font-semibold">✓</span> Rule-based + adaptive correction
+                  <span className="text-[#39FF14] font-semibold">✓</span> Payload mismatch correction for known breakpoints
                 </span>
               </div>
             </motion.div>
@@ -330,152 +410,188 @@ export default function Landing() {
       {/* PROBLEM */}
       <section className="bg-[#0d0d0d] px-4 sm:px-6 md:px-10 xl:px-35 py-24 md:py-32">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#E3E3E3] text-center mb-4">
-            One renamed field. Your entire automation, broken.
+          <h2 className="text-3xl md:text-4xl font-bold text-[#E3E3E3] text-center mb-6">
+            It’s not the build that breaks. It’s everything after.
           </h2>
-          <p className="text-[#9a9a9a] text-center text-lg max-w-2xl mx-auto mb-16">
-            API providers change schemas without warning. Payloads drift. Required fields go null. Your Make.com scenario quietly fails at 2 AM while orders pile up — and nobody notices until customers complain.
+
+          <p className="text-[#9a9a9a] text-center text-lg max-w-2xl mx-auto mb-12">
+            Your automations work when you ship them. Then a few weeks later, something upstream changes, and everything starts degrading quietly.
           </p>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                stat: "68%",
-                label: "of automation outages trace back to a payload schema change",
-                sub: "Most teams find out hours later, from an angry Slack message.",
+                title: "APIs change without warning",
+                desc: "A field gets renamed, removed, or wrapped differently. Your workflow still runs, but the data is wrong.",
               },
               {
-                stat: "4.2 hrs",
-                label: "average time spent debugging a single webhook mismatch",
-                sub: "Cross-referencing logs, re-running scenarios, guessing what changed.",
+                title: "Failures aren’t obvious",
+                desc: "Nothing crashes. Steps get skipped, bad data flows through, and no one notices immediately.",
               },
               {
-                stat: "$0",
-                label: "in revenue from automations that silently stop running",
-                sub: "Zaps that error without retry. n8n flows that halt without alerting anyone.",
+                title: "You find out too late",
+                desc: "A client reports missing leads, broken routing, or incorrect data, after damage is already done.",
               },
             ].map((item) => (
-              <div key={item.stat} className="bg-[#181818] border border-[#2a2a2a] rounded-2xl p-6 flex flex-col gap-2">
-                <span className="text-4xl font-bold text-blue-400">{item.stat}</span>
-                <p className="text-[#E3E3E3] font-semibold text-base">{item.label}</p>
-                <p className="text-[#888] text-sm">{item.sub}</p>
+              <div key={item.title} className="bg-[#181818] border border-[#2a2a2a] rounded-2xl p-6">
+                <h3 className="text-[#E3E3E3] font-semibold text-lg mb-3">{item.title}</h3>
+                <p className="text-[#888] text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
+
+          <p className="text-center text-[#888] mt-10 max-w-xl mx-auto">
+            Now you’re debugging something that’s already been broken for days.
+          </p>
+        </div>
+      </section>
+
+      {/* PROBLEM-FIRST SEO */}
+      <section className="bg-[#111111] px-4 sm:px-6 md:px-10 xl:px-35 py-24 md:py-32">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#E3E3E3] text-center mb-6">
+            This is why automation work doesn’t scale
+          </h2>
+
+          <p className="text-[#9a9a9a] text-center text-lg max-w-3xl mx-auto mb-12">
+            You can add validation, logging, and error handling, but it doesn’t solve the real problem.
+          </p>
+
+          <div className="max-w-3xl mx-auto text-[#b8b8b8] text-base leading-relaxed space-y-4">
+            <p>• You’re still reacting after something breaks</p>
+            <p>• You’re still manually figuring out what changed</p>
+            <p>• Every new client adds more surface area for failure</p>
+          </div>
+
+          <p className="text-center text-[#9a9a9a] mt-12 max-w-2xl mx-auto">
+            So instead of scaling cleanly, you end up spending more time maintaining automations than building them.
+          </p>
+
+          <p className="text-center text-white font-semibold mt-6">
+            The real bottleneck isn’t building workflows. It’s keeping them reliable.
+          </p>
         </div>
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="bg-[#111111] px-4 sm:px-6 md:px-10 xl:px-35 py-24 md:py-32">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#E3E3E3] text-center mb-4">
-            How DataCrawl prevents webhook failures
-          </h2>
-          <p className="text-[#9a9a9a] text-center text-lg max-w-2xl mx-auto mb-16">
-            A monitored validation layer that sits between your API providers and your automations.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {[
-              {
-                step: "01",
-                title: "Route webhooks through DataCrawl",
-                desc: "Point your Make.com, n8n, or Zapier webhook trigger at your DataCrawl proxy endpoint. No changes needed on the sending side.",
-              },
-              {
-                step: "02",
-                title: "Real-time validation using rules + learned patterns",
-                desc: "We validate every incoming payload using established rules and patterns learned from your traffic. When something is uncertain or new, it's flagged for review instead of silently failing.",
-              },
-              {
-                step: "03",
-                title: "Auto-correct known issues, flag new ones",
-                desc: "Critical mismatches are automatically corrected when rules exist. New or ambiguous cases are handled by our monitoring layer and converted into reusable rules over time.",
-              },
-            ].map((item, i) => (
-              <div key={item.step} className="relative bg-[#181818] border border-[#2a2a2a] rounded-2xl p-6 flex flex-col gap-3">
-                <span className="text-5xl font-black text-[#1e2a45] select-none absolute top-4 right-5">{item.step}</span>
-                <span className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-1">Step {i + 1}</span>
-                <h3 className="text-[#E3E3E3] font-semibold text-lg">{item.title}</h3>
-                <p className="text-[#888] text-sm leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-center mt-12">
-            <button
-              onClick={() => navigate("/validation")}
-              className="px-8 py-3 border border-[#2f63d7] text-[#dbeafe] hover:bg-[#1a2750] font-semibold rounded-xl transition-all duration-200"
-            >
-              See the Validation Layer in action
-            </button>
-          </div>
-        </div>
-      </section>
 
-      {/* FEATURES */}
-      <section className="bg-[#0d0d0d] px-4 sm:px-6 md:px-10 xl:px-35 py-24 md:py-32">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#E3E3E3] text-center mb-4">
-            Monitored validation layer
-          </h2>
-          <p className="text-[#9a9a9a] text-center text-lg max-w-2xl mx-auto mb-16">
-            Built for the automation stack you already use.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full justify-items-center">
-            <FeatureCard
-              icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" alt="" />}
-              name="Compatibility"
-              description="Works with any API, webhook, or data source. HTTP-level interception means zero lock-in."
-              glow={true}
-              glowClass="left-[43px] top-[37px]"
-            />
-            <FeatureCard
-              icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" alt="" />}
-              name="Validation"
-              description="Stop payload mismatches and schema breakages before they reach your automations using established rules and adaptive patterns."
-            />
-            <FeatureCard
-              icon={<img src={`${import.meta.env.BASE_URL}landing/Settings.svg`} className="w-12" alt="" />}
-              name="Drift Detection"
-              description="Learns patterns from real traffic and alerts you the moment a provider changes their API. New edge cases are flagged for review."
-            />
-            <FeatureCard
-              icon={<img src={`${import.meta.env.BASE_URL}landing/API.svg`} className="w-12" alt="" />}
-              name="Native Support"
-              description="First-class support for Make.com, n8n, Zapier, Pipedream, and custom REST APIs."
-              glow={true}
-              glowClass="bottom-[20px] right-[161px]"
-            />
-          </div>
-          <div className="flex justify-center mt-12">
-            <button
-              onClick={() => setShowForm(true)}
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all duration-200"
-            >
-              Get Started Free — No Credit Card
-            </button>
-          </div>
+    <section className="bg-[#111111] px-4 sm:px-6 md:px-10 xl:px-35 py-24 md:py-32">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#E3E3E3] text-center mb-4">
+          How agencies stop automation breakage without constant debugging
+        </h2>
+
+        <p className="text-[#9a9a9a] text-center text-lg max-w-2xl mx-auto mb-16">
+          Instead of waiting for clients to report broken workflows or digging through logs, DataCrawl catches and fixes payload issues before they turn into lost leads or bad CRM data.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          {[
+            {
+              step: "01",
+              title: "Route your client webhooks through DataCrawl",
+              desc: "You place DataCrawl between incoming data (forms, APIs, webhooks) and your automations. No rebuilds — just change the endpoint and everything keeps running.",
+            },
+            {
+              step: "02",
+              title: "Catch the exact changes that usually break your workflows",
+              desc: "When a field is renamed, removed, or changed, DataCrawl flags it immediately. No more guessing what broke or waiting for a client to notice missing leads.",
+            },
+            {
+              step: "03",
+              title: "Fix known issues automatically and surface the rest clearly",
+              desc: "Common breakpoints (field renames, type changes) are corrected instantly. Anything new is surfaced with exactly what changed so you fix it in minutes, not hours.",
+            },
+          ].map((item, i) => (
+            <div key={item.step} className="relative bg-[#181818] border border-[#2a2a2a] rounded-2xl p-6 flex flex-col gap-3">
+              <span className="text-5xl font-black text-[#1e2a45] select-none absolute top-4 right-5">{item.step}</span>
+              <span className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-1">Step {i + 1}</span>
+              <h3 className="text-[#E3E3E3] font-semibold text-lg">{item.title}</h3>
+              <p className="text-[#888] text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
         </div>
-      </section>
+
+        <div className="flex justify-center mt-12">
+          <button
+            onClick={() => navigate("/validation")}
+            className="px-8 py-3 border border-[#2f63d7] text-[#dbeafe] hover:bg-[#1a2750] font-semibold rounded-xl transition-all duration-200"
+          >
+            See how it catches real failures
+          </button>
+        </div>
+      </div>
+    </section>
+
+     {/* FEATURES */}
+<section className="bg-[#0d0d0d] px-4 sm:px-6 md:px-10 xl:px-35 py-24 md:py-32">
+  <div className="max-w-5xl mx-auto">
+    <h2 className="text-3xl md:text-4xl font-bold text-[#E3E3E3] text-center mb-4">
+      Built for teams managing real client automations
+    </h2>
+
+    <p className="text-[#9a9a9a] text-center text-lg max-w-2xl mx-auto mb-16">
+      This is not another monitoring tool. It’s designed to reduce the time you spend debugging broken workflows across clients, CRMs, and APIs.
+    </p>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full justify-items-center">
+
+      <FeatureCard
+        icon={<img src={`${import.meta.env.BASE_URL}landing/Expand.svg`} className="w-10" alt="" />}
+        name="Stop silent failures"
+        description="Catch missing fields, bad payloads, and schema changes before they turn into lost leads, broken automations, or client complaints."
+        glow={true}
+        glowClass="left-[43px] top-[37px]"
+      />
+
+      <FeatureCard
+        icon={<img src={`${import.meta.env.BASE_URL}landing/Security Shield.svg`} className="w-12" alt="" />}
+        name="Reduce debugging"
+        description="No more digging through logs or replaying workflows to figure out what changed. See exactly what broke and why, instantly."
+      />
+
+      <FeatureCard
+        icon={<img src={`${import.meta.env.BASE_URL}landing/Settings.svg`} className="w-12" alt="" />}
+        name="Auto-fix breaks"
+        description="Handle known issues like field renames and type mismatches automatically so your workflows keep running without manual intervention."
+      />
+
+      <FeatureCard
+        icon={<img src={`${import.meta.env.BASE_URL}landing/API.svg`} className="w-12" alt="" />}
+        name="Cloud support"
+        description="Make.com, n8n, Zapier, custom APIs — if it uses webhooks, it can be protected without rebuilding your automations."
+        glow={true}
+        glowClass="bottom-[20px] right-[161px]"
+      />
+
+    </div>
+
+    <div className="flex justify-center mt-12">
+      <button
+        onClick={() => setShowForm(true)}
+        className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all duration-200"
+      >
+        Start protecting your automations
+      </button>
+    </div>
+  </div>
+</section>
 
       {/* WHO IT'S FOR */}
       <section className="bg-[#111111] px-4 sm:px-6 md:px-10 xl:px-35 py-24 md:py-32">
         <div className="max-w-5xl mx-auto flex flex-col items-center gap-12">
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-[#E3E3E3] mb-4">
-              Built for developers and enterprise teams
+              Built for agencies running client automations
             </h2>
             <p className="text-[#9a9a9a] text-lg max-w-2xl mx-auto">
-              Whether you are an individual developer running automation workflows or an enterprise team managing dozens of data pipelines, DataCrawl scales with you.
+              If you're managing multiple client workflows in Make, Zapier, or n8n, you’ve already dealt with silent failures, schema drift, and debugging chaos. DataCrawl exists to stop that from scaling with your client base.
             </p>
           </div>
           <div className="flex flex-col md:flex-row gap-12 mt-4">
-            <Need img="landing/usage/development.svg" text="Individual Developers & Startups" />
-            <Need img="landing/usage/data-science.svg" text="Automation & AI Teams" />
-            <Need img="landing/usage/marketing.svg" text="SaaS Product Builders" />
-          </div>
-          <div className="flex flex-col md:flex-row gap-12">
-            <Need img="landing/usage/e-commerce.svg" text="Enterprise Integration Teams" />
-            <Need img="landing/usage/content.svg" text="API-First Companies" />
-            <Need img="landing/usage/seo.svg" text="Data & Analytics Platforms" />
+            <Need img="landing/usage/development.svg" text="Agencies managing client automations" />
+            <Need img="landing/usage/data-science.svg" text="Freelancers building workflows for clients" />
+            <Need img="landing/usage/marketing.svg" text="Teams maintaining multiple production automations" />
           </div>
         </div>
       </section>
@@ -487,7 +603,7 @@ export default function Landing() {
             The reliability gap current SaaS tooling still leaves open
           </h2>
           <p className="text-[#9a9a9a] text-center text-lg max-w-2xl mx-auto mb-12">
-            Most SaaS tools help you detect issues, monitor pipelines, or define validation rules. The gap is the service layer that validates intake, normalizes payload changes, and handles operational response before bad data spreads downstream. That is the gap DataCrawl is designed to fill.
+            Most SaaS tools alert after the damage starts. The operational gap is catching webhook errors, schema drift, and payload mismatch at intake before bad data spreads through downstream automations.
           </p>
           <div className="overflow-x-auto rounded-xl border border-[#2a2a2a]">
             <table className="w-full min-w-[1200px] text-left text-sm text-[#e5e5e5]">
@@ -538,7 +654,7 @@ export default function Landing() {
             Start free. Scale as your webhook volume grows. No surprise invoices.
           </p>
           <p className="text-[#888] text-center text-sm max-w-xl mx-auto mb-16">
-            Pricing includes managed validation coverage for your pipelines.
+            Pricing includes webhook validation, schema drift monitoring, and payload correction coverage for production workflows.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {pricingPlans.map((plan) => (
@@ -594,7 +710,7 @@ export default function Landing() {
             Frequently asked questions
           </h2>
           <p className="text-[#9a9a9a] text-center text-lg mb-12">
-            Common questions about webhook validation, drift handling, and how teams usually operate this layer.
+            Common questions about webhook validation, schema drift, payload changes, and preventing automation failures.
           </p>
           <div className="flex flex-col gap-3">
             {faqs.map((faq, i) => (
@@ -638,6 +754,18 @@ export default function Landing() {
               Step-by-step fixes for the most common webhook and schema mismatch failures.
             </p>
           </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 mb-8">
+            {seoPages.map((page) => (
+              <button
+                key={page.to}
+                onClick={() => navigate(page.to)}
+                className="text-left bg-[#151515] border border-[#2a2a2a] rounded-xl p-4 hover:border-[#3b82f6] transition-colors"
+              >
+                <p className="text-[#E3E3E3] font-semibold text-sm mb-2">{page.label}</p>
+                <p className="text-[#888] text-xs leading-relaxed">{page.description}</p>
+              </button>
+            ))}
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <button
               onClick={() => navigate("/guides/make-webhook-breakage")}
@@ -676,7 +804,7 @@ export default function Landing() {
             Stop debugging webhook failures at 2 AM
           </h2>
           <p className="text-[#9a9a9a] text-lg mb-10">
-            Current SaaS tooling rarely covers the operational gap between upstream schema changes and downstream failures. DataCrawl provides that service layer with monitored validation, normalization, and response coverage around your workflows.
+            When API payloads change, Make.com, n8n, and Zapier workflows break fast. DataCrawl adds webhook validation, schema drift detection, and payload correction before those failures hit customers or operations.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button

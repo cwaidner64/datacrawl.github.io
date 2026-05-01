@@ -6,6 +6,7 @@
  * @param {string} opts.title       — <title> and og:title
  * @param {string} opts.description — meta description and og:description
  * @param {string} [opts.canonical] — canonical URL (optional)
+ * @param {boolean} [opts.appendBaseTitle=true] — append site title suffix
  */
 import { useEffect } from "react";
 
@@ -13,9 +14,9 @@ const BASE_TITLE = "DataCrawl";
 const SITE_URL = "https://www.datacrawl.org";
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 
-export function usePageMeta({ title, description, canonical }) {
+export function usePageMeta({ title, description, canonical, appendBaseTitle = true }) {
   useEffect(() => {
-    const fullTitle = title ? `${title} — ${BASE_TITLE}` : BASE_TITLE;
+    const fullTitle = title ? (appendBaseTitle ? `${title} — ${BASE_TITLE}` : title) : BASE_TITLE;
 
     // <title>
     document.title = fullTitle;
@@ -47,5 +48,5 @@ export function usePageMeta({ title, description, canonical }) {
       }
       canonicalEl.setAttribute("href", canonical);
     }
-  }, [title, description, canonical]);
+  }, [title, description, canonical, appendBaseTitle]);
 }
