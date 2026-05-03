@@ -7,6 +7,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   const navLinks = [
+    { to: '/solutions', label: 'Solutions' },
     { to: '/about', label: 'About' },
     { to: '/pricing', label: 'Pricing' },
     { to: '/contact', label: 'Contact' },

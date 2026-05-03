@@ -154,16 +154,7 @@ export default function Validation() {
 
   return (
     <div className="min-h-screen bg-[#111111] text-white py-12 sm:py-20 px-4 font-[Heebo]">
-      {/* Back nav */}
-      <div className="max-w-6xl mx-auto mb-8 flex items-center gap-4">
-        <button onClick={() => navigate("/")} className="text-[#9a9a9a] hover:text-[#E3E3E3] text-sm transition-colors">
-          ← Home
-        </button>
-        <span className="text-[#3a3a3a]">·</span>
-        <button onClick={() => navigate("/pricing")} className="text-blue-400 hover:underline text-sm">
-          View Pricing
-        </button>
-      </div>
+  
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-[#1a1a1a] p-8 rounded-xl w-[90%] max-w-md max-h-[90vh] overflow-y-auto">

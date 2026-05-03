@@ -173,7 +173,7 @@ The email field in the downstream module resolves to empty because the sender re
           <p className="text-[#888] text-sm mb-4">Related guides</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <button onClick={() => navigate("/make-webhook-errors")} className="text-left bg-[#181818] border border-[#2a2a2a] rounded-xl p-4 hover:border-[#3a3a3a] transition-colors flex-1">
-              <p className="text-blue-400 text-xs mb-1">SEO page</p>
+              <p className="text-blue-400 text-xs mb-1">Make</p>
               <p className="text-[#E3E3E3] text-sm font-semibold">Make.com webhook errors</p>
             </button>
             <button onClick={() => navigate("/guides/n8n-schema-drift")} className="text-left bg-[#181818] border border-[#2a2a2a] rounded-xl p-4 hover:border-[#3a3a3a] transition-colors flex-1">

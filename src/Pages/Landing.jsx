@@ -10,7 +10,7 @@ import "../App.css";
 
 export default function Landing() {
   usePageMeta({
-    title: "Webhook Validation for Make, n8n & Zapier | Prevent Schema Drift Failures",
+    title: "Webhook/Data Validation for Make, n8n & Zapier | Prevent Schema Drift Failures",
     description:
       "Detect and fix broken automations caused by webhook schema changes in Make.com, n8n, and Zapier. Auto-correct payload drift before workflows fail.",
     canonical: "https://www.datacrawl.org/",
@@ -84,6 +84,7 @@ export default function Landing() {
   };
 
   const navLinks = [
+    { to: "/solutions", label: "Solutions" },
     { to: "/about", label: "About" },
     { to: "/pricing", label: "Pricing" },
     { to: "/contact", label: "Contact" },
@@ -190,11 +191,11 @@ export default function Landing() {
   },
   {
     q: "What actually gets automated vs handled manually?",
-    a: "Known issues like field renames or type mismatches can be corrected automatically. New or ambiguous changes are flagged with clear context so you can fix them quickly instead of debugging from scratch."
+    a: "Known issues like field renames or type mismatches can be corrected automatically. New or ambiguous changes are flagged with clear context so you can fix them quickly instead of debugging from scratch. "
   },
   {
     q: "When does this become worth paying for?",
-    a: "When you're managing multiple automations or clients and spending hours every week fixing breakages, re-running workflows, or dealing with silent failures."
+    a: "When you're managing multiple automations or clients and spending hours every week fixing breakages, re-running workflows, or dealing with silent failures. #1 problem with scaling automations is maintaining them, we solve that problem."
   }
 ];
 
@@ -345,7 +346,7 @@ const pricingPlans = [
               transition={{ duration: 0.9, ease: "easeOut" }}
             >
               <span className="inline-block mb-4 px-3 py-1 rounded-full border border-blue-500/40 bg-blue-500/10 text-blue-300 text-xs font-semibold tracking-wide uppercase">
-                Webhook Validation for Make.com, n8n, and Zapier
+                Data validation service for Make, n8n, and Zapier
               </span>
               <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight text-[#E3E3E3] mb-5 max-w-4xl">
                 Stop your client automations from silently breaking
@@ -358,13 +359,13 @@ const pricingPlans = [
               transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
             >
               <p className="text-[#AFAFAF] text-base md:text-lg max-w-2xl mb-2 leading-relaxed">
-                Webhook validation for Make.com, n8n, Zapier, and custom APIs.
+                Data validation service for automations.
               </p>
               <p className="text-[#888] text-sm md:text-base max-w-2xl mb-4 leading-relaxed">
-                Catch and fix hidden failures in Make, Zapier, and n8n workflows before they turn into bad data, missed actions, and hours of debugging.
+                We detect and fix broken automations, and ensure it doesn't happend again
               </p>
               <p className="text-[#666] text-sm md:text-base max-w-2xl mb-8 leading-relaxed">
-                Built for agencies managing multiple client automations where things work at launch, but quietly degrade over time.
+                Built for agencies managing multiple client automations. 
               </p>
             </motion.div>
 
@@ -415,9 +416,12 @@ const pricingPlans = [
           </h2>
 
           <p className="text-[#9a9a9a] text-center text-lg max-w-2xl mx-auto mb-12">
-            Your automations work when you ship them. Then a few weeks later, something upstream changes, and everything starts degrading quietly.
+            Agencies spend{" "}
+            <span className="inline-block px-2.5 py-0.5 rounded-md bg-blue-500/15 text-blue-300 font-extrabold tracking-tight shadow-[0_0_18px_rgba(59,130,246,0.45)]">
+              30-50%
+            </span>{" "}
+            of their time maintaining automations.
           </p>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -458,9 +462,9 @@ const pricingPlans = [
           </p>
 
           <div className="max-w-3xl mx-auto text-[#b8b8b8] text-base leading-relaxed space-y-4">
-            <p>• You’re still reacting after something breaks</p>
-            <p>• You’re still manually figuring out what changed</p>
-            <p>• Every new client adds more surface area for failure</p>
+            <p>1) You’re still reacting after something breaks</p>
+            <p>2) You’re still manually figuring out what changed</p>
+            <p>3) Every new client adds more surface area for failure</p>
           </div>
 
           <p className="text-center text-[#9a9a9a] mt-12 max-w-2xl mx-auto">
@@ -478,11 +482,11 @@ const pricingPlans = [
     <section className="bg-[#111111] px-4 sm:px-6 md:px-10 xl:px-35 py-24 md:py-32">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-[#E3E3E3] text-center mb-4">
-          How agencies stop automation breakage without constant debugging
+          How agencies stop automation breakage 
         </h2>
 
         <p className="text-[#9a9a9a] text-center text-lg max-w-2xl mx-auto mb-16">
-          Instead of waiting for clients to report broken workflows or digging through logs, DataCrawl catches and fixes payload issues before they turn into lost leads or bad CRM data.
+          Get back to building, less time debugging.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
@@ -495,12 +499,12 @@ const pricingPlans = [
             {
               step: "02",
               title: "Catch the exact changes that usually break your workflows",
-              desc: "When a field is renamed, removed, or changed, DataCrawl flags it immediately. No more guessing what broke or waiting for a client to notice missing leads.",
+              desc: "When a field is renamed, removed, or changed, DataCrawl flags it immediately. Our service works so you don't have to.",
             },
             {
               step: "03",
               title: "Fix known issues automatically and surface the rest clearly",
-              desc: "Common breakpoints (field renames, type changes) are corrected instantly. Anything new is surfaced with exactly what changed so you fix it in minutes, not hours.",
+              desc: "We see known breakpoints all the time. Our service thrives on adversity.",
             },
           ].map((item, i) => (
             <div key={item.step} className="relative bg-[#181818] border border-[#2a2a2a] rounded-2xl p-6 flex flex-col gap-3">
@@ -531,7 +535,7 @@ const pricingPlans = [
     </h2>
 
     <p className="text-[#9a9a9a] text-center text-lg max-w-2xl mx-auto mb-16">
-      This is not another monitoring tool. It’s designed to reduce the time you spend debugging broken workflows across clients, CRMs, and APIs.
+      This is not another monitoring tool. We actively work on stopping breakages, preventing outages, and recovering lost client data. 
     </p>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full justify-items-center">
@@ -585,13 +589,13 @@ const pricingPlans = [
               Built for agencies running client automations
             </h2>
             <p className="text-[#9a9a9a] text-lg max-w-2xl mx-auto">
-              If you're managing multiple client workflows in Make, Zapier, or n8n, you’ve already dealt with silent failures, schema drift, and debugging chaos. DataCrawl exists to stop that from scaling with your client base.
+              If you're managing multiple client workflows in Make, Zapier, or n8n, you’ve already dealt with silent failures, schema drift, and debugging chaos. DataCrawl exists to stop that cycle.
             </p>
           </div>
           <div className="flex flex-col md:flex-row gap-12 mt-4">
-            <Need img="landing/usage/development.svg" text="Agencies managing client automations" />
-            <Need img="landing/usage/data-science.svg" text="Freelancers building workflows for clients" />
-            <Need img="landing/usage/marketing.svg" text="Teams maintaining multiple production automations" />
+            <Need img="landing/usage/development.svg" text="Easy Integration" />
+            <Need img="landing/usage/data-science.svg" text="Multiple Workflows" />
+            <Need img="landing/usage/marketing.svg" text="Scale your revenue" />
           </div>
         </div>
       </section>
@@ -817,7 +821,7 @@ const pricingPlans = [
               onClick={() => navigate("/validation")}
               className="px-10 py-4 border border-[#2f63d7] text-[#dbeafe] hover:bg-[#1a2750] font-semibold text-lg rounded-xl transition-all duration-200"
             >
-              Try the Validator Free
+              Try our service
             </button>
           </div>
           <p className="text-[#888] text-sm mt-6">
@@ -850,25 +854,21 @@ const pricingPlans = [
               <input type="text" name="company" placeholder="Company (optional)" value={formData.company} onChange={handleChange} disabled={isSubmitting} className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50" />
               <select name="role" value={formData.role} required onChange={handleChange} disabled={isSubmitting} className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50">
                 <option value="">What best describes you?</option>
-                <option value="dev-individual">Individual Developer</option>
-                <option value="dev-team">Developer (on a team)</option>
-                <option value="data-engineer">Data / Backend Engineer</option>
-                <option value="ml-engineer">ML / AI Engineer</option>
-                <option value="founder">Founder / Startup</option>
-                <option value="product">Product / Engineering Manager</option>
-                <option value="enterprise">Enterprise / Architect</option>
-                <option value="other">Other</option>
+                <option value="auto-agency">Automation Agency</option>
+                <option value="ai-auto-agency">AI Automation Agency</option>
+                <option value="no-code-dev">n8n/Zapier/Make developer</option>
+                <option value="other">Other (please specify)</option>
+
               </select>
               <select name="intent" value={formData.intent} required onChange={handleChange} disabled={isSubmitting} className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50">
                 <option value="">What problem are you trying to solve?</option>
-                <option value="debugging">Debugging broken webhooks / APIs</option>
-                <option value="schema-breaks">Schema changes breaking my automations</option>
-                <option value="bad-data">Inconsistent API payloads causing failures</option>
-                <option value="automation">Unreliable Make / n8n / Zapier workflows</option>
-                <option value="preventative">Looking for monitored validation coverage</option>
-                <option value="exploring">Exploring / evaluating</option>
-                <option value="buying">Evaluating for team or company</option>
-                <option value="demo">Want a demo</option>
+                <option value="debugging">Silent failures in automations</option>
+                <option value="monitoring">Better monitoring and alerts</option>
+                <option value="auto-fix">Automatic fixes for known breakpoints</option>
+                <option value="scaling">Scaling client automations without debugging</option>
+                <option value="reliability">Reliability engineering</option>
+                <option value="other">Other (please specify)</option>
+               
               </select>
               <textarea name="comment" placeholder="Anything else? (optional)" value={formData.comment} onChange={handleChange} disabled={isSubmitting} rows={3} className="p-3 rounded bg-[#111] text-white border border-[#333] focus:border-[#7dd3fc] outline-none disabled:opacity-50 resize-y" />
               <button type="submit" disabled={isSubmitting} className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed p-3 rounded text-white font-bold">

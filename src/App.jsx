@@ -18,6 +18,9 @@ import N8nSchemaDriftPage from "./Pages/N8nSchemaDriftPage";
 import ZapierWebhookFailures from "./Pages/ZapierWebhookFailures";
 import ApiPayloadBreakage from "./Pages/ApiPayloadBreakage";
 import AutomationFailureMonitoring from "./Pages/AutomationFailureMonitoring";
+import Features from "./Pages/Features";
+import AgencyAutomationReliability from "./Pages/solutions/AgencyAutomationReliability";
+import InternalOpsAutomationGuardrails from "./Pages/solutions/InternalOpsAutomationGuardrails";
 import MakeWebhookBreakage from "./Pages/guides/MakeWebhookBreakage";
 import N8nSchemaDrift from "./Pages/guides/N8nSchemaDrift";
 import ZapierPayloadMismatch from "./Pages/guides/ZapierPayloadMismatch";
@@ -45,6 +48,9 @@ function AppContent({ handleData, data }) {
           <Route path="/zapier-webhook-failures" exact element={<ZapierWebhookFailures />} />
           <Route path="/api-payload-breakage" exact element={<ApiPayloadBreakage />} />
           <Route path="/automation-failure-monitoring" exact element={<AutomationFailureMonitoring />} />
+          <Route path="/solutions" exact element={<Features />} />
+          <Route path="/solutions/agency-automation-reliability" exact element={<AgencyAutomationReliability />} />
+          <Route path="/solutions/internal-ops-automation-guardrails" exact element={<InternalOpsAutomationGuardrails />} />
           <Route path="/guides/make-webhook-breakage" element={<MakeWebhookBreakage />} />
           <Route path="/guides/n8n-schema-drift" element={<N8nSchemaDrift />} />
           <Route path="/guides/zapier-payload-mismatch" element={<ZapierPayloadMismatch />} />
