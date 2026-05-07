@@ -1,12 +1,36 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { usePageMeta } from "../../utils/usePageMeta";
+import { useStructuredData } from "../../utils/useStructuredData";
 
 export default function N8nSchemaDrift() {
+  const canonical = "https://www.datacrawl.org/guides/n8n-schema-drift";
+  const pageTitle = "Fixing n8n Schema Drift: Webhook and API Payload Changes";
+  const pageDescription = "n8n workflows break when upstream APIs change their payload schema. Learn how to detect schema drift, repair broken webhook nodes, and reduce future failures with stronger validation and intake controls.";
+
   usePageMeta({
-    title: "Fixing n8n Schema Drift: Webhook and API Payload Changes",
-    description: "n8n workflows break when upstream APIs change their payload schema. Learn how to detect schema drift, repair broken webhook nodes, and reduce future failures with stronger validation and intake controls.",
-    canonical: "https://www.datacrawl.org/guides/n8n-schema-drift",
+    title: pageTitle,
+    description: pageDescription,
+    canonical,
+  });
+
+  useStructuredData(`breadcrumb-${canonical}`, {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.datacrawl.org/" },
+      { "@type": "ListItem", position: 2, name: "Guides", item: "https://www.datacrawl.org/guides/n8n-schema-drift" },
+      { "@type": "ListItem", position: 3, name: pageTitle, item: canonical },
+    ],
+  });
+
+  useStructuredData(`article-${canonical}`, {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: pageTitle,
+    description: pageDescription,
+    mainEntityOfPage: canonical,
+    author: { "@type": "Organization", name: "DataCrawl" },
   });
 
   const navigate = useNavigate();

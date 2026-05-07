@@ -1,12 +1,36 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { usePageMeta } from "../../utils/usePageMeta";
+import { useStructuredData } from "../../utils/useStructuredData";
 
 export default function MakeWebhookBreakage() {
+  const canonical = "https://www.datacrawl.org/guides/make-webhook-breakage";
+  const pageTitle = "How to Fix Make.com Webhook Breakages";
+  const pageDescription = "Make.com webhook scenarios break when an API provider renames a field, adds a required key, or changes a payload structure. Learn how to detect, repair, and reduce future breakages with better validation and normalization.";
+
   usePageMeta({
-    title: "How to Fix Make.com Webhook Breakages",
-    description: "Make.com webhook scenarios break when an API provider renames a field, adds a required key, or changes a payload structure. Learn how to detect, repair, and reduce future breakages with better validation and normalization.",
-    canonical: "https://www.datacrawl.org/guides/make-webhook-breakage",
+    title: pageTitle,
+    description: pageDescription,
+    canonical,
+  });
+
+  useStructuredData(`breadcrumb-${canonical}`, {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.datacrawl.org/" },
+      { "@type": "ListItem", position: 2, name: "Guides", item: "https://www.datacrawl.org/guides/make-webhook-breakage" },
+      { "@type": "ListItem", position: 3, name: pageTitle, item: canonical },
+    ],
+  });
+
+  useStructuredData(`article-${canonical}`, {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: pageTitle,
+    description: pageDescription,
+    mainEntityOfPage: canonical,
+    author: { "@type": "Organization", name: "DataCrawl" },
   });
 
   const navigate = useNavigate();

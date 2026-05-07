@@ -5,57 +5,39 @@ import { usePageMeta } from "../utils/usePageMeta";
 
 const pricingPlans = [
   {
-    name: "Starter",
-    subtitle: "Monitored Coverage",
-    price: "$99",
+    name: "Free",
+    subtitle: "Get started at no cost",
+    price: "$0",
     period: "/mo",
-    description: "For individual developers running a few critical automations",
+    description: "For individuals trying out webhook validation on a single workflow",
     features: [
-      "Up to 3 monitored pipelines",
-      "Webhook schema validation layer",
+      "3 active webhooks",
+      "Webhook validation layer",
       "Basic schema drift detection",
-      "Rule-based payload normalization",
-      "Human review for critical failures (best effort)",
-      "Email alerts when issues are detected",
-      "14-day free trial",
+      "Email alerts for issues",
+      "No credit card required",
     ],
-    cta: "Start Free Trial",
+    cta: "Get Started Free",
     highlight: false,
   },
   {
     name: "Pro",
     subtitle: "Managed Reliability",
-    price: "$349",
+    price: "$99",
     period: "/mo",
     description: "For teams where automation downtime directly impacts revenue or ops",
     features: [
-      "Up to 10 monitored pipelines",
-      "Everything in Starter",
-      "Priority failure triage",
-      "Custom validation & correction rules",
+      "Up to 10 active webhooks",
+      "Everything in Free",
+      "Custom validation, correction rules",
+      "Priority issue detection",
       "Webhook replay + audit logs",
-      "Slack incident notifications",
-      "Faster manual resolution of edge cases",
+      "Slack alerts for failures",
+      "Auto-fix known breakpoints",
+      "14-day free trial",
     ],
     cta: "Start Free Trial",
     highlight: true,
-  },
-  {
-    name: "Reliability+",
-    subtitle: "High-Trust Coverage",
-    price: "$1,000",
-    period: "/mo",
-    description: "For production systems where failures are expensive and immediate response matters",
-    features: [
-      "Up to 25 monitored pipelines (contracted scope)",
-      "Proactive monitoring of schema drift",
-      "Guaranteed incident response window",
-      "Manual intervention for critical failures",
-      "Advanced correction rules + system tuning",
-      "Priority support channel",
-    ],
-    cta: "Upgrade to Reliability+",
-    highlight: false,
   },
   {
     name: "Enterprise",
@@ -64,12 +46,13 @@ const pricingPlans = [
     period: "",
     description: "For mission-critical infrastructure with strict uptime requirements",
     features: [
-      "Unlimited pipeline coverage (scoped contract)",
+      "Unlimited webhooks",
+      "Everything in Pro",
       "Dedicated reliability monitoring",
-      "SLA-backed response times",
-      "On-premise or VPC deployment option",
+      "SLA-backed incident response",
+      "Manual intervention for critical failures",
+      "On-premise / VPC deployment option",
       "SSO / SAML support",
-      "Custom integrations + onboarding",
       "Dedicated account coverage",
     ],
     cta: "Contact Us",
@@ -349,7 +332,7 @@ export default function Validation() {
             </ul>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 max-w-6xl mx-auto">
+          <div className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
             {pricingPlans.map((plan) => {
               const planLabel = plan.price === "Custom" ? plan.name : `${plan.name} - ${plan.price}${plan.period}`;
 

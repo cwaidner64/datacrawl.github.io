@@ -1,12 +1,36 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { usePageMeta } from "../../utils/usePageMeta";
+import { useStructuredData } from "../../utils/useStructuredData";
 
 export default function ZapierPayloadMismatch() {
+  const canonical = "https://www.datacrawl.org/guides/zapier-payload-mismatch";
+  const pageTitle = "Troubleshooting Zapier Payload Mismatches";
+  const pageDescription = "Zapier zaps fail when webhook payloads do not match what the Zap expects. Learn how to diagnose payload mismatches, repair mappings, and reduce future breakage with better validation and change handling.";
+
   usePageMeta({
-    title: "Troubleshooting Zapier Payload Mismatches",
-    description: "Zapier zaps fail when webhook payloads do not match what the Zap expects. Learn how to diagnose payload mismatches, repair mappings, and reduce future breakage with better validation and change handling.",
-    canonical: "https://www.datacrawl.org/guides/zapier-payload-mismatch",
+    title: pageTitle,
+    description: pageDescription,
+    canonical,
+  });
+
+  useStructuredData(`breadcrumb-${canonical}`, {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.datacrawl.org/" },
+      { "@type": "ListItem", position: 2, name: "Guides", item: "https://www.datacrawl.org/guides/zapier-payload-mismatch" },
+      { "@type": "ListItem", position: 3, name: pageTitle, item: canonical },
+    ],
+  });
+
+  useStructuredData(`article-${canonical}`, {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: pageTitle,
+    description: pageDescription,
+    mainEntityOfPage: canonical,
+    author: { "@type": "Organization", name: "DataCrawl" },
   });
 
   const navigate = useNavigate();

@@ -1,0 +1,27 @@
+# DataCrawl AI Site Guide
+
+DataCrawl is a webhook validation and schema drift detection platform for automation workflows.
+
+## Canonical Site
+- https://www.datacrawl.org/
+
+## Core Pages
+- Home: https://www.datacrawl.org/
+- Solutions: https://www.datacrawl.org/solutions
+- Validation: https://www.datacrawl.org/validation
+- Pricing: https://www.datacrawl.org/pricing
+- Contact: https://www.datacrawl.org/contact
+
+## Product Focus
+- Webhook payload validation before workflow execution
+- Schema drift detection for API and webhook integrations
+- Safe payload normalization for known field and type changes
+- Reliability monitoring for Make.com, n8n, and Zapier automations
+
+## Crawl And Use Policy
+- Public marketing and guide content may be indexed.
+- AI crawlers are allowed by robots policy.
+- Use canonical URLs from sitemap and page canonical tags.
+
+## Contact
+- contact@datacrawl.org

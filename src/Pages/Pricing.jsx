@@ -5,87 +5,56 @@ import { usePageMeta } from "../utils/usePageMeta";
 
 const pricingPlans = [
   {
-    name: "Starter",
-    subtitle: "For solo builders & small automation setups",
-    price: "$99",
+    name: "Free",
+    price: "$0",
     period: "/mo",
-    description: "For freelancers or developers managing a few critical client automations",
+    subtitle: "Monitored Coverage",
+    description: "For individuals trying out webhook reliability monitoring on a single workflow",
     features: [
-      "Up to 3 active client automations",
-      "Webhook validation before workflows run",
-      "Detect schema changes (field rename, missing data, type shifts)",
-      "Auto-fix common payload issues",
-      "Basic failure alerts (so you’re not guessing what broke)",
-      "Email notifications when issues are detected",
-      "14-day free trial"
+      "3 active webhooks",
+      "Webhook validation layer",
+      "Basic schema drift detection",
+      "Email alerts for issues",
     ],
     cta: "Start Free Trial",
-    highlight: false,
   },
-
   {
     name: "Pro",
-    subtitle: "For agencies managing multiple clients",
-    price: "$349",
+    price: "$99",
     period: "/mo",
-    description: "For teams tired of debugging broken Make / n8n / Zapier workflows every week",
+    subtitle: "Managed Reliability",
+    description: "Reduce debugging time across multiple client automations with proactive monitoring and response tools.",
     features: [
-      "Up to 15 active client automations",
-      "Everything in Starter",
-      "Prioritized detection of breaking changes",
-      "Custom rules for client-specific workflows",
-      "Replay failed or corrupted webhook events",
-      "Slack alerts when automations break or drift",
-      "Faster resolution for edge-case failures",
-      "Reduces recurring debugging across clients"
+      "Up to 10 active webhooks",
+      "Everything in Free",
+      "Custom validation, correction rules",
+      "Priority issue detection",
+      "Webhook replay + audit logs",
+      "Slack alerts for failures",
     ],
-    cta: "Start Free Trial",
     highlight: true,
-  },
-
-  {
-    name: "Reliability+",
-    subtitle: "For high-volume production automation systems",
-    price: "$1,000",
-    period: "/mo",
-    description: "For teams where broken automations directly impact revenue, leads, or operations",
-    features: [
-      "Up to 25+ active automations (scoped)",
-      "Proactive detection of schema drift across all workflows",
-      "Guaranteed response window for critical failures",
-      "Manual intervention for high-risk or ambiguous changes",
-      "Advanced correction logic for recurring breakpoints",
-      "System-level tuning for stable operations",
-      "Priority support channel"
-    ],
-    cta: "Talk to Us",
-    highlight: false,
-  },
-
+    cta: "Start Pro Trial",
+  },  
   {
     name: "Enterprise",
-    subtitle: "For mission-critical automation infrastructure",
     price: "Custom",
     period: "",
-    description: "For organizations where automation reliability is tied directly to revenue and operations",
+    subtitle: "SLA-Backed Response",
+    description: "For mission-critical infrastructure with strict uptime requirements. Dedicated support and response SLAs.",
     features: [
-      "Unlimited automation coverage (contract-based)",
-      "Dedicated reliability monitoring layer",
-      "SLA-backed incident response times",
-      "VPC or private deployment option",
-      "SSO / SAML authentication",
-      "Custom integration support",
-      "Onboarding + architecture setup support",
-      "Dedicated account coverage"
+      "Unlimited webhooks",
+      "Everything in Pro",
+      "Dedicated reliability monitoring",
+      "SLA-backed incident response",
+      "Custom onboarding and support",
     ],
-    cta: "Contact Us",
-    highlight: false,
+    cta: "Contact Sales",
   },
-];
+];  
 export default function Pricing() {
   usePageMeta({
     title: "Pricing",
-    description: "Transparent pricing for monitored webhook reliability coverage. Starter at $99/mo, Pro at $349/mo, Reliability+ at $1,000/mo, and Enterprise custom coverage.",
+    description: "Transparent pricing for webhook reliability coverage. Free tier, Pro at $99/mo, and Enterprise custom pricing.",
     canonical: "https://www.datacrawl.org/pricing",
   });
 
@@ -214,7 +183,7 @@ export default function Pricing() {
 
         {/* Plan Cards */}
         <section className="w-full max-w-6xl mb-16 sm:mb-20">
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-3">
             {pricingPlans.map((plan) => {
               const planLabel = plan.price === "Custom" ? plan.name : `${plan.name} - ${plan.price}${plan.period}`;
 

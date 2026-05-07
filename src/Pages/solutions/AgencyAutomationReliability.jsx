@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Landing/Header";
 import { usePageMeta } from "../../utils/usePageMeta";
+import { useStructuredData } from "../../utils/useStructuredData";
 
 const outcomes = [
   {
@@ -26,11 +27,33 @@ const implementation = [
 ];
 
 export default function AgencyAutomationReliability() {
+  const canonical = "https://www.datacrawl.org/solutions/agency-automation-reliability";
+  const pageTitle = "Agency Automation Reliability";
+  const pageDescription = "A reliability solution for agencies managing multi-client automations across Make, n8n, and Zapier.";
+
   usePageMeta({
-    title: "Agency Automation Reliability",
-    description:
-      "A reliability solution for agencies managing multi-client automations across Make, n8n, and Zapier.",
-    canonical: "https://www.datacrawl.org/solutions/agency-automation-reliability",
+    title: pageTitle,
+    description: pageDescription,
+    canonical,
+  });
+
+  useStructuredData(`breadcrumb-${canonical}`, {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.datacrawl.org/" },
+      { "@type": "ListItem", position: 2, name: "Solutions", item: "https://www.datacrawl.org/solutions" },
+      { "@type": "ListItem", position: 3, name: pageTitle, item: canonical },
+    ],
+  });
+
+  useStructuredData(`article-${canonical}`, {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: pageTitle,
+    description: pageDescription,
+    mainEntityOfPage: canonical,
+    author: { "@type": "Organization", name: "DataCrawl" },
   });
 
   const navigate = useNavigate();

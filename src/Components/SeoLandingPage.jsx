@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { usePageMeta } from "../utils/usePageMeta";
+import { useStructuredData } from "../utils/useStructuredData";
 
 export default function SeoLandingPage({
   metaTitle,
@@ -12,6 +13,7 @@ export default function SeoLandingPage({
   sections,
   ctaTitle,
   ctaCopy,
+  breadcrumbSection = "SEO Pages",
 }) {
   usePageMeta({
     title: metaTitle,
@@ -20,6 +22,54 @@ export default function SeoLandingPage({
   });
 
   const navigate = useNavigate();
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.datacrawl.org/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: breadcrumbSection,
+        item: canonical,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: canonical,
+      },
+    ],
+  };
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: metaTitle,
+    description: metaDescription,
+    mainEntityOfPage: canonical,
+    author: {
+      "@type": "Organization",
+      name: "DataCrawl",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "DataCrawl",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.datacrawl.org/Logo-basic.svg",
+      },
+    },
+  };
+
+  useStructuredData(`breadcrumb-${canonical}`, breadcrumbSchema);
+  useStructuredData(`article-${canonical}`, articleSchema);
 
   return (
     <div className="min-h-screen bg-[#111111] text-white px-4 sm:px-6 md:px-10 xl:px-35 py-16 font-[Heebo]">
