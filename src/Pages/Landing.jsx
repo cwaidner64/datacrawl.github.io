@@ -207,7 +207,7 @@ const pricingPlans = [
     period: "/mo",
     description: "For individuals trying out webhook validation on a single workflow",
     features: [
-      "3 active webhooks",
+      "3 active workflows",
       "Webhook validation layer",
       "Basic schema drift detection",
       "Email alerts for issues",
@@ -223,9 +223,9 @@ const pricingPlans = [
     period: "/mo",
     description: "Reduce debugging time across multiple client automations",
     features: [
-      "Up to 10 active webhooks",
+      "Up to 10 active workflows",
       "Everything in Free",
-      "Custom validation, correction rules",
+      "Custom validation & correction rules",
       "Priority issue detection",
       "Webhook replay + audit logs",
       "Slack alerts for failures",
@@ -388,7 +388,7 @@ const pricingPlans = [
               </button>
             </div>
             <p className="text-sm text-[#888] mt-4 tracking-wide">
-              14-day free trial — no credit card required
+              Free and paid tiers available. No credit card required for free trial.
             </p>
             <div className="flex flex-wrap gap-4 mt-3">
               <span className="flex items-center gap-1.5 text-sm text-[#a3a3a3]">

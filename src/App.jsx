@@ -4,14 +4,10 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from "react-route
 
 import Navbar from "../src/Components/Navbar";
 import Landing from "../src/Pages/Landing";
-import VendorInfo from "../src/Pages/VendorInformation";
 import Footer from "../src/Components/Footer";
 import Pricing from "./Pages/Pricing";
 import Contact from "./Pages/Contact";
-import Investors from "./Pages/Investors";
 import About from "./Pages/About";
-import MarketplaceTool from "./Pages/MarketplaceTool";
-import Services from "./Pages/Services";
 import Validation from "./Pages/Validation";
 import MakeWebhookErrors from "./Pages/MakeWebhookErrors";
 import N8nSchemaDriftPage from "./Pages/N8nSchemaDriftPage";
